@@ -1,0 +1,154 @@
+.
+├── 10 Things I Hate About You (1999) 1080p BluRay AV1 Opus 5.1 [RAV1NE]
+│   ├── 10.Things.I.Hate.About.You.1999.1080p.BluRay.AV1.Opus.5.1-RAV1NE.mkv
+│   └── 10.Things.I.Hate.About.You.1999.1080p.BluRay.AV1.Opus.5.1-RAV1NE.nfo
+├── 21 Jump Street (2012) [1080p]
+│   ├── 21.Jump.Street.2012.1080p.BluRay.x264.YIFY.mp4
+│   ├── 21.Jump.Street.2012.1080p.BluRay.x264.YIFY.srt
+│   ├── Other
+│   │   ├── AhaShare.com.txt
+│   │   ├── Torrent downloaded from Demonoid.com - Copy.txt
+│   │   └── Torrent Downloaded From ExtraTorrent.com.txt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── 22 Jump Street (2014) [1080p]
+│   ├── 22.Jump.Street.2014.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.RE.jpg
+├── 50 First Dates (2004) [1080p]
+│   ├── 50.First.Dates.2004.1080p.BrRip.x264.YIFY.mp4
+│   ├── 50.First.Dates.2004.1080p.BrRip.x264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── A Beautiful Mind (2001) [1080p]
+│   ├── A.Beautiful.Mind.2001.1080p.BrRip.x264.YIFY.mp4
+│   ├── A.Beautiful.Mind.2001.1080p.BrRip.x264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── American Gangster (2007) [1080p]
+│   ├── American.Gangster.2007.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.RE.jpg
+├── Blade Runner 2049 (2017) [1080p] [YTS.AG]
+│   ├── Blade.Runner.2049.2017.1080p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── Colonia (2015) [YTS.AG]
+│   ├── Colonia.2015.720p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── Divergent (2014) [1080p]
+│   ├── Divergent.2014.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.RE.jpg
+├── Ex Machina (2015) [1080p]
+│   ├── Ex.Machina.2015.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.TO.jpg
+├── file_tree.txt
+├── Flight (2012) [1080p]
+│   ├── Flight.2012.1080p.BrRipx264.YIFY.mp4
+│   ├── Flight.2012.1080p.BrRipx264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── Fury 2014 1080p.BluRay.5.1.x264 . NVEE
+│   ├── Fury 2014.808p.BluRay.5.1.x264 . NVEE_English_Foreign_Parts_Only.srt
+│   └── Fury 2014.808p.BluRay.5.1.x264 . NVEE.mp4
+├── Gravity (2013) [1080p]
+│   ├── Gravity.2013.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── Guardians of the Galaxy (2014) [1080p]
+│   ├── Guardians.of.the.Galaxy.2014.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.RE.jpg
+├── Guardians Of The Galaxy Vol. 2 (2017) [1080p] [YTS.AG]
+│   ├── Guardians.Of.The.Galaxy.Vol..2.2017.1080p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── Guardians.of.the.Galaxy.Vol.3.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA
+│   ├── Guardians.of.the.Galaxy.Vol.3.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.mkv
+│   └── PSArips.com.txt
+├── Jumanji The Next Level (2019) [1080p] [WEBRip] [5.1] [YTS.MX]
+│   ├── Jumanji.The.Next.Level.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+│   ├── Jumanji.The.Next.Level.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].srt
+│   └── www.YTS.MX.jpg
+├── Jumanji Welcome To The Jungle (2017) [WEBRip] [1080p] [YTS.AM]
+│   ├── Jumanji.Welcome.To.The.Jungle.2017.1080p.WEBRip.x264-[YTS.AM].mp4
+│   └── www.YTS.AM.jpg
+├── Million Dollar Arm (2014) [1080p]
+│   ├── Million.Dollar.Arm.2014.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.RE.jpg
+├── Mishima A Life In Four Chapters (1985) [BluRay] [1080p] [YTS.AM]
+│   ├── Mishima.A.Life.In.Four.Chapters.1985.1080p.BluRay.x264-[YTS.AM].mp4
+│   └── www.YTS.AM.jpg
+├── Moneyball (2011)
+│   ├── Moneyball.2011.720p.BrRip.x264.YIFY.mp4
+│   ├── Moneyball.2011.720p.BrRip.x264.YIFY.srt
+│   ├── Other
+│   │   ├── AhaShare.com.txt
+│   │   ├── Torrent downloaded from Demonoid.com - Copy.txt
+│   │   └── Torrent Downloaded From ExtraTorrent.com.txt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── No.Hard.Feelings.2023.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG[TGx]
+│   ├── NEW upcoming releases by Xclusive.txt
+│   ├── No.Hard.Feelings.2023.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv
+│   └── [TGx]Downloaded from torrentgalaxy.to .txt
+├── Schindler's.List.1993.1080p.BDRip.H265.AAC -  KiNGDOM
+│   ├── Jolly Roger.png
+│   ├── Poster.jpg
+│   └── Schindler's.List.1993.1080p.BDRip.H265.AAC -  KiNGDOM.mp4
+├── Sicario Day Of The Soldado (2018) [WEBRip] [1080p] [YTS.AM]
+│   ├── Sicario.Day.Of.The.Soldado.2018.1080p.WEBRip.x264-[YTS.AM].mp4
+│   └── www.YTS.AM.jpg
+├── Southpaw (2015) [1080p]
+│   ├── Southpaw.2015.1080p.BluRay.x264.YIFY.mp4
+│   └── WWW.YTS.TO.jpg
+├── The Divergent Series - Insurgent (2015) 1080p H265 ita eng AC3 5.1 sub ita eng Licdom.mkv
+├── The Great Gatsby (2013) [1080p]
+│   ├── The.Great.Gatsby.2013.1080p.BluRay.x264.YIFY.mp4
+│   ├── The.Great.Gatsby.2013.1080p.BluRay.x264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── The.Guardians.of.the.Galaxy.Holiday.Special.2022.1080p.DSNP.WEBRip.DDP5.1.Atmos.x264-EddieSmurfy
+│   ├── RARBG.txt
+│   └── The.Guardians.of.the.Galaxy.Holiday.Special.2022.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-EddieSmurfy.mkv
+├── The Hangover 2009 part 1 1080p
+│   ├── [1337x] Torrent downloaded from 1337x.to.txt
+│   ├── [TGx]Downloaded from torrentgalaxy.to .txt
+│   └── The Hangover 2009 part 1 1080p.ts
+├── The Hangover Part II (2011)
+│   ├── Other
+│   │   ├── AhaShare.com.txt
+│   │   └── Torrent downloaded from Demonoid.com - Copy.txt
+│   ├── The.Hangover.Part.II.2011.720p.BrRip.x264.YIFY.mp4
+│   ├── The.Hangover.Part.II.2011.720p.BrRip.x264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── The Hangover Part III (2013)
+│   ├── The.Hangover.Part.III.2013.720p.BluRay.x264.YIFY.mp4
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── The Hateful Eight (2015) [1080p] [YTS.AG]
+│   ├── The.Hateful.Eight.2015.1080p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── The Machinist (2004)
+│   ├── Other
+│   │   ├── AhaShare.com.txt
+│   │   ├── Torrent downloaded from Demonoid.com - Copy.txt
+│   │   └── Torrent Downloaded From ExtraTorrent.com.txt
+│   ├── The.Machinist.2004.720p.BluRay.x264.YIFY.mp4
+│   ├── The.Machinist.2004.720p.BluRay.x264.YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── The Martian (2015) [1080p] [YTS.AG]
+│   ├── The.Martian.2015.1080p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── The Revenant 2015 1080p WEB-DL x264 AC3-JYK
+│   ├── Subs
+│   │   └── English.srt
+│   ├── The Revenant 2015 1080p WEB-DL x264 AC3-JYK.mkv
+│   └── The Revenant 2015 1080p WEB-DL x264 AC3-JYK.mkv.jpg
+├── The Social Network (2010) [1080]
+│   ├── Other
+│   │   ├── AhaShare.com.txt
+│   │   ├── Torrent downloaded from Demonoid.com - Copy.txt
+│   │   └── Torrent Downloaded From ExtraTorrent.com.txt
+│   ├── The Social Network (2010) 1080p BrRip x264 - 1.2GB - YIFY.mp4
+│   ├── The Social Network (2010) 1080p BrRip x264 - 1.2GB - YIFY.srt
+│   └── WWW.YIFY-TORRENTS.COM.jpg
+├── The Spectacular Now (2013) [1080p] [YTS.AG]
+│   ├── The.Spectacular.Now.2013.1080p.BluRay.x264-[YTS.AG].mp4
+│   └── WWW.YTS.AG.jpg
+├── The Wedding Planner (2001) [1080p] [BluRay] [5.1] [YTS.MX]
+│   └── The.Wedding.Planner.2001.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4
+├── Tron Ares 2025 1080p HDRip HEVC x265 BONE.mkv
+├── Tron Legacy 2010 REMASTERED 1080p BluRay HEVC x265 10-BIT 5.1 BONE.mkv
+└── We're the Millers (2013) [1080p]
+    ├── We're.the.Millers.2013.1080p.BluRay.x264.YIFY.mp4
+    └── WWW.YIFY-TORRENTS.COM.jpg
+
+45 directories, 107 files

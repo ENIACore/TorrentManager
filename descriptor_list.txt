@@ -1,0 +1,1644 @@
+============= 10 Things I Hate About You (1999) 1080p BluRay AV1 Opus 5.1 [RAV1NE]
+
+part 10 descriptor status False
+part THINGS descriptor status False
+part I descriptor status False
+part HATE descriptor status False
+part ABOUT descriptor status False
+part YOU descriptor status False
+part 1999 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part AV1 descriptor status True
+part OPUS descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part RAV1NE descriptor status False
+part  descriptor status False
+=============
+============= 10.Things.I.Hate.About.You.1999.1080p.BluRay.AV1.Opus.5.1-RAV1NE.mkv
+
+part 10 descriptor status False
+part THINGS descriptor status False
+part I descriptor status False
+part HATE descriptor status False
+part ABOUT descriptor status False
+part YOU descriptor status False
+part 1999 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part AV1 descriptor status True
+part OPUS descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part RAV1NE descriptor status False
+part MKV descriptor status True
+=============
+============= 10.Things.I.Hate.About.You.1999.1080p.BluRay.AV1.Opus.5.1-RAV1NE.nfo
+
+part 10 descriptor status False
+part THINGS descriptor status False
+part I descriptor status False
+part HATE descriptor status False
+part ABOUT descriptor status False
+part YOU descriptor status False
+part 1999 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part AV1 descriptor status True
+part OPUS descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part RAV1NE descriptor status False
+part NFO descriptor status False
+=============
+============= 21 Jump Street (2012) [1080p]
+
+part 21 descriptor status False
+part JUMP descriptor status False
+part STREET descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= 21.Jump.Street.2012.1080p.BluRay.x264.YIFY.mp4
+
+part 21 descriptor status False
+part JUMP descriptor status False
+part STREET descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= 21.Jump.Street.2012.1080p.BluRay.x264.YIFY.srt
+
+part 21 descriptor status False
+part JUMP descriptor status False
+part STREET descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= Other
+
+part OTHER descriptor status False
+=============
+============= AhaShare.com.txt
+
+part AHASHARE descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent downloaded from Demonoid.com - Copy.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part DEMONOID descriptor status False
+part COM descriptor status False
+part COPY descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent Downloaded From ExtraTorrent.com.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part EXTRATORRENT descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= 22 Jump Street (2014) [1080p]
+
+part 22 descriptor status False
+part JUMP descriptor status False
+part STREET descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= 22.Jump.Street.2014.1080p.BluRay.x264.YIFY.mp4
+
+part 22 descriptor status False
+part JUMP descriptor status False
+part STREET descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.RE.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part RE descriptor status False
+part JPG descriptor status False
+=============
+============= 50 First Dates (2004) [1080p]
+
+part 50 descriptor status False
+part FIRST descriptor status False
+part DATES descriptor status False
+part 2004 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= 50.First.Dates.2004.1080p.BrRip.x264.YIFY.mp4
+
+part 50 descriptor status False
+part FIRST descriptor status False
+part DATES descriptor status False
+part 2004 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= 50.First.Dates.2004.1080p.BrRip.x264.YIFY.srt
+
+part 50 descriptor status False
+part FIRST descriptor status False
+part DATES descriptor status False
+part 2004 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= A Beautiful Mind (2001) [1080p]
+
+part A descriptor status False
+part BEAUTIFUL descriptor status False
+part MIND descriptor status False
+part 2001 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= A.Beautiful.Mind.2001.1080p.BrRip.x264.YIFY.mp4
+
+part A descriptor status False
+part BEAUTIFUL descriptor status False
+part MIND descriptor status False
+part 2001 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= A.Beautiful.Mind.2001.1080p.BrRip.x264.YIFY.srt
+
+part A descriptor status False
+part BEAUTIFUL descriptor status False
+part MIND descriptor status False
+part 2001 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= American Gangster (2007) [1080p]
+
+part AMERICAN descriptor status False
+part GANGSTER descriptor status False
+part 2007 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= American.Gangster.2007.1080p.BluRay.x264.YIFY.mp4
+
+part AMERICAN descriptor status False
+part GANGSTER descriptor status False
+part 2007 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.RE.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part RE descriptor status False
+part JPG descriptor status False
+=============
+============= Blade Runner 2049 (2017) [1080p] [YTS.AG]
+
+part BLADE descriptor status False
+part RUNNER descriptor status False
+part 2049 descriptor status False
+part 2017 descriptor status False
+part 1080P descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= Blade.Runner.2049.2017.1080p.BluRay.x264-[YTS.AG].mp4
+
+part BLADE descriptor status False
+part RUNNER descriptor status False
+part 2049 descriptor status False
+part 2017 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= Colonia (2015) [YTS.AG]
+
+part COLONIA descriptor status False
+part 2015 descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= Colonia.2015.720p.BluRay.x264-[YTS.AG].mp4
+
+part COLONIA descriptor status False
+part 2015 descriptor status False
+part 720P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= Divergent (2014) [1080p]
+
+part DIVERGENT descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Divergent.2014.1080p.BluRay.x264.YIFY.mp4
+
+part DIVERGENT descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.RE.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part RE descriptor status False
+part JPG descriptor status False
+=============
+============= Ex Machina (2015) [1080p]
+
+part EX descriptor status False
+part MACHINA descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Ex.Machina.2015.1080p.BluRay.x264.YIFY.mp4
+
+part EX descriptor status False
+part MACHINA descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.TO.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part TO descriptor status False
+part JPG descriptor status False
+=============
+============= file_tree.txt
+
+part FILE descriptor status False
+part TREE descriptor status False
+part TXT descriptor status False
+=============
+============= Flight (2012) [1080p]
+
+part FLIGHT descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Flight.2012.1080p.BrRipx264.YIFY.mp4
+
+part FLIGHT descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part BRRIPX264 descriptor status False
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= Flight.2012.1080p.BrRipx264.YIFY.srt
+
+part FLIGHT descriptor status False
+part 2012 descriptor status False
+part 1080P descriptor status True
+part BRRIPX264 descriptor status False
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= Fury 2014 1080p.BluRay.5.1.x264 . NVEE
+
+part FURY descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part X264 descriptor status True
+part NVEE descriptor status False
+=============
+============= Fury 2014.808p.BluRay.5.1.x264 . NVEE_English_Foreign_Parts_Only.srt
+
+part FURY descriptor status False
+part 2014 descriptor status False
+part 808P descriptor status False
+part BLURAY descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part X264 descriptor status True
+part NVEE descriptor status False
+part ENGLISH descriptor status False
+part FOREIGN descriptor status False
+part PARTS descriptor status False
+part ONLY descriptor status False
+part SRT descriptor status True
+=============
+============= Fury 2014.808p.BluRay.5.1.x264 . NVEE.mp4
+
+part FURY descriptor status False
+part 2014 descriptor status False
+part 808P descriptor status False
+part BLURAY descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part X264 descriptor status True
+part NVEE descriptor status False
+part MP4 descriptor status True
+=============
+============= Gravity (2013) [1080p]
+
+part GRAVITY descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Gravity.2013.1080p.BluRay.x264.YIFY.mp4
+
+part GRAVITY descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= Guardians of the Galaxy (2014) [1080p]
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Guardians.of.the.Galaxy.2014.1080p.BluRay.x264.YIFY.mp4
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.RE.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part RE descriptor status False
+part JPG descriptor status False
+=============
+============= Guardians Of The Galaxy Vol. 2 (2017) [1080p] [YTS.AG]
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part VOL descriptor status False
+part 2 descriptor status False
+part 2017 descriptor status False
+part 1080P descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= Guardians.Of.The.Galaxy.Vol..2.2017.1080p.BluRay.x264-[YTS.AG].mp4
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part VOL descriptor status False
+part 2 descriptor status False
+part 2017 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= Guardians.of.the.Galaxy.Vol.3.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part VOL descriptor status False
+part 3 descriptor status False
+part 2023 descriptor status False
+part 1080P descriptor status True
+part 10BIT descriptor status True
+part WEBRIP descriptor status True
+part 6CH descriptor status True
+part X265 descriptor status True
+part HEVC descriptor status True
+part PSA descriptor status True
+=============
+============= Guardians.of.the.Galaxy.Vol.3.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.mkv
+
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part VOL descriptor status False
+part 3 descriptor status False
+part 2023 descriptor status False
+part 1080P descriptor status True
+part 10BIT descriptor status True
+part WEBRIP descriptor status True
+part 6CH descriptor status True
+part X265 descriptor status True
+part HEVC descriptor status True
+part PSA descriptor status True
+part MKV descriptor status True
+=============
+============= PSArips.com.txt
+
+part PSARIPS descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Jumanji The Next Level (2019) [1080p] [WEBRip] [5.1] [YTS.MX]
+
+part JUMANJI descriptor status False
+part THE descriptor status False
+part NEXT descriptor status False
+part LEVEL descriptor status False
+part 2019 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part  descriptor status False
+=============
+============= Jumanji.The.Next.Level.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+
+part JUMANJI descriptor status False
+part THE descriptor status False
+part NEXT descriptor status False
+part LEVEL descriptor status False
+part 2019 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part X264 descriptor status True
+part AAC5 descriptor status False
+part 1 descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part MP4 descriptor status True
+=============
+============= Jumanji.The.Next.Level.2019.1080p.WEBRip.x264.AAC5.1-[YTS.MX].srt
+
+part JUMANJI descriptor status False
+part THE descriptor status False
+part NEXT descriptor status False
+part LEVEL descriptor status False
+part 2019 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part X264 descriptor status True
+part AAC5 descriptor status False
+part 1 descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part SRT descriptor status True
+=============
+============= www.YTS.MX.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part JPG descriptor status False
+=============
+============= Jumanji Welcome To The Jungle (2017) [WEBRip] [1080p] [YTS.AM]
+
+part JUMANJI descriptor status False
+part WELCOME descriptor status False
+part TO descriptor status False
+part THE descriptor status False
+part JUNGLE descriptor status False
+part 2017 descriptor status False
+part WEBRIP descriptor status True
+part 1080P descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part  descriptor status False
+=============
+============= Jumanji.Welcome.To.The.Jungle.2017.1080p.WEBRip.x264-[YTS.AM].mp4
+
+part JUMANJI descriptor status False
+part WELCOME descriptor status False
+part TO descriptor status False
+part THE descriptor status False
+part JUNGLE descriptor status False
+part 2017 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part MP4 descriptor status True
+=============
+============= www.YTS.AM.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AM descriptor status False
+part JPG descriptor status False
+=============
+============= Million Dollar Arm (2014) [1080p]
+
+part MILLION descriptor status False
+part DOLLAR descriptor status False
+part ARM descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Million.Dollar.Arm.2014.1080p.BluRay.x264.YIFY.mp4
+
+part MILLION descriptor status False
+part DOLLAR descriptor status False
+part ARM descriptor status False
+part 2014 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.RE.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part RE descriptor status False
+part JPG descriptor status False
+=============
+============= Mishima A Life In Four Chapters (1985) [BluRay] [1080p] [YTS.AM]
+
+part MISHIMA descriptor status False
+part A descriptor status False
+part LIFE descriptor status False
+part IN descriptor status False
+part FOUR descriptor status False
+part CHAPTERS descriptor status False
+part 1985 descriptor status False
+part BLURAY descriptor status True
+part 1080P descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part  descriptor status False
+=============
+============= Mishima.A.Life.In.Four.Chapters.1985.1080p.BluRay.x264-[YTS.AM].mp4
+
+part MISHIMA descriptor status False
+part A descriptor status False
+part LIFE descriptor status False
+part IN descriptor status False
+part FOUR descriptor status False
+part CHAPTERS descriptor status False
+part 1985 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part MP4 descriptor status True
+=============
+============= www.YTS.AM.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AM descriptor status False
+part JPG descriptor status False
+=============
+============= Moneyball (2011)
+
+part MONEYBALL descriptor status False
+part 2011 descriptor status False
+part  descriptor status False
+=============
+============= Moneyball.2011.720p.BrRip.x264.YIFY.mp4
+
+part MONEYBALL descriptor status False
+part 2011 descriptor status False
+part 720P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= Moneyball.2011.720p.BrRip.x264.YIFY.srt
+
+part MONEYBALL descriptor status False
+part 2011 descriptor status False
+part 720P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= Other
+
+part OTHER descriptor status False
+=============
+============= AhaShare.com.txt
+
+part AHASHARE descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent downloaded from Demonoid.com - Copy.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part DEMONOID descriptor status False
+part COM descriptor status False
+part COPY descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent Downloaded From ExtraTorrent.com.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part EXTRATORRENT descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= No.Hard.Feelings.2023.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG[TGx]
+
+part NO descriptor status False
+part HARD descriptor status False
+part FEELINGS descriptor status False
+part 2023 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part 1400MB descriptor status False
+part DD5 descriptor status False
+part 1 descriptor status False
+part X264 descriptor status True
+part GALAXYRG descriptor status False
+part TGX descriptor status False
+part  descriptor status False
+=============
+============= NEW upcoming releases by Xclusive.txt
+
+part NEW descriptor status False
+part UPCOMING descriptor status False
+part RELEASES descriptor status False
+part BY descriptor status False
+part XCLUSIVE descriptor status False
+part TXT descriptor status False
+=============
+============= No.Hard.Feelings.2023.1080p.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv
+
+part NO descriptor status False
+part HARD descriptor status False
+part FEELINGS descriptor status False
+part 2023 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part 1400MB descriptor status False
+part DD5 descriptor status False
+part 1 descriptor status False
+part X264 descriptor status True
+part GALAXYRG descriptor status False
+part MKV descriptor status True
+=============
+============= [TGx]Downloaded from torrentgalaxy.to .txt
+
+part  descriptor status False
+part TGX descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part TORRENTGALAXY descriptor status False
+part TO descriptor status False
+part TXT descriptor status False
+=============
+============= Schindler's.List.1993.1080p.BDRip.H265.AAC -  KiNGDOM
+
+part SCHINDLERS descriptor status False
+part LIST descriptor status False
+part 1993 descriptor status False
+part 1080P descriptor status True
+part BDRIP descriptor status True
+part H265 descriptor status True
+part AAC descriptor status True
+part KINGDOM descriptor status False
+=============
+============= Jolly Roger.png
+
+part JOLLY descriptor status False
+part ROGER descriptor status False
+part PNG descriptor status False
+=============
+============= Poster.jpg
+
+part POSTER descriptor status False
+part JPG descriptor status False
+=============
+============= Schindler's.List.1993.1080p.BDRip.H265.AAC -  KiNGDOM.mp4
+
+part SCHINDLERS descriptor status False
+part LIST descriptor status False
+part 1993 descriptor status False
+part 1080P descriptor status True
+part BDRIP descriptor status True
+part H265 descriptor status True
+part AAC descriptor status True
+part KINGDOM descriptor status False
+part MP4 descriptor status True
+=============
+============= Sicario Day Of The Soldado (2018) [WEBRip] [1080p] [YTS.AM]
+
+part SICARIO descriptor status False
+part DAY descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part SOLDADO descriptor status False
+part 2018 descriptor status False
+part WEBRIP descriptor status True
+part 1080P descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part  descriptor status False
+=============
+============= Sicario.Day.Of.The.Soldado.2018.1080p.WEBRip.x264-[YTS.AM].mp4
+
+part SICARIO descriptor status False
+part DAY descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part SOLDADO descriptor status False
+part 2018 descriptor status False
+part 1080P descriptor status True
+part WEBRIP descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AM descriptor status False
+part MP4 descriptor status True
+=============
+============= www.YTS.AM.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AM descriptor status False
+part JPG descriptor status False
+=============
+============= Southpaw (2015) [1080p]
+
+part SOUTHPAW descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= Southpaw.2015.1080p.BluRay.x264.YIFY.mp4
+
+part SOUTHPAW descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YTS.TO.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part TO descriptor status False
+part JPG descriptor status False
+=============
+============= The Divergent Series - Insurgent (2015) 1080p H265 ita eng AC3 5.1 sub ita eng Licdom.mkv
+
+part THE descriptor status False
+part DIVERGENT descriptor status False
+part SERIES descriptor status False
+part INSURGENT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part H265 descriptor status True
+part ITA descriptor status False
+part ENG descriptor status False
+part AC3 descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part SUB descriptor status True
+part ITA descriptor status False
+part ENG descriptor status False
+part LICDOM descriptor status False
+part MKV descriptor status True
+=============
+============= The Great Gatsby (2013) [1080p]
+
+part THE descriptor status False
+part GREAT descriptor status False
+part GATSBY descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= The.Great.Gatsby.2013.1080p.BluRay.x264.YIFY.mp4
+
+part THE descriptor status False
+part GREAT descriptor status False
+part GATSBY descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= The.Great.Gatsby.2013.1080p.BluRay.x264.YIFY.srt
+
+part THE descriptor status False
+part GREAT descriptor status False
+part GATSBY descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= The.Guardians.of.the.Galaxy.Holiday.Special.2022.1080p.DSNP.WEBRip.DDP5.1.Atmos.x264-EddieSmurfy
+
+part THE descriptor status False
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part HOLIDAY descriptor status False
+part SPECIAL descriptor status True
+part 2022 descriptor status False
+part 1080P descriptor status True
+part DSNP descriptor status True
+part WEBRIP descriptor status True
+part DDP5 descriptor status False
+part 1 descriptor status False
+part ATMOS descriptor status True
+part X264 descriptor status True
+part EDDIESMURFY descriptor status False
+=============
+============= RARBG.txt
+
+part RARBG descriptor status True
+part TXT descriptor status False
+=============
+============= The.Guardians.of.the.Galaxy.Holiday.Special.2022.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-EddieSmurfy.mkv
+
+part THE descriptor status False
+part GUARDIANS descriptor status False
+part OF descriptor status False
+part THE descriptor status False
+part GALAXY descriptor status False
+part HOLIDAY descriptor status False
+part SPECIAL descriptor status True
+part 2022 descriptor status False
+part 1080P descriptor status True
+part DSNP descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part DDP5 descriptor status False
+part 1 descriptor status False
+part ATMOS descriptor status True
+part H descriptor status False
+part 264 descriptor status False
+part EDDIESMURFY descriptor status False
+part MKV descriptor status True
+=============
+============= The Hangover 2009 part 1 1080p
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part 2009 descriptor status False
+part PART descriptor status False
+part 1 descriptor status False
+part 1080P descriptor status True
+=============
+============= [1337x] Torrent downloaded from 1337x.to.txt
+
+part  descriptor status False
+part 1337X descriptor status False
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part 1337X descriptor status False
+part TO descriptor status False
+part TXT descriptor status False
+=============
+============= [TGx]Downloaded from torrentgalaxy.to .txt
+
+part  descriptor status False
+part TGX descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part TORRENTGALAXY descriptor status False
+part TO descriptor status False
+part TXT descriptor status False
+=============
+============= The Hangover 2009 part 1 1080p.ts
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part 2009 descriptor status False
+part PART descriptor status False
+part 1 descriptor status False
+part 1080P descriptor status True
+part TS descriptor status True
+=============
+============= The Hangover Part II (2011)
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part PART descriptor status False
+part II descriptor status False
+part 2011 descriptor status False
+part  descriptor status False
+=============
+============= Other
+
+part OTHER descriptor status False
+=============
+============= AhaShare.com.txt
+
+part AHASHARE descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent downloaded from Demonoid.com - Copy.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part DEMONOID descriptor status False
+part COM descriptor status False
+part COPY descriptor status False
+part TXT descriptor status False
+=============
+============= The.Hangover.Part.II.2011.720p.BrRip.x264.YIFY.mp4
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part PART descriptor status False
+part II descriptor status False
+part 2011 descriptor status False
+part 720P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= The.Hangover.Part.II.2011.720p.BrRip.x264.YIFY.srt
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part PART descriptor status False
+part II descriptor status False
+part 2011 descriptor status False
+part 720P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= The Hangover Part III (2013)
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part PART descriptor status False
+part III descriptor status False
+part 2013 descriptor status False
+part  descriptor status False
+=============
+============= The.Hangover.Part.III.2013.720p.BluRay.x264.YIFY.mp4
+
+part THE descriptor status False
+part HANGOVER descriptor status False
+part PART descriptor status False
+part III descriptor status False
+part 2013 descriptor status False
+part 720P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= The Hateful Eight (2015) [1080p] [YTS.AG]
+
+part THE descriptor status False
+part HATEFUL descriptor status False
+part EIGHT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= The.Hateful.Eight.2015.1080p.BluRay.x264-[YTS.AG].mp4
+
+part THE descriptor status False
+part HATEFUL descriptor status False
+part EIGHT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= The Machinist (2004)
+
+part THE descriptor status False
+part MACHINIST descriptor status False
+part 2004 descriptor status False
+part  descriptor status False
+=============
+============= Other
+
+part OTHER descriptor status False
+=============
+============= AhaShare.com.txt
+
+part AHASHARE descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent downloaded from Demonoid.com - Copy.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part DEMONOID descriptor status False
+part COM descriptor status False
+part COPY descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent Downloaded From ExtraTorrent.com.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part EXTRATORRENT descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= The.Machinist.2004.720p.BluRay.x264.YIFY.mp4
+
+part THE descriptor status False
+part MACHINIST descriptor status False
+part 2004 descriptor status False
+part 720P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= The.Machinist.2004.720p.BluRay.x264.YIFY.srt
+
+part THE descriptor status False
+part MACHINIST descriptor status False
+part 2004 descriptor status False
+part 720P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= The Martian (2015) [1080p] [YTS.AG]
+
+part THE descriptor status False
+part MARTIAN descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= The.Martian.2015.1080p.BluRay.x264-[YTS.AG].mp4
+
+part THE descriptor status False
+part MARTIAN descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= The Revenant 2015 1080p WEB-DL x264 AC3-JYK
+
+part THE descriptor status False
+part REVENANT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part X264 descriptor status True
+part AC3 descriptor status True
+part JYK descriptor status False
+=============
+============= Subs
+
+part SUBS descriptor status True
+=============
+============= The Revenant 2015 1080p WEB-DL x264 AC3-JYK.mkv
+
+part THE descriptor status False
+part REVENANT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part X264 descriptor status True
+part AC3 descriptor status True
+part JYK descriptor status False
+part MKV descriptor status True
+=============
+============= The Revenant 2015 1080p WEB-DL x264 AC3-JYK.mkv.jpg
+
+part THE descriptor status False
+part REVENANT descriptor status False
+part 2015 descriptor status False
+part 1080P descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part X264 descriptor status True
+part AC3 descriptor status True
+part JYK descriptor status False
+part MKV descriptor status True
+part JPG descriptor status False
+=============
+============= The Social Network (2010) [1080]
+
+part THE descriptor status False
+part SOCIAL descriptor status False
+part NETWORK descriptor status False
+part 2010 descriptor status False
+part 1080 descriptor status False
+part  descriptor status False
+=============
+============= AhaShare.com.txt
+
+part AHASHARE descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent downloaded from Demonoid.com - Copy.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part DEMONOID descriptor status False
+part COM descriptor status False
+part COPY descriptor status False
+part TXT descriptor status False
+=============
+============= Torrent Downloaded From ExtraTorrent.com.txt
+
+part TORRENT descriptor status False
+part DOWNLOADED descriptor status False
+part FROM descriptor status False
+part EXTRATORRENT descriptor status False
+part COM descriptor status False
+part TXT descriptor status False
+=============
+============= The Social Network (2010) 1080p BrRip x264 - 1.2GB - YIFY.mp4
+
+part THE descriptor status False
+part SOCIAL descriptor status False
+part NETWORK descriptor status False
+part 2010 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part 1 descriptor status False
+part 2GB descriptor status False
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= The Social Network (2010) 1080p BrRip x264 - 1.2GB - YIFY.srt
+
+part THE descriptor status False
+part SOCIAL descriptor status False
+part NETWORK descriptor status False
+part 2010 descriptor status False
+part 1080P descriptor status True
+part BRRIP descriptor status True
+part X264 descriptor status True
+part 1 descriptor status False
+part 2GB descriptor status False
+part YIFY descriptor status True
+part SRT descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= The Spectacular Now (2013) [1080p] [YTS.AG]
+
+part THE descriptor status False
+part SPECTACULAR descriptor status False
+part NOW descriptor status True
+part 2013 descriptor status False
+part 1080P descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part  descriptor status False
+=============
+============= The.Spectacular.Now.2013.1080p.BluRay.x264-[YTS.AG].mp4
+
+part THE descriptor status False
+part SPECTACULAR descriptor status False
+part NOW descriptor status True
+part 2013 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YTS descriptor status True
+part AG descriptor status False
+part MP4 descriptor status True
+=============
+============= WWW.YTS.AG.jpg
+
+part WWW descriptor status False
+part YTS descriptor status True
+part AG descriptor status False
+part JPG descriptor status False
+=============
+============= The Wedding Planner (2001) [1080p] [BluRay] [5.1] [YTS.MX]
+
+part THE descriptor status False
+part WEDDING descriptor status False
+part PLANNER descriptor status False
+part 2001 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part 5 descriptor status False
+part 1 descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part  descriptor status False
+=============
+============= The.Wedding.Planner.2001.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4
+
+part THE descriptor status False
+part WEDDING descriptor status False
+part PLANNER descriptor status False
+part 2001 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part AAC5 descriptor status False
+part 1 descriptor status False
+part YTS descriptor status True
+part MX descriptor status False
+part MP4 descriptor status True
+=============
+============= Tron Ares 2025 1080p HDRip HEVC x265 BONE.mkv
+
+part TRON descriptor status False
+part ARES descriptor status False
+part 2025 descriptor status False
+part 1080P descriptor status True
+part HDRIP descriptor status True
+part HEVC descriptor status True
+part X265 descriptor status True
+part BONE descriptor status False
+part MKV descriptor status True
+=============
+============= Tron Legacy 2010 REMASTERED 1080p BluRay HEVC x265 10-BIT 5.1 BONE.mkv
+
+part TRON descriptor status False
+part LEGACY descriptor status False
+part 2010 descriptor status False
+part REMASTERED descriptor status True
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part HEVC descriptor status True
+part X265 descriptor status True
+part 10 descriptor status False
+part BIT descriptor status False
+part 5 descriptor status False
+part 1 descriptor status False
+part BONE descriptor status False
+part MKV descriptor status True
+=============
+============= We're the Millers (2013) [1080p]
+
+part WERE descriptor status False
+part THE descriptor status False
+part MILLERS descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part  descriptor status False
+=============
+============= We're.the.Millers.2013.1080p.BluRay.x264.YIFY.mp4
+
+part WERE descriptor status False
+part THE descriptor status False
+part MILLERS descriptor status False
+part 2013 descriptor status False
+part 1080P descriptor status True
+part BLURAY descriptor status True
+part X264 descriptor status True
+part YIFY descriptor status True
+part MP4 descriptor status True
+=============
+============= WWW.YIFY-TORRENTS.COM.jpg
+
+part WWW descriptor status False
+part YIFY descriptor status True
+part TORRENTS descriptor status False
+part COM descriptor status False
+part JPG descriptor status False
+=============
+============= Smiling.Friends.S01E07.Frowning.Friends.2160p.Web.AI.AV1.AC3.Dual-[Enrav1sh].mkv
+
+part SMILING descriptor status False
+part FRIENDS descriptor status False
+part S01E07 descriptor status False
+part FROWNING descriptor status False
+part FRIENDS descriptor status False
+part 2160P descriptor status True
+part WEB descriptor status True
+part AI descriptor status False
+part AV1 descriptor status True
+part AC3 descriptor status True
+part DUAL descriptor status True
+part ENRAV1SH descriptor status False
+part MKV descriptor status True
+=============
+============= Smiling.Friends.S01E08.Charlie.Dies.and.Doesnt.Come.Back.2160p.Web.AI.AV1.AC3.Dual-[Enrav1sh].mkv
+
+part SMILING descriptor status False
+part FRIENDS descriptor status False
+part S01E08 descriptor status False
+part CHARLIE descriptor status False
+part DIES descriptor status False
+part AND descriptor status False
+part DOESNT descriptor status False
+part COME descriptor status False
+part BACK descriptor status False
+part 2160P descriptor status True
+part WEB descriptor status True
+part AI descriptor status False
+part AV1 descriptor status True
+part AC3 descriptor status True
+part DUAL descriptor status True
+part ENRAV1SH descriptor status False
+part MKV descriptor status True
+=============
+============= Smiling.Friends.S01E09.The.Smiling.Friends.Go.To.Brazil.2160p.Web.AI.AV1.AC3.Dual-[Enrav1sh].mkv
+
+part SMILING descriptor status False
+part FRIENDS descriptor status False
+part S01E09 descriptor status False
+part THE descriptor status False
+part SMILING descriptor status False
+part FRIENDS descriptor status False
+part GO descriptor status False
+part TO descriptor status False
+part BRAZIL descriptor status False
+part 2160P descriptor status True
+part WEB descriptor status True
+part AI descriptor status False
+part AV1 descriptor status True
+part AC3 descriptor status True
+part DUAL descriptor status True
+part ENRAV1SH descriptor status False
+part MKV descriptor status True
+=============
+============= Stranger Things S01E07 Chapter Seven The Bathtub 2160p NF WEB-DL TrueHD 5 1IMDb
+
+part STRANGER descriptor status False
+part THINGS descriptor status False
+part S01E07 descriptor status False
+part CHAPTER descriptor status False
+part SEVEN descriptor status False
+part THE descriptor status False
+part BATHTUB descriptor status False
+part 2160P descriptor status True
+part NF descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part TRUEHD descriptor status True
+part 5 descriptor status False
+part 1IMDB descriptor status False
+=============
+============= Stranger Things S01E05 Chapter Five The Flea and the Acrobat 2160p NF WEB-DIMDb
+
+part STRANGER descriptor status False
+part THINGS descriptor status False
+part S01E05 descriptor status False
+part CHAPTER descriptor status False
+part FIVE descriptor status False
+part THE descriptor status False
+part FLEA descriptor status False
+part AND descriptor status False
+part THE descriptor status False
+part ACROBAT descriptor status False
+part 2160P descriptor status True
+part NF descriptor status True
+part WEB descriptor status True
+part DIMDB descriptor status False
+=============
+============= Stranger Things S01E08 Chapter Eight The Upside Down 2160p NF WEB-DL TrueHDIMDb
+
+part STRANGER descriptor status False
+part THINGS descriptor status False
+part S01E08 descriptor status False
+part CHAPTER descriptor status False
+part EIGHT descriptor status False
+part THE descriptor status False
+part UPSIDE descriptor status False
+part DOWN descriptor status False
+part 2160P descriptor status True
+part NF descriptor status True
+part WEB descriptor status True
+part DL descriptor status False
+part TRUEHDIMDB descriptor status False
+=============
