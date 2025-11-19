@@ -17,7 +17,7 @@ from constants import (
     )
 
 
-class FileExtractor:
+class MediaExtractor:
     
     def __init__(self, filename):
         self.filename = filename

@@ -1,0 +1,60 @@
+main ===============
+
+    TorrentManager.process_torrents(PATH_TO_TORRENT, PATH_TO_TM)
+    TorrentManager.process_staging(PATH_TO_STAGING, PATH_TO_MOVIES, PATH_TO_SHOWS)
+
+===============
+
+TorrentManager.process_torrents ===============
+
+    for each file/dir in PATH_TO_TORRENT
+        
+
+        if file:
+            self.process_file(file)
+            
+        if directory:
+            TorrentManager.process_dir(dir)
+
+===============
+
+TorrentManager.process_file ===============
+
+    metadata = extractor.extract_metadata(file)
+
+    if metadata.type == 'show':
+        # <title>.<year>.<season><episode>.<resolution>.<quality>.<codec>.<audio>.<ext>
+        shutil.move(PATH_TO_STAGING + metadata.title + '.' + metadata.season + ...)
+    elif metadata.type == 'movie':
+        # <title>.<year>.<resolution>.<quality>.<codec>.<audio>.<ext>
+        shutil.move(PATH_TO_STAGING + metadata.title + '.' + ...)
+    elif metadata.type == 'sub'
+        error_msg = "Error due subtitle file in main torrent directory, metadata is {metadata...}"
+        self.handle_error(file, metadata, error_msg)  
+    else
+        error_msg = "Error due to unclassified file, metadata is {metadata...}"
+        self.handle_error(file, metadata, error_msg)  
+
+===============
+
+TorrentManager.process_dir ===============
+
+    if (extractor.is_show_dir(dir)):
+        self.process_show_dir(dir)
+    elif (extractor.is_movie_dir(dir)):
+        self.process_movie_dir(dir)
+    else:
+        error_msg = "Directory could not be identified as a movie or show"
+        self.handle_error(file, error_msg)
+
+===============
+
+
+TorrentManager.process_show_dir ===============
+
+    for root, dirs, files in walk(dir):
+        for dir in dirs:
+            if extractor.is_season_dir(dir)
+
+
+===============
