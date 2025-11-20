@@ -27,7 +27,9 @@ class MediaMetadata:
     codec: str | None = None
     quality: str | None = None
     audio: str | None = None
+
     ext: str | None = None
+    type: str | None = None
 
     """
         Description: Returns metadata in filename format without file ext
