@@ -4,7 +4,10 @@ from models.media_metadata import MediaMetadata
 import re
 from datetime import datetime
 from config.constants import (
-    RESOLUTION_PATTERNS
+    RESOLUTION_PATTERNS,
+    CODEC_PATTERNS,
+    SOURCE_PATTERNS,
+    AUDIO_PATTERNS
     )
 
 class MediaExtractor:
@@ -89,17 +92,19 @@ class MediaExtractor:
     def _extract_season_num(self, index: int, parts: list[str]):
         return
 
+    # Testing not needed (yet, will be after adding static patterns) ✅
     def _is_quality_descriptor(self, index: int, parts: list[str]) -> bool:
-        # Check if resolution descriptor 
+        if (
+            self._is_resolution_descriptor(index, parts) or
+            self._is_codec_descriptor(index, parts) or
+            self._is_source_descriptor(index, parts) or
+            self._is_audio_descriptor(index, parts)
+            ):
+            return True
 
-        # Check if codec descriptor
-
-        # Check if source descriptor
-
-        # Check if audio descriptor
         return False
 
-    # Tested ✅
+    # tested ✅
     def _is_resolution_descriptor(self, index: int, parts: list[str]) -> bool:
         for resolution in RESOLUTION_PATTERNS:
             for pattern in RESOLUTION_PATTERNS[resolution]:
@@ -107,13 +112,28 @@ class MediaExtractor:
                     return True
         return False
 
+    # tested ✅
     def _is_codec_descriptor(self, index: int, parts: list[str]) -> bool:
+        for codec in CODEC_PATTERNS:
+            for pattern in CODEC_PATTERNS[codec]:
+                if self._match_regex(pattern, index, parts):
+                    return True
         return False
 
+    # tested ✅
     def _is_source_descriptor(self, index: int, parts: list[str]) -> bool:
+        for source in SOURCE_PATTERNS:
+            for pattern in SOURCE_PATTERNS[source]:
+                if self._match_regex(pattern, index, parts):
+                    return True
         return False
 
+    # tested ✅
     def _is_audio_descriptor(self, index: int, parts: list[str]) -> bool:
+        for audio in AUDIO_PATTERNS:
+            for pattern in AUDIO_PATTERNS[audio]:
+                if self._match_regex(pattern, index, parts):
+                    return True
         return False
 
 
