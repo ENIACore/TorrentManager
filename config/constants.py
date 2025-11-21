@@ -14,6 +14,8 @@ Attributes:
 
     HDR_PATTERNS: Dict of common patterns used to describe HDR in file names
     SHOW_PATTERNS: Dict of common patterns used to identify TV show episodes and seasons
+    EPISODES_PATTERNS: List of patterns to match episode identifiers with capture groups
+    SEASONS_PATTERNS: List of patterns to match season identifiers with capture groups
 
     STATIC_DESCRIPTORS: Set of static descriptors commonly found in torrent filenames
 
@@ -178,3 +180,58 @@ AUDIO_PATTERNS = {
     # Matches DUAL-AUDIO, DUAL AUDIO, DUAL
     'DUAL': [r'DUAL\.AUDIO', r'DUAL']
 }
+
+# If season number exists, it is capture group 1, for all matches
+SEASONS_PATTERNS = [
+    # Matches S<number>
+    r'S(\d+)',
+    # Matches S.<number>
+    r'S\.(\d+)',
+
+    # Matches SEA<number>
+    r'SEA(\d+)',
+    # Matches SEA.<number>
+    r'SEA\.(\d+)',
+
+    # Matches SEASON<number>
+    r'SEASON(\d+)',
+    # Matches SEASON.<number>
+    r'SEASON\.(\d+)',
+
+    # Matches SEASON
+    r'SEASON',
+
+    # Matches S<number>E<number>
+    r'S(\d+)E\d+',
+]
+
+# If season number exists, it is capture group 1, for all matches
+EPISODES_PATTERNS = [
+    # Matches E<number>
+    r'E(\d+)',
+    # Matches E.<number>
+    r'E\.(\d+)',
+
+    # Matches EP<number>
+    r'EP(\d+)',
+    # Matches EP.<number>
+    r'EP\.(\d+)',
+
+    # Matches EPISODE<number>
+    r'EPISODE(\d+)',
+    # Matches EPISODE.<number>
+    r'EPISODE\.(\d+)',
+
+    # Matches EPISODE
+    r'(EPISODE)',
+    # Matches EP
+    r'(EP)',
+
+    # Matches S<number>E<number>
+    r'S\d+E(\d+)',
+    # Matches <number>X<number>
+    r'\d+X(\d+)',
+    # Matches <number>.X.<number> (e.g., 1.X.01, 2.X.15)
+    r'\d+\.X\.(\d+)',
+
+]

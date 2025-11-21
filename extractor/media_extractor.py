@@ -4,10 +4,20 @@ from models.media_metadata import MediaMetadata
 import re
 from datetime import datetime
 from config.constants import (
+    # Quality descriptor patterns
     RESOLUTION_PATTERNS,
     CODEC_PATTERNS,
     SOURCE_PATTERNS,
-    AUDIO_PATTERNS
+    AUDIO_PATTERNS,
+
+    # Series patterns
+    SEASONS_PATTERNS,
+    EPISODES_PATTERNS,
+
+    # File extensions
+    VIDEO_EXTENSIONS,
+    SUBTITLE_EXTENSIONS,
+    AUDIO_EXTENSIONS
     )
 
 class MediaExtractor:
@@ -21,8 +31,32 @@ class MediaExtractor:
         return MediaMetadata()
     
     def extract_title(self, path: Path) -> str:
-        #parts = self._get_sanitized_file_or_dir(path).split('.')
+        """
+        Extracts title of movie or series from filename.
 
+        Title Extraction Logic:
+            Title consists of all parts from the start until a terminator is found.
+
+            Terminators (indicators that title has ended):
+            - Quality descriptor (resolution, codec, source, audio)
+            - Season indicator (S01, S01E01, etc.)
+            - Episode indicator (when not part of season pattern)
+            - File extension (.mkv, .mp4, etc.)
+            - End of filename parts
+
+            Year Handling:
+            - If a valid year is followed by a terminator → year ends the title
+            - If a valid year is NOT followed by a terminator → year is part of the title
+
+        Example Patterns:
+            Title.2020.1080p          → title="Title", year=2020 (year followed by quality)
+            Title.2020.S01E01         → title="Title", year=2020 (year followed by season)
+            Title.2020                → title="Title", year=2020 (year at end)
+            Title.2020.Part2.1080p    → title="Title.2020.Part2" (2020 not followed by terminator)
+            Title.1080p               → title="Title" (no year, ends at quality)
+            Title                     → title="Title" (no terminators found)
+        """
+        parts = self._get_sanitized_file_or_dir(path).split('.')
         return ''
     
     def extract_year(self, path: Path) -> str:
@@ -79,18 +113,24 @@ class MediaExtractor:
         if year_num > 1900 and year_num <= datetime.now().year:
             return True
         return False
-    
-    def _is_episode(self, episode: str) -> bool:
-        return False
 
+    # Tested ✅
+    def _extract_season_num(self, index: int, parts: list[str]) -> Match[str] | None:
+        for pattern in SEASONS_PATTERNS:
+            match = self._match_regex(pattern, index, parts)
+            if match:
+                return match
+
+        return None
+                
+    # Tested ✅
     def _extract_episode_num(self, index: int, parts: list[str]):
-        return
-    
-    def _is_season(self, season: str) -> bool:
-        return False
+        for pattern in EPISODES_PATTERNS:
+            match = self._match_regex(pattern, index, parts)
+            if match:
+                return match
 
-    def _extract_season_num(self, index: int, parts: list[str]):
-        return
+        return None
 
     # Testing not needed (yet, will be after adding static patterns) ✅
     def _is_quality_descriptor(self, index: int, parts: list[str]) -> bool:
@@ -136,6 +176,51 @@ class MediaExtractor:
                     return True
         return False
 
+    # tested ✅
+    def _is_ext(self, index: int, parts: list[str]) -> bool:
+        if (
+            self._is_video_ext(index, parts) or
+            self._is_subtitle_ext(index, parts) or
+            self._is_audio_ext(index, parts)
+            ):
+            return True
+
+        return False
+
+    # tested ✅
+    def _is_video_ext(self, index: int, parts: list[str]) -> bool:
+        for pattern in VIDEO_EXTENSIONS:
+            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
+                return True
+
+        return False
+
+    # tested ✅
+    def _is_subtitle_ext(self, index: int, parts: list[str]) -> bool:
+        for pattern in SUBTITLE_EXTENSIONS:
+            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
+                return True
+
+        return False
+
+    # tested ✅
+    def _is_audio_ext(self, index: int, parts: list[str]) -> bool:
+        for pattern in AUDIO_EXTENSIONS:
+            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
+                return True
+
+        return False
+
+    # tested ✅
+    def _is_matching_tail_len(self, pattern: str, index: int, parts: list[str]) -> bool:
+        """
+        Helper function for _is_<type>_ext to ensure ext pattern only matches end of filename parts array.
+        Does this by ensuring number of parts in pattern.split('.') is equivalent to remaining parts to match in filename
+        """
+        num_pattern_parts = len(pattern.split('.'))
+        num_filename_parts_left = len(parts) - index 
+        
+        return num_filename_parts_left == num_pattern_parts
 
     """
     General helper functions
