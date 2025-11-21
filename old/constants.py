@@ -2,18 +2,6 @@ SUBTITLE_EXTENSIONS = {'SRT', 'ASS', 'SSA', 'SUB', 'VTT', 'SBV', 'JSON', 'SMI', 
 VIDEO_EXTENSIONS = {'MP4', 'MKV', 'AVI', 'MOV', 'FLV', 'WMV', 'WEBM', 'M4V', 'TS', 'M2TS', 'MPG', 'MPEG', 'VOB', '3GP', 'OGV', 'RMVB', 'RM', 'DIVX', 'F4V'}
 AUDIO_EXTENSIONS = {'MP3', 'FLAC', 'AAC', 'OGG', 'WMA', 'M4A', 'OPUS', 'WAV', 'APE', 'WV', 'DTS', 'AC3', 'MKA'}
 
-RESOLUTION_PATTERNS = {
-    '8K': r'(?:8K|4320P|7680X4320)',
-    '4K': r'(?:4K|UHD|2160P|3840X2160)',
-    '2K': r'(?:2K|1440P|2560X1440|QHD|WQHD)',
-    '1080p': r'(?:1080[PI]|FHD|1920X1080|FULLHD)',
-    '720p': r'(?:720[PI]|HD|1280X720)',
-    '576p': r'(?:576[PI]|PAL)',
-    '480p': r'(?:480[PI]|NTSC|SD)',
-    '360p': r'360[PI]',
-    '240p': r'240[PI]'
-}
-
 CODEC_PATTERNS = {
     'AV1': r'AV1',
     'VP9': r'VP9',
