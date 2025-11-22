@@ -4,21 +4,17 @@ from extractor.media_extractor import MediaExtractor
 from pathlib import Path
 
 
-extractor = MediaExtractor()
-#movie = "The.Hunger.Games.The.Ballad.of.Songbirds.and.Snakes.2023.1080p.AMZN.WEBRip.1600MB.DD5.1.x264-GalaxyRG.mkv "
-movie = "Movie.2015.S01.mkv"
-path = Path(movie)
-print('season is: ' + str(extractor.extract_season(path)))
-#metadata = extractor.extract_metadata(path)
 
 
+example = 'y'
+while (example != 'n'):
+    example = input('Enter a movie or show (enter n to stop): ')
+    path = Path(example)
 
+    extractor = MediaExtractor()
+    metadata = extractor.extract_metadata(path)
 
-
-
-
-
-
+    metadata.print()
 
 
 

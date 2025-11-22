@@ -21,7 +21,8 @@ from config.constants import (
     )
 
 """
-Needs to be done - Functionality of extract title needs to be expanded to include common words
+TODO - Functionality of extract title needs to be expanded to include common words
+TODO - Improve audio extraction
 """
 
 class MediaExtractor:
@@ -408,3 +409,10 @@ class MediaExtractor:
             return array[index + 1]
         else:
             return None
+
+    # Common patterns for identification
+    EXTRA_KEYWORDS = [
+        'EXTRAS?', 'FEATURETTES?', 'BEHIND.THE.SCENES?', 'BTS',
+        'DELETED.SCENES?', 'INTERVIEWS?', 'MAKING.OF', 'TRAILER',
+        'BONUS', 'DOCUMENTARY', 'DOCUMENTARIES'
+    ]
