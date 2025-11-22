@@ -17,7 +17,7 @@ def instance():
 ])
 def test_is_codec_descriptor_av1(instance, parts, index):
     """Test that AV1 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # VP9 codec tests
@@ -27,7 +27,7 @@ def test_is_codec_descriptor_av1(instance, parts, index):
 ])
 def test_is_codec_descriptor_vp9(instance, parts, index):
     """Test that VP9 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # VP8 codec tests
@@ -37,7 +37,7 @@ def test_is_codec_descriptor_vp9(instance, parts, index):
 ])
 def test_is_codec_descriptor_vp8(instance, parts, index):
     """Test that VP8 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # x265/HEVC codec tests
@@ -53,7 +53,7 @@ def test_is_codec_descriptor_vp8(instance, parts, index):
 ])
 def test_is_codec_descriptor_x265(instance, parts, index):
     """Test that x265/HEVC codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # x264/AVC codec tests
@@ -68,7 +68,7 @@ def test_is_codec_descriptor_x265(instance, parts, index):
 ])
 def test_is_codec_descriptor_x264(instance, parts, index):
     """Test that x264/AVC codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # x263 codec tests
@@ -80,7 +80,7 @@ def test_is_codec_descriptor_x264(instance, parts, index):
 ])
 def test_is_codec_descriptor_x263(instance, parts, index):
     """Test that x263 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # XVID codec tests
@@ -90,7 +90,7 @@ def test_is_codec_descriptor_x263(instance, parts, index):
 ])
 def test_is_codec_descriptor_xvid(instance, parts, index):
     """Test that XVID codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # DIVX codec tests
@@ -101,7 +101,7 @@ def test_is_codec_descriptor_xvid(instance, parts, index):
 ])
 def test_is_codec_descriptor_divx(instance, parts, index):
     """Test that DIVX codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # MPEG4 codec tests
@@ -112,7 +112,7 @@ def test_is_codec_descriptor_divx(instance, parts, index):
 ])
 def test_is_codec_descriptor_mpeg4(instance, parts, index):
     """Test that MPEG4 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # MPEG2 codec tests
@@ -123,7 +123,7 @@ def test_is_codec_descriptor_mpeg4(instance, parts, index):
 ])
 def test_is_codec_descriptor_mpeg2(instance, parts, index):
     """Test that MPEG2 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # MPEG1 codec tests
@@ -134,7 +134,7 @@ def test_is_codec_descriptor_mpeg2(instance, parts, index):
 ])
 def test_is_codec_descriptor_mpeg1(instance, parts, index):
     """Test that MPEG1 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # VC1 codec tests
@@ -146,7 +146,7 @@ def test_is_codec_descriptor_mpeg1(instance, parts, index):
 ])
 def test_is_codec_descriptor_vc1(instance, parts, index):
     """Test that VC1 codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # THEORA codec tests
@@ -155,7 +155,7 @@ def test_is_codec_descriptor_vc1(instance, parts, index):
 ])
 def test_is_codec_descriptor_theora(instance, parts, index):
     """Test that THEORA codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # PRORES codec tests
@@ -167,7 +167,7 @@ def test_is_codec_descriptor_theora(instance, parts, index):
 ])
 def test_is_codec_descriptor_prores(instance, parts, index):
     """Test that PRORES codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # DNxHD codec tests
@@ -177,7 +177,7 @@ def test_is_codec_descriptor_prores(instance, parts, index):
 ])
 def test_is_codec_descriptor_dnxhd(instance, parts, index):
     """Test that DNxHD codec patterns are correctly identified."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # Invalid codec descriptors
@@ -195,40 +195,40 @@ def test_is_codec_descriptor_dnxhd(instance, parts, index):
 ])
 def test_is_codec_descriptor_invalid(instance, parts, index):
     """Test that non-codec patterns return False."""
-    assert instance._is_codec_descriptor(index, parts) is False
+    assert instance._is_codec_descriptor(index, parts) is None
 
 
 # Edge cases - different positions
 def test_is_codec_descriptor_at_beginning(instance):
     """Test codec at the beginning of parts list."""
     parts = ["X265", "MY", "MOVIE", "BLURAY"]
-    assert instance._is_codec_descriptor(0, parts) is True
+    assert instance._is_codec_descriptor(0, parts) is not None
 
 
 def test_is_codec_descriptor_at_end(instance):
     """Test codec at the end of parts list."""
     parts = ["MY", "MOVIE", "BLURAY", "X265"]
-    assert instance._is_codec_descriptor(3, parts) is True
+    assert instance._is_codec_descriptor(3, parts) is not None
 
 
 def test_is_codec_descriptor_single_element(instance):
     """Test codec as the only element."""
     parts = ["X265"]
-    assert instance._is_codec_descriptor(0, parts) is True
+    assert instance._is_codec_descriptor(0, parts) is not None
 
 
 # Edge cases - index boundaries
 def test_is_codec_descriptor_index_out_of_bounds(instance):
     """Test that index beyond parts length returns False."""
     parts = ["MY", "MOVIE", "X265"]
-    assert instance._is_codec_descriptor(10, parts) is False
+    assert instance._is_codec_descriptor(10, parts) is None
 
 
 def test_is_codec_descriptor_negative_index(instance):
     """Test behavior with negative index."""
     parts = ["MY", "MOVIE", "X265"]
     result = instance._is_codec_descriptor(-1, parts)
-    assert isinstance(result, bool)
+    assert isinstance(result, (str, type(None)))
 
 
 # Multi-part codec patterns (with dots)
@@ -244,7 +244,7 @@ def test_is_codec_descriptor_negative_index(instance):
 ])
 def test_is_codec_descriptor_multipart_patterns(instance, parts, index):
     """Test codec patterns that span multiple parts with dots."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # Common torrent filename scenarios
@@ -258,24 +258,24 @@ def test_is_codec_descriptor_multipart_patterns(instance, parts, index):
 ])
 def test_is_codec_descriptor_realistic_filenames(instance, parts, index):
     """Test codec detection in realistic torrent filename patterns."""
-    assert instance._is_codec_descriptor(index, parts) is True
+    assert instance._is_codec_descriptor(index, parts) is not None
 
 
 # Empty and minimal inputs
 def test_is_codec_descriptor_empty_parts(instance):
     """Test with empty parts list."""
-    assert instance._is_codec_descriptor(0, []) is False
+    assert instance._is_codec_descriptor(0, []) is None
 
 
 def test_is_codec_descriptor_empty_string_part(instance):
     """Test with empty string in parts."""
     parts = ["TITLE", "", "X265"]
-    assert instance._is_codec_descriptor(1, parts) is False
+    assert instance._is_codec_descriptor(1, parts) is None
 
 
 # Multiple codecs in same filename (uncommon but possible)
 def test_is_codec_descriptor_multiple_codecs(instance):
     """Test filename with multiple codec patterns."""
     parts = ["MOVIE", "X264", "TO", "X265", "CONVERTED"]
-    assert instance._is_codec_descriptor(1, parts) is True
-    assert instance._is_codec_descriptor(3, parts) is True
+    assert instance._is_codec_descriptor(1, parts) is not None
+    assert instance._is_codec_descriptor(3, parts) is not None

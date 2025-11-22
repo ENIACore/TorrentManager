@@ -3,7 +3,7 @@ from pathlib import Path
 from extractor.media_extractor import MediaExtractor
 
 """
-Needs to be done - Functionality of extract title needs to be expanded to include common words
+TODO - Functionality of extraction needs to be expanded to include common static classifiers
 """
 
 @pytest.fixture

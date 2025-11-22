@@ -19,7 +19,7 @@ def instance():
 ])
 def test_is_resolution_descriptor_8k(instance, parts, index):
     """Test that 8K resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 4K/UHD resolution tests
@@ -33,7 +33,7 @@ def test_is_resolution_descriptor_8k(instance, parts, index):
 ])
 def test_is_resolution_descriptor_4k(instance, parts, index):
     """Test that 4K/UHD resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 2K resolution tests
@@ -48,7 +48,7 @@ def test_is_resolution_descriptor_4k(instance, parts, index):
 ])
 def test_is_resolution_descriptor_2k(instance, parts, index):
     """Test that 2K resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 1080p resolution tests
@@ -62,7 +62,7 @@ def test_is_resolution_descriptor_2k(instance, parts, index):
 ])
 def test_is_resolution_descriptor_1080p(instance, parts, index):
     """Test that 1080p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 720p resolution tests
@@ -74,7 +74,7 @@ def test_is_resolution_descriptor_1080p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_720p(instance, parts, index):
     """Test that 720p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 576p resolution tests
@@ -86,7 +86,7 @@ def test_is_resolution_descriptor_720p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_576p(instance, parts, index):
     """Test that 576p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 480p resolution tests
@@ -98,7 +98,7 @@ def test_is_resolution_descriptor_576p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_480p(instance, parts, index):
     """Test that 480p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 360p resolution tests
@@ -109,7 +109,7 @@ def test_is_resolution_descriptor_480p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_360p(instance, parts, index):
     """Test that 360p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # 240p resolution tests
@@ -120,7 +120,7 @@ def test_is_resolution_descriptor_360p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_240p(instance, parts, index):
     """Test that 240p resolution patterns are correctly identified."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # Invalid resolution descriptors
@@ -139,33 +139,33 @@ def test_is_resolution_descriptor_240p(instance, parts, index):
 ])
 def test_is_resolution_descriptor_invalid(instance, parts, index):
     """Test that non-resolution patterns return False."""
-    assert instance._is_resolution_descriptor(index, parts) is False
+    assert instance._is_resolution_descriptor(index, parts) is None
 
 
 # Edge cases - different positions
 def test_is_resolution_descriptor_at_beginning(instance):
     """Test resolution at the beginning of parts list."""
     parts = ["1080P", "MY", "MOVIE", "BLURAY"]
-    assert instance._is_resolution_descriptor(0, parts) is True
+    assert instance._is_resolution_descriptor(0, parts) is not None
 
 
 def test_is_resolution_descriptor_at_end(instance):
     """Test resolution at the end of parts list."""
     parts = ["MY", "MOVIE", "BLURAY", "1080P"]
-    assert instance._is_resolution_descriptor(3, parts) is True
+    assert instance._is_resolution_descriptor(3, parts) is not None
 
 
 def test_is_resolution_descriptor_single_element(instance):
     """Test resolution as the only element."""
     parts = ["1080P"]
-    assert instance._is_resolution_descriptor(0, parts) is True
+    assert instance._is_resolution_descriptor(0, parts) is not None
 
 
 # Edge cases - index boundaries
 def test_is_resolution_descriptor_index_out_of_bounds(instance):
-    """Test that index beyond parts length returns False."""
+    """Test that index beyond parts length returns None."""
     parts = ["MY", "MOVIE", "1080P"]
-    assert instance._is_resolution_descriptor(10, parts) is False
+    assert instance._is_resolution_descriptor(10, parts) is None
 
 
 def test_is_resolution_descriptor_negative_index(instance):
@@ -175,7 +175,7 @@ def test_is_resolution_descriptor_negative_index(instance):
     # This tests current implementation behavior
     result = instance._is_resolution_descriptor(-1, parts)
     # The function will try to combine parts from -1 onward, which may not match
-    assert isinstance(result, bool)
+    assert isinstance(result, (str, type(None)))
 
 
 # Multi-part resolution patterns
@@ -188,7 +188,7 @@ def test_is_resolution_descriptor_negative_index(instance):
 ])
 def test_is_resolution_descriptor_dimension_formats(instance, parts, index):
     """Test resolution patterns in WIDTHxHEIGHT format."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # Common torrent filename scenarios
@@ -202,19 +202,19 @@ def test_is_resolution_descriptor_dimension_formats(instance, parts, index):
 ])
 def test_is_resolution_descriptor_realistic_filenames(instance, parts, index):
     """Test resolution detection in realistic torrent filename patterns."""
-    assert instance._is_resolution_descriptor(index, parts) is True
+    assert instance._is_resolution_descriptor(index, parts) is not None
 
 
 # Empty and minimal inputs
 def test_is_resolution_descriptor_empty_parts(instance):
     """Test with empty parts list."""
-    assert instance._is_resolution_descriptor(0, []) is False
+    assert instance._is_resolution_descriptor(0, []) is None
 
 
 def test_is_resolution_descriptor_empty_string_part(instance):
     """Test with empty string in parts."""
     parts = ["TITLE", "", "1080P"]
-    assert instance._is_resolution_descriptor(1, parts) is False
+    assert instance._is_resolution_descriptor(1, parts) is None
 
 
 # Mixed resolution patterns in same filename
@@ -222,5 +222,5 @@ def test_is_resolution_descriptor_multiple_resolutions(instance):
     """Test filename with multiple resolution-like patterns."""
     # Some torrents might have upscaled info like "720P.TO.1080P"
     parts = ["MOVIE", "720P", "TO", "1080P", "UPSCALED"]
-    assert instance._is_resolution_descriptor(1, parts) is True
-    assert instance._is_resolution_descriptor(3, parts) is True
+    assert instance._is_resolution_descriptor(1, parts) is not None
+    assert instance._is_resolution_descriptor(3, parts) is not None

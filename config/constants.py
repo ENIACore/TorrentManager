@@ -156,7 +156,7 @@ AUDIO_PATTERNS = {
     # Matches TrueHD, TRUE-HD, TRUEHD, TRUE HD
     'TrueHD': [r'TRUEHD', r'TRUE\.HD', r'TRUE\.HD'],
     # Matches DD+, DDP, E-AC-3, EAC3, DD-PLUS, DDPLUS
-    'DD+': [r'DD', r'DDP', r'E\.AC\.3', r'E\.AC\.3', r'EAC3', r'DD\.PLUS', r'DD\.PLUS', r'DDPLUS'],
+    'DD+': [r'DDP', r'E\.AC\.3', r'E\.AC\.3', r'EAC3', r'DD\.PLUS', r'DD\.PLUS', r'DDPLUS'],
     # Matches DD, AC3, DOLBY-DIGITAL, DOLBY DIGITAL (but not DD+ or variants)
     'DD': [r'DD', r'AC3', r'DOLBY-DIGITAL', r'DOLBY\.DIGITAL', r'DOLBYDIGITAL'],
     # Matches AAC, HE-AAC, HEAAC, HE AAC

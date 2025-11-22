@@ -11,7 +11,7 @@ def base_metadata():
     metadata.episode = 1
     metadata.resolution = '1080p'
     metadata.codec = 'x265'
-    metadata.quality = 'BluRay'
+    metadata.source = 'BluRay'
     metadata.audio = 'DUAL'
     return metadata
 

@@ -3,12 +3,43 @@ from config.constants import (RESOLUTION_PATTERNS)
 from extractor.media_extractor import MediaExtractor
 from pathlib import Path
 
-# Out of bounds test for _is_quality_descriptor
 
-parts = ['PART1', '1080P']
 extractor = MediaExtractor()
-res = extractor._is_quality_descriptor(1, parts)
-print('res is: ' + str(res))
+#movie = "The.Hunger.Games.The.Ballad.of.Songbirds.and.Snakes.2023.1080p.AMZN.WEBRip.1600MB.DD5.1.x264-GalaxyRG.mkv "
+movie = "Movie.2015.S01.mkv"
+path = Path(movie)
+print('season is: ' + str(extractor.extract_season(path)))
+#metadata = extractor.extract_metadata(path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
 re_str = r'8K|4320[PI]?|7680X4320|FULLUHD'

@@ -20,16 +20,34 @@ from config.constants import (
     AUDIO_EXTENSIONS
     )
 
+"""
+Needs to be done - Functionality of extract title needs to be expanded to include common words
+"""
+
 class MediaExtractor:
     
     """
     Extraction functions
     """
     def extract_metadata(self, path: Path) -> MediaMetadata:
+        metadata = MediaMetadata()
+        metadata.title = self.extract_title(path) 
+        metadata.year = self.extract_year(path)
+        metadata.season = self.extract_season(path)
+        metadata.episode = self.extract_episode(path)
 
-        sanitized_name = self._get_sanitized_file_or_dir(path)
-        return MediaMetadata()
+        metadata.resolution = self.extract_resolution(path)
+        metadata.codec = self.extract_codec(path)
+        metadata.source = self.extract_source(path)
+        metadata.audio = self.extract_audio(path)
+
+        metadata.ext = self.extract_ext(path)
+        #metadata.type = self.extract_type
+
+
+        return metadata
     
+    # Tested ✅
     def extract_title(self, path: Path) -> str:
         """
         Extracts title of movie or series from filename.
@@ -84,31 +102,142 @@ class MediaExtractor:
 
         return '.'.join(title)
     
-    def extract_year(self, path: Path) -> str:
+    # Tested ✅
+    def extract_year(self, path: Path) -> int | None:
+        """
+        Extracts year of movie or series from filename.
+
+        Year Extraction Logic:
+            Year must be a valid year (1900 - current year) preceded by a title and followed by a terminator
+            If the year is not preceded only by the title it will not be assumed the year
+            If the year is not followed by a terminator it will be assumed a part of the title
+
+            Terminators (indicators that title has ended):
+            - End of filename parts
+            - File extension (.mkv, .mp4, etc.)
+            - Quality descriptor (resolution, codec, source, audio)
+            - Season indicator (S01, S01E01, etc.)
+            - Episode indicator (when not part of season pattern)
+
+            Year Handling:
+            - If a valid year is followed by a terminator → year is captured
+            - If a valid year is NOT followed by a terminator → year is part of the title
+
+        Example Patterns:
+            Title.2020.1080p          → title="Title", year=2020 (year followed by quality)
+            Title.2020.S01E01         → title="Title", year=2020 (year followed by season)
+            Title.2020                → title="Title", year=2020 (year at end)
+            Title.2020.Part2.1080p    → title="Title.2020.Part2" (2020 not followed by terminator)
+            Title.1080p               → title="Title" (no year, ends at quality)
+            Title                     → title="Title" (no terminators found)
+
+        Returns:
+            int if year found
+            None if no year found
+        """
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+
+            # If terminator found
+            if (
+                self._is_quality_descriptor(i, parts) or
+                self._extract_season_num(i, parts) or
+                self._extract_episode_num(i, parts) or
+                self._is_ext(i, parts)
+                ):
+                # If previous part is year, return year
+                if (i > 0 and self._is_valid_year(parts[i - 1])):
+                    return int(parts[i - 1])
+                # If previous part is not year, no year can come after terminator, return None
+                else:
+                    return None
+            # Returns year if year is last part in filename
+            if not self._get_next_element(i, parts):
+                if self._is_valid_year(parts[i]):
+                    return int(parts[i])
+    
+    # Tested ✅
+    def extract_season(self, path: Path) -> int | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            match = self._extract_season_num(i, parts)
+            if match and match.group(1):
+                return int(match.group(1)) 
+        return None
+    
+    # Tested ✅
+    def extract_episode(self, path: Path) -> int | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            match = self._extract_episode_num(i, parts)
+            if match and match.group(1):
+                return int(match.group(1))
+        return None
+    
+    # Tested ✅
+    def extract_resolution(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            resolution = self._is_resolution_descriptor(i, parts)
+            if resolution:
+                return resolution
+        
+        return None
+            
+    
+    # Tested ✅
+    def extract_codec(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            codec = self._is_codec_descriptor(i, parts)
+            if codec:
+                return codec
+        
+        return None
+    
+    # Tested ✅
+    def extract_source(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            source = self._is_source_descriptor(i, parts)
+            if source:
+                return source
+        
+        return None
+    
+    # Tested ✅
+    def extract_audio(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            audio = self._is_audio_descriptor(i, parts)
+            if audio:
+                return audio
+        
+        return None
+
+    def extract_ext(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            if self._is_ext(i, parts):
+                return part
+
+        return None
+
+    def extract_type(self, path: Path) -> str:
         return ''
     
-    def extract_season(self, path: Path) -> str:
-        return ''
-    
-    def extract_episode(self, path: Path) -> str:
-        return ''
-    
-    def extract_resolution(self, path: Path) -> str:
-        return ''
-    
-    def extract_codec(self, path: Path) -> str:
-        return ''
-    
-    def extract_quality(self, path: Path) -> str:
-        return ''
-    
-    def extract_audio(self, path: Path) -> str:
-        return ''
-    
-    def extract_dir_type(self, path: Path) -> str:
+    def _extract_dir_type(self, path: Path) -> str:
         return ''
 
-    def extract_file_type(self, path: Path) -> str:
+    def _extract_file_type(self, path: Path) -> str:
         return ''
     
     """
@@ -171,36 +300,36 @@ class MediaExtractor:
         return False
 
     # tested ✅
-    def _is_resolution_descriptor(self, index: int, parts: list[str]) -> bool:
+    def _is_resolution_descriptor(self, index: int, parts: list[str]) -> str | None:
         for resolution in RESOLUTION_PATTERNS:
             for pattern in RESOLUTION_PATTERNS[resolution]:
                 if self._match_regex(pattern, index, parts):
-                    return True
-        return False
+                    return resolution
+        return None
 
     # tested ✅
-    def _is_codec_descriptor(self, index: int, parts: list[str]) -> bool:
+    def _is_codec_descriptor(self, index: int, parts: list[str]) -> str | None:
         for codec in CODEC_PATTERNS:
             for pattern in CODEC_PATTERNS[codec]:
                 if self._match_regex(pattern, index, parts):
-                    return True
-        return False
+                    return codec
+        return None
 
     # tested ✅
-    def _is_source_descriptor(self, index: int, parts: list[str]) -> bool:
+    def _is_source_descriptor(self, index: int, parts: list[str]) -> str | None:
         for source in SOURCE_PATTERNS:
             for pattern in SOURCE_PATTERNS[source]:
                 if self._match_regex(pattern, index, parts):
-                    return True
-        return False
+                    return source
+        return None
 
     # tested ✅
-    def _is_audio_descriptor(self, index: int, parts: list[str]) -> bool:
+    def _is_audio_descriptor(self, index: int, parts: list[str]) -> str | None:
         for audio in AUDIO_PATTERNS:
             for pattern in AUDIO_PATTERNS[audio]:
                 if self._match_regex(pattern, index, parts):
-                    return True
-        return False
+                    return audio
+        return None
 
     # tested ✅
     def _is_ext(self, index: int, parts: list[str]) -> bool:

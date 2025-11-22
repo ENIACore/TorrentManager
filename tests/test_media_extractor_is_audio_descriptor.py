@@ -17,7 +17,7 @@ def instance():
 ])
 def test_is_audio_descriptor_atmos(instance, parts, index):
     """Test that Atmos audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DTS-X audio tests
@@ -27,7 +27,7 @@ def test_is_audio_descriptor_atmos(instance, parts, index):
 ])
 def test_is_audio_descriptor_dtsx(instance, parts, index):
     """Test that DTS-X audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DTS-HD audio tests
@@ -41,7 +41,7 @@ def test_is_audio_descriptor_dtsx(instance, parts, index):
 ])
 def test_is_audio_descriptor_dts_hd(instance, parts, index):
     """Test that DTS-HD audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DTS-MA audio tests
@@ -52,7 +52,7 @@ def test_is_audio_descriptor_dts_hd(instance, parts, index):
 ])
 def test_is_audio_descriptor_dts_ma(instance, parts, index):
     """Test that DTS-MA audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DTS-ES audio tests
@@ -63,7 +63,7 @@ def test_is_audio_descriptor_dts_ma(instance, parts, index):
 ])
 def test_is_audio_descriptor_dts_es(instance, parts, index):
     """Test that DTS-ES audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DTS audio tests
@@ -73,7 +73,7 @@ def test_is_audio_descriptor_dts_es(instance, parts, index):
 ])
 def test_is_audio_descriptor_dts(instance, parts, index):
     """Test that DTS audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # TrueHD audio tests
@@ -84,7 +84,7 @@ def test_is_audio_descriptor_dts(instance, parts, index):
 ])
 def test_is_audio_descriptor_truehd(instance, parts, index):
     """Test that TrueHD audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DD+ (Dolby Digital Plus) audio tests
@@ -100,7 +100,7 @@ def test_is_audio_descriptor_truehd(instance, parts, index):
 ])
 def test_is_audio_descriptor_dd_plus(instance, parts, index):
     """Test that DD+ audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DD (Dolby Digital) audio tests
@@ -113,7 +113,7 @@ def test_is_audio_descriptor_dd_plus(instance, parts, index):
 ])
 def test_is_audio_descriptor_dd(instance, parts, index):
     """Test that DD audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # AAC audio tests
@@ -125,7 +125,7 @@ def test_is_audio_descriptor_dd(instance, parts, index):
 ])
 def test_is_audio_descriptor_aac(instance, parts, index):
     """Test that AAC audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # FLAC audio tests
@@ -135,7 +135,7 @@ def test_is_audio_descriptor_aac(instance, parts, index):
 ])
 def test_is_audio_descriptor_flac(instance, parts, index):
     """Test that FLAC audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # MP3 audio tests
@@ -145,7 +145,7 @@ def test_is_audio_descriptor_flac(instance, parts, index):
 ])
 def test_is_audio_descriptor_mp3(instance, parts, index):
     """Test that MP3 audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # LPCM audio tests
@@ -155,7 +155,7 @@ def test_is_audio_descriptor_mp3(instance, parts, index):
 ])
 def test_is_audio_descriptor_lpcm(instance, parts, index):
     """Test that LPCM audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # OGG audio tests
@@ -165,7 +165,7 @@ def test_is_audio_descriptor_lpcm(instance, parts, index):
 ])
 def test_is_audio_descriptor_ogg(instance, parts, index):
     """Test that OGG audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # OPUS audio tests
@@ -174,7 +174,7 @@ def test_is_audio_descriptor_ogg(instance, parts, index):
 ])
 def test_is_audio_descriptor_opus(instance, parts, index):
     """Test that OPUS audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # 5.1 channel audio tests
@@ -186,7 +186,7 @@ def test_is_audio_descriptor_opus(instance, parts, index):
 ])
 def test_is_audio_descriptor_5_1(instance, parts, index):
     """Test that 5.1 channel patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # 7.1 channel audio tests
@@ -198,7 +198,7 @@ def test_is_audio_descriptor_5_1(instance, parts, index):
 ])
 def test_is_audio_descriptor_7_1(instance, parts, index):
     """Test that 7.1 channel patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # 2.0 stereo audio tests
@@ -211,7 +211,7 @@ def test_is_audio_descriptor_7_1(instance, parts, index):
 ])
 def test_is_audio_descriptor_2_0(instance, parts, index):
     """Test that 2.0 stereo patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # DUAL audio tests
@@ -221,7 +221,7 @@ def test_is_audio_descriptor_2_0(instance, parts, index):
 ])
 def test_is_audio_descriptor_dual(instance, parts, index):
     """Test that DUAL audio patterns are correctly identified."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # Invalid audio descriptors
@@ -239,40 +239,40 @@ def test_is_audio_descriptor_dual(instance, parts, index):
 ])
 def test_is_audio_descriptor_invalid(instance, parts, index):
     """Test that non-audio patterns return False."""
-    assert instance._is_audio_descriptor(index, parts) is False
+    assert instance._is_audio_descriptor(index, parts) is None
 
 
 # Edge cases - different positions
 def test_is_audio_descriptor_at_beginning(instance):
     """Test audio at the beginning of parts list."""
     parts = ["ATMOS", "MY", "MOVIE", "BLURAY"]
-    assert instance._is_audio_descriptor(0, parts) is True
+    assert instance._is_audio_descriptor(0, parts) is not None
 
 
 def test_is_audio_descriptor_at_end(instance):
     """Test audio at the end of parts list."""
     parts = ["MY", "MOVIE", "BLURAY", "ATMOS"]
-    assert instance._is_audio_descriptor(3, parts) is True
+    assert instance._is_audio_descriptor(3, parts) is not None
 
 
 def test_is_audio_descriptor_single_element(instance):
     """Test audio as the only element."""
     parts = ["DTS"]
-    assert instance._is_audio_descriptor(0, parts) is True
+    assert instance._is_audio_descriptor(0, parts) is not None
 
 
 # Edge cases - index boundaries
 def test_is_audio_descriptor_index_out_of_bounds(instance):
     """Test that index beyond parts length returns False."""
     parts = ["MY", "MOVIE", "DTS"]
-    assert instance._is_audio_descriptor(10, parts) is False
+    assert instance._is_audio_descriptor(10, parts) is None
 
 
 def test_is_audio_descriptor_negative_index(instance):
     """Test behavior with negative index."""
     parts = ["MY", "MOVIE", "DTS"]
     result = instance._is_audio_descriptor(-1, parts)
-    assert isinstance(result, bool)
+    assert isinstance(result, (str, type(None)))
 
 
 # Multi-part audio patterns (with dots)
@@ -294,7 +294,7 @@ def test_is_audio_descriptor_negative_index(instance):
 ])
 def test_is_audio_descriptor_multipart_patterns(instance, parts, index):
     """Test audio patterns that span multiple parts with dots."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # Common torrent filename scenarios
@@ -308,27 +308,27 @@ def test_is_audio_descriptor_multipart_patterns(instance, parts, index):
 ])
 def test_is_audio_descriptor_realistic_filenames(instance, parts, index):
     """Test audio detection in realistic torrent filename patterns."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None
 
 
 # Empty and minimal inputs
 def test_is_audio_descriptor_empty_parts(instance):
     """Test with empty parts list."""
-    assert instance._is_audio_descriptor(0, []) is False
+    assert instance._is_audio_descriptor(0, []) is None
 
 
 def test_is_audio_descriptor_empty_string_part(instance):
     """Test with empty string in parts."""
     parts = ["TITLE", "", "DTS"]
-    assert instance._is_audio_descriptor(1, parts) is False
+    assert instance._is_audio_descriptor(1, parts) is None
 
 
 # Multiple audio descriptors in same filename
 def test_is_audio_descriptor_multiple_audio(instance):
     """Test filename with multiple audio patterns (e.g., Atmos with 7.1)."""
     parts = ["MOVIE", "ATMOS", "7", "1", "BLURAY"]
-    assert instance._is_audio_descriptor(1, parts) is True
-    assert instance._is_audio_descriptor(2, parts) is True
+    assert instance._is_audio_descriptor(1, parts) is not None
+    assert instance._is_audio_descriptor(2, parts) is not None
 
 
 # Complex audio combinations
@@ -342,4 +342,4 @@ def test_is_audio_descriptor_multiple_audio(instance):
 ])
 def test_is_audio_descriptor_complex_combinations(instance, parts, index):
     """Test complex audio combinations found in high-quality releases."""
-    assert instance._is_audio_descriptor(index, parts) is True
+    assert instance._is_audio_descriptor(index, parts) is not None

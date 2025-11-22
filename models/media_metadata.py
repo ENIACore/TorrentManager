@@ -11,8 +11,8 @@ import re
 
         resolution (optional): Resolution of media file
         codec (optional): Codec of media file
-        quality (optional): quality of media file
-        audio (optional): audio of media file
+        source (optional): Source of media file
+        audio (optional): Audio of media file
 
 """
 # Tested ✅
@@ -26,7 +26,7 @@ class MediaMetadata:
     # Descriptors of media file encoding
     resolution: str | None = None
     codec: str | None = None
-    quality: str | None = None
+    source: str | None = None
     audio: str | None = None
 
     ext: str | None = None
@@ -50,8 +50,8 @@ class MediaMetadata:
             parts.append(self.resolution)
         if self.codec:
             parts.append(self.codec)
-        if self.quality:
-            parts.append(self.quality)
+        if self.source:
+            parts.append(self.source)
         if self.audio:
             parts.append(self.audio)
 
@@ -67,7 +67,7 @@ class MediaMetadata:
             lowercase_title = lowercase_title.replace('\'', '').replace('\"', '')
 
             # Remove special characters, and join words with '.'
-            alphanumeric_title = re.sub(r'[^a-z0-9]+', '.', lowercase_title)            
+            alphanumeric_title = re.sub(r'[^a-z0-9]+', '.', lowercase_title)
             # Remove '.' from beginning & end of title
             alphanumeric_title = alphanumeric_title.strip('.')
 
@@ -80,3 +80,19 @@ class MediaMetadata:
             return ''
         else:
             return None
+
+    """
+        Description: Prints all member variables in a readable format
+    """
+    def print(self):
+        print("MediaMetadata:")
+        print(f"  Title:      {self.title}")
+        print(f"  Year:       {self.year}")
+        print(f"  Season:     {self.season}")
+        print(f"  Episode:    {self.episode}")
+        print(f"  Resolution: {self.resolution}")
+        print(f"  Codec:      {self.codec}")
+        print(f"  Source:     {self.source}")
+        print(f"  Audio:      {self.audio}")
+        print(f"  Extension:  {self.ext}")
+        print(f"  Type:       {self.type}")
