@@ -235,3 +235,17 @@ EPISODES_PATTERNS = [
     r'\d+\.X\.(\d+)',
 
 ]
+
+# Pattenrs for
+EXTRAS_PATTERNS = [
+    'EXTRA[s]', 
+    'FEATURETTE[s]', 
+    'BEHIND.THE.SCENE[S]', 
+    'BTS',
+    'DELETED.SCENE[S]', 
+    'MAKING.OF', 
+    'TRAILER',
+    'BONUS', 
+    'DOCUMENTARY', 
+    'DOCUMENTARIES'
+]

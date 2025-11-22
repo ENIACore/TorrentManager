@@ -5,6 +5,7 @@ import re
 from datetime import datetime
 from config.constants import (
     # Quality descriptor patterns
+    EXTRAS_PATTERNS,
     RESOLUTION_PATTERNS,
     CODEC_PATTERNS,
     SOURCE_PATTERNS,
@@ -17,7 +18,9 @@ from config.constants import (
     # File extensions
     VIDEO_EXTENSIONS,
     SUBTITLE_EXTENSIONS,
-    AUDIO_EXTENSIONS
+    AUDIO_EXTENSIONS,
+
+    EXTRAS_PATTERNS
     )
 
 """
@@ -244,6 +247,16 @@ class MediaExtractor:
     """
     Extraction helper functions
     """
+    def _is_extras(self, path: Path) -> bool:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, part in enumerate(parts):
+            for pattern in EXTRAS_PATTERNS:
+                if self._match_regex(pattern, i, parts):
+                    return True
+
+        return False
+
     # Tested ✅
     def _get_sanitized_file_or_dir(self, path: Path) -> str:
         name = path.name
@@ -410,9 +423,3 @@ class MediaExtractor:
         else:
             return None
 
-    # Common patterns for identification
-    EXTRA_KEYWORDS = [
-        'EXTRAS?', 'FEATURETTES?', 'BEHIND.THE.SCENES?', 'BTS',
-        'DELETED.SCENES?', 'INTERVIEWS?', 'MAKING.OF', 'TRAILER',
-        'BONUS', 'DOCUMENTARY', 'DOCUMENTARIES'
-    ]
