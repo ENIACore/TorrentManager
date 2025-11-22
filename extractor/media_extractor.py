@@ -38,11 +38,11 @@ class MediaExtractor:
             Title consists of all parts from the start until a terminator is found.
 
             Terminators (indicators that title has ended):
+            - End of filename parts
+            - File extension (.mkv, .mp4, etc.)
             - Quality descriptor (resolution, codec, source, audio)
             - Season indicator (S01, S01E01, etc.)
             - Episode indicator (when not part of season pattern)
-            - File extension (.mkv, .mp4, etc.)
-            - End of filename parts
 
             Year Handling:
             - If a valid year is followed by a terminator → year ends the title
@@ -56,8 +56,33 @@ class MediaExtractor:
             Title.1080p               → title="Title" (no year, ends at quality)
             Title                     → title="Title" (no terminators found)
         """
+
         parts = self._get_sanitized_file_or_dir(path).split('.')
-        return ''
+        title = []
+
+        for i, part in enumerate(parts):
+
+            # Skips over year to check for only terminators or end of filename parts
+            part_to_match = part
+            index_to_match = i
+            if self._is_valid_year(part_to_match):
+                part_to_match = self._get_next_element(i, parts)
+                index_to_match = i + 1
+
+            
+            # If teminator after title or year
+            if (
+                not part_to_match or
+                self._is_quality_descriptor(index_to_match, parts) or
+                self._extract_season_num(index_to_match, parts) or
+                self._extract_episode_num(index_to_match, parts) or
+                self._is_ext(index_to_match, parts)
+                ):
+                break
+            else:
+                title.append(part)
+
+        return '.'.join(title)
     
     def extract_year(self, path: Path) -> str:
         return ''
@@ -96,11 +121,12 @@ class MediaExtractor:
         name = name.upper()
         name = name.replace('\'', '')
         name = name.replace('\"', '')
-        name = re.sub(r'[^A-Z0-9]+', '.', name) 
+        name = re.sub(r'[^A-Z0-9]+', '.', name)
+        name = name.strip('.')
 
         # If file name only consists of special characters
-        if name == '.':
-            name = ''
+        if name == '':
+            return ''
 
         return name
 

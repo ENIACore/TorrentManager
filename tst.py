@@ -3,6 +3,13 @@ from config.constants import (RESOLUTION_PATTERNS)
 from extractor.media_extractor import MediaExtractor
 from pathlib import Path
 
+# Out of bounds test for _is_quality_descriptor
+
+parts = ['PART1', '1080P']
+extractor = MediaExtractor()
+res = extractor._is_quality_descriptor(1, parts)
+print('res is: ' + str(res))
+
 """
 re_str = r'8K|4320[PI]?|7680X4320|FULLUHD'
 
@@ -21,6 +28,8 @@ for key, value in RESOLUTION_PATTERNS.items():
     print('pattern is: ' + value)
 """
 
+
+"""
 pattern = 'MY.P.HI'
 filename = 'My pattern is here and it continues on'
 extractor = MediaExtractor()
@@ -39,6 +48,7 @@ for i in range(start_index, min(start_index + num_parts, len(parts))):
 
 print('pattern to match will cover ' + str(num_parts) + ' parts')
 print('combined parts for pattern is: ' + combined_parts)
+"""
 
 
 """
