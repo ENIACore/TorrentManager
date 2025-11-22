@@ -23,11 +23,6 @@ from config.constants import (
     EXTRAS_PATTERNS
     )
 
-"""
-TODO - Functionality of extract title needs to be expanded to include common words
-TODO - Improve audio extraction
-"""
-
 class MediaExtractor:
     
     """
@@ -46,7 +41,6 @@ class MediaExtractor:
         metadata.audio = self.extract_audio(path)
 
         metadata.ext = self.extract_ext(path)
-        #metadata.type = self.extract_type
 
 
         return metadata
@@ -234,15 +228,6 @@ class MediaExtractor:
                 return part
 
         return None
-
-    def extract_type(self, path: Path) -> str:
-        return ''
-    
-    def _extract_dir_type(self, path: Path) -> str:
-        return ''
-
-    def _extract_file_type(self, path: Path) -> str:
-        return ''
     
     """
     Extraction helper functions
