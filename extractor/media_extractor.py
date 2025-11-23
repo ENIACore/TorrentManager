@@ -45,7 +45,7 @@ class MediaExtractor:
 
         return metadata
     
-    def extract_title(self, path: Path) -> str:
+    def extract_title(self, path: Path) -> str | None:
         """
         Extracts title of movie or series from filename.
 
@@ -97,6 +97,9 @@ class MediaExtractor:
             else:
                 title.append(part)
 
+        if len(title) == 0:
+            return None
+
         return '.'.join(title)
     
     def extract_year(self, path: Path) -> int | None:
@@ -143,15 +146,15 @@ class MediaExtractor:
                 self._is_ext(i, parts)
                 ):
                 # If previous part is year, return year
-                if (i > 0 and self._is_valid_year(parts[i - 1])):
-                    return int(parts[i - 1])
+                if (i > 0 and (year := self._is_valid_year(parts[i - 1]))):
+                    return year
                 # If previous part is not year, no year can come after terminator, return None
                 else:
                     return None
             # Returns year if year is last part in filename
             if not self._get_next_element(i, parts):
-                if self._is_valid_year(parts[i]):
-                    return int(parts[i])
+                if (year := self._is_valid_year(parts[i])):
+                    return year
     
     def extract_season(self, path: Path) -> int | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
@@ -224,15 +227,15 @@ class MediaExtractor:
     """
     Extraction helper functions
     """
-    def _is_extras(self, path: Path) -> bool:
+    def _is_extras(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
         for i, part in enumerate(parts):
             for pattern in EXTRAS_PATTERNS:
                 if self._match_regex(pattern, i, parts):
-                    return True
+                    return pattern
 
-        return False
+        return None
 
     def _get_sanitized_file_or_dir(self, path: Path) -> str:
         name = path.name
@@ -249,17 +252,15 @@ class MediaExtractor:
 
         return name
 
-    # Tested ✅
-    def _is_valid_year(self, year: str) -> bool: 
+    def _is_valid_year(self, year: str) -> int | None: 
         if not year.isdigit():
             return False
 
         year_num = int(year)
         if year_num > 1900 and year_num <= datetime.now().year:
-            return True
-        return False
+            return year_num
+        return None
 
-    # Tested ✅
     def _extract_season_num(self, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in SEASONS_PATTERNS:
             match = self._match_regex(pattern, index, parts)
@@ -268,7 +269,6 @@ class MediaExtractor:
 
         return None
                 
-    # Tested ✅
     def _extract_episode_num(self, index: int, parts: list[str]):
         for pattern in EPISODES_PATTERNS:
             match = self._match_regex(pattern, index, parts)
@@ -277,19 +277,17 @@ class MediaExtractor:
 
         return None
 
-    # Testing not needed (yet, will be after adding static patterns) ✅
-    def _is_quality_descriptor(self, index: int, parts: list[str]) -> bool:
+    def _is_quality_descriptor(self, index: int, parts: list[str]) -> str | None:
         if (
-            self._is_resolution_descriptor(index, parts) or
-            self._is_codec_descriptor(index, parts) or
-            self._is_source_descriptor(index, parts) or
-            self._is_audio_descriptor(index, parts)
+            (descriptor := self._is_resolution_descriptor(index, parts)) or
+            (descriptor := self._is_codec_descriptor(index, parts)) or
+            (descriptor := self._is_source_descriptor(index, parts)) or
+            (descriptor := self._is_audio_descriptor(index, parts))
             ):
-            return True
+            return descriptor
 
-        return False
+        return None
 
-    # tested ✅
     def _is_resolution_descriptor(self, index: int, parts: list[str]) -> str | None:
         for resolution in RESOLUTION_PATTERNS:
             for pattern in RESOLUTION_PATTERNS[resolution]:
@@ -297,7 +295,6 @@ class MediaExtractor:
                     return resolution
         return None
 
-    # tested ✅
     def _is_codec_descriptor(self, index: int, parts: list[str]) -> str | None:
         for codec in CODEC_PATTERNS:
             for pattern in CODEC_PATTERNS[codec]:
@@ -305,7 +302,6 @@ class MediaExtractor:
                     return codec
         return None
 
-    # tested ✅
     def _is_source_descriptor(self, index: int, parts: list[str]) -> str | None:
         for source in SOURCE_PATTERNS:
             for pattern in SOURCE_PATTERNS[source]:
@@ -313,7 +309,6 @@ class MediaExtractor:
                     return source
         return None
 
-    # tested ✅
     def _is_audio_descriptor(self, index: int, parts: list[str]) -> str | None:
         for audio in AUDIO_PATTERNS:
             for pattern in AUDIO_PATTERNS[audio]:
@@ -353,20 +348,19 @@ class MediaExtractor:
 
         return None
 
-    def _is_matching_tail_len(self, pattern: str, index: int, parts: list[str]) -> bool:
+    def _is_matching_tail_len(self, pattern: str, index: int, parts: list[str]) -> int | None:
         """
         Helper function for _is_<type>_ext to ensure ext pattern only matches end of filename parts array.
         Does this by ensuring number of parts in pattern.split('.') is equivalent to remaining parts to match in filename
         """
-        num_pattern_parts = len(pattern.split('.'))
-        num_filename_parts_left = len(parts) - index 
+        if (num_pattern_parts := len(pattern.split('.')) == len(parts) - index):
+            return num_pattern_parts
         
-        return num_filename_parts_left == num_pattern_parts
+        return None
 
     """
     General helper functions
     """
-
     def _match_regex(self, pattern: str, index: int, parts: list[str]) -> Match[str] | None:
         """
         Matches pattern on one or more full parts of filename
@@ -388,7 +382,6 @@ class MediaExtractor:
         # Match recombined or individual, filename parts with pattern
         return re.fullmatch(pattern, combined_parts) 
 
-    # Testing not needed ✅
     def _get_next_element(self, index: int, array: list[Any]) -> Any | None:
         if index < len(array) - 1:
             return array[index + 1]
