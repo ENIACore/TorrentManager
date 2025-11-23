@@ -1,3 +1,4 @@
+from __future__ import annotations
 from pathlib import Path
 from extractor.media_extractor import MediaExtractor
 from models.media_metadata import MediaMetadata
