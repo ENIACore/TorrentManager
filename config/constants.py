@@ -223,9 +223,9 @@ EPISODES_PATTERNS = [
     r'EPISODE\.(\d+)',
 
     # Matches EPISODE
-    r'(EPISODE)',
+    r'EPISODE',
     # Matches EP
-    r'(EP)',
+    r'EP',
 
     # Matches S<number>E<number>
     r'S\d+E(\d+)',

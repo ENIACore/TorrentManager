@@ -162,7 +162,8 @@ class MediaExtractor:
 
         for i, part in enumerate(parts):
             match = self._extract_season_num(i, parts)
-            if match and match.group(1):
+            #if match and match.groups() and len(match.groups()) >= 1 and match.group(1):
+            if match and len(match.groups()) >= 1 and match.group(1):
                 return int(match.group(1)) 
         return None
     
@@ -171,7 +172,8 @@ class MediaExtractor:
 
         for i, part in enumerate(parts):
             match = self._extract_episode_num(i, parts)
-            if match and match.group(1):
+            #if match and match.group(1):
+            if match and len(match.groups()) >= 1 and match.group(1):
                 return int(match.group(1))
         return None
     
