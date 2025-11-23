@@ -1,4 +1,4 @@
-from typing import Any, Match
+from typing import Any, Match, Dict
 from pathlib import Path
 from models.media_metadata import MediaMetadata
 import re
@@ -22,6 +22,7 @@ from config.constants import (
 
     EXTRAS_PATTERNS
     )
+from config.language import LANGUAGE_PATTERNS
 
 class MediaExtractor:
     
@@ -40,8 +41,8 @@ class MediaExtractor:
         metadata.source = self.extract_source(path)
         metadata.audio = self.extract_audio(path)
 
+        metadata.language = self.extract_language(path)
         metadata.ext = self.extract_ext(path)
-
 
         return metadata
     
@@ -215,6 +216,18 @@ class MediaExtractor:
         
         return None
 
+    def extract_language(self, path: Path) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, _ in enumerate(parts):
+            for language in LANGUAGE_PATTERNS:
+                for pattern in LANGUAGE_PATTERNS[language]:
+                    if self._match_regex(pattern, i, parts):
+                        return language
+
+        return None
+        
+
     def extract_ext(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -223,20 +236,31 @@ class MediaExtractor:
                 return match.group(0)
 
         return None
-    
-    """
-    Extraction helper functions
-    """
-    def _is_extras(self, path: Path) -> str | None:
+
+    def match_pattern_dict(self, path: Path, pattern_dict: Dict[str, str]) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
-        for i, part in enumerate(parts):
-            for pattern in EXTRAS_PATTERNS:
+        for i, _ in enumerate(parts):
+            for pattern in pattern_dict:
                 if self._match_regex(pattern, i, parts):
                     return pattern
 
         return None
 
+    def match_pattern_dict_list(self, path: Path, pattern_dict_list: Dict[str, list[str]]) -> str | None:
+        parts = self._get_sanitized_file_or_dir(path).split('.')
+
+        for i, _ in enumerate(parts):
+            for res in pattern_dict_list:
+                for pattern in pattern_dict_list[res]:
+                    if self._match_regex(pattern, i, parts):
+                        return res
+
+        return None
+    
+    """
+    Extraction helper functions
+    """
     def _get_sanitized_file_or_dir(self, path: Path) -> str:
         name = path.name
         name = name.rstrip()

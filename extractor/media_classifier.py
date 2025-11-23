@@ -7,20 +7,50 @@ import re
 
 
 """
-Series Folder:
-    Required Contains: Multiple season folders
-    Optional Contains: Subtitle folder
+Show Folder:
+    Requirements: 
+        - extract title is not None
+        - contains multiple season folders
+        # TODO add multiple episodes from different seasons not in season folders
+    Optional:
+        - contains subtitle folder
+        - contains extras folder
+
 Season Folder:
-    Required Contains: Multiple episode files of the same season
-    Optional Contains: Subtitle folder OR multiple subtitle files
+    Requirements:
+        - pattern match from SEASON_PATTERNS
+        - MediaMetadata.season is not None
+        -   All contained episode files' MediaMetadata.season are the same 
+            OR all contained episode files' MediaMetadata.season are None 
+        - Contains multiple episode files
+    Optional: 
+        -   Contains subtitle folder 
+            OR contains multiple subtitle files
+        - Contains extras folder
+
 Movie Folder:
-    Required Contains: One media (movie) file
-    Optional Contains: (Subtitle folder OR multiple subtitle files) and/or extras folder
+    Requirements:
+        - MediaMetadata.type is movie
+        - Contains one movie file
+        # TODO handle multiple part movies
+    Optional:
+        -   Contains subtitle folder 
+            OR contains multiple subtitle files
+        - Contains extras folder
+
 Subtitles Folder:
-    Required Contains: One or more subtitles files 
+    Required: 
+        - Contains no media files
+        - Contains one or more subtitles files 
+
 Extras Folder:
-    Required Contains: One or more media files or folders, folder or subfolders/files are MediaExtractor._is_extras
-    Optional Contains: Subtitle folder OR multiple subtitle files
+    Required:
+        - MediaMetadata.type is extras
+        - Contains one or more media files
+        # TODO Add handling for season folders inside extras folder and extras folders inside extras folder
+    Optional: 
+        -   Contains subtitles folder 
+            OR contains multiple subtitle files
 """
 DirectoryType = Literal[
     'SERIES_FOLDER',
@@ -33,11 +63,40 @@ DirectoryType = Literal[
     #'MOVIE_COLLECTION', TODO
 ]
 
+"""
+Movie File:
+    Required:
+        - MediaMetadata.season is None
+        - MediaMetadata.episode is None
+        - MediaMetadata.title is not None
+        - MediaExtractor.has_pattern with EPISODES_PATTERNS is None
+        - MediaExtractor.has_pattern with SEASON_PATTERNS is None
+        - MediaMetadata.ext is in VIDEO_EXTENSIONS
+
+Episode File:
+    Required:
+        -   MediaMetadata.season is not None 
+            OR MediaMetadata.episode is not None
+            OR MediaExtractor.has_pattern with SEASON_PATTERNS is not None
+            OR MediaExtractor.has_pattern with EPISODES_PATTERNS is not None
+        - MediaMetadata.ext is in VIDEO_EXTENSIONS
+
+Subtitle File:
+    Required:
+        - MediaMetadata.ext is in SUBTITLE_EXTENSIONS
+        # TODO Add common subtitle patterns
+
+Extra File:
+    Required
+        - MediaMetadata.ext is in VIDEO_EXTENSIONS
+
+
+EXTRAS_PATTERNS
+"""
 FileType = Literal[
-    'MOVIE_FILE',
+    'MOVIE_OR_EXTRAS_FILE',
     'EPISODE_FILE',
     'SUBTITLE_FILE',
-    'EXTRA_FILE',
 
 
     #'AUDIO_FILE', TODO
@@ -54,12 +113,14 @@ class MediaClassifier:
     def __init__(self):
         self.extractor = MediaExtractor()
     
-    def classify_media(self, path: Path) -> MediaType:
+    def classify_media(self, path: Path) -> MediaType | None:
 
         if path.is_dir():
             return self._classify_directory(path)
-        else:
+        elif path.is_file():
             return self._classify_file(path)
+        else:
+            return None
     
     def _classify_directory(self, path: Path) -> DirectoryType:
         return 'EXTRAS_FOLDER'

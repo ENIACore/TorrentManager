@@ -1,36 +1,22 @@
+from typing import Literal
 import re
 
-"""
-    Description: Data class for media file metadata information
-    Attributes:
 
-        title (optional): Title of movie or series
-        year (optional): Year of movie or series
-        season (optional): Season of series
-        episode (optional): Episode of series & season
-
-        resolution (optional): Resolution of media file
-        codec (optional): Codec of media file
-        source (optional): Source of media file
-        audio (optional): Audio of media file
-
-"""
-# Tested ✅
 class MediaMetadata:
-    # Descriptors of show or movie
+    # Show, movie, or extra descriptors
     title: str | None = None
     year: int | None = None
     season: int | None = None
     episode: int | None = None
 
-    # Descriptors of media file encoding
+    # Media descriptors
     resolution: str | None = None
     codec: str | None = None
     source: str | None = None
     audio: str | None = None
 
+    language: str | None = None
     ext: str | None = None
-    type: str | None = None
 
     """
         Description: Returns metadata in filename format without file ext
@@ -95,4 +81,3 @@ class MediaMetadata:
         print(f"  Source:     {self.source}")
         print(f"  Audio:      {self.audio}")
         print(f"  Extension:  {self.ext}")
-        print(f"  Type:       {self.type}")
