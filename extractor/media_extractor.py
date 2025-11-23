@@ -45,7 +45,6 @@ class MediaExtractor:
 
         return metadata
     
-    # Tested ✅
     def extract_title(self, path: Path) -> str:
         """
         Extracts title of movie or series from filename.
@@ -100,7 +99,6 @@ class MediaExtractor:
 
         return '.'.join(title)
     
-    # Tested ✅
     def extract_year(self, path: Path) -> int | None:
         """
         Extracts year of movie or series from filename.
@@ -155,7 +153,6 @@ class MediaExtractor:
                 if self._is_valid_year(parts[i]):
                     return int(parts[i])
     
-    # Tested ✅
     def extract_season(self, path: Path) -> int | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -165,7 +162,6 @@ class MediaExtractor:
                 return int(match.group(1)) 
         return None
     
-    # Tested ✅
     def extract_episode(self, path: Path) -> int | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -175,7 +171,6 @@ class MediaExtractor:
                 return int(match.group(1))
         return None
     
-    # Tested ✅
     def extract_resolution(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -187,7 +182,6 @@ class MediaExtractor:
         return None
             
     
-    # Tested ✅
     def extract_codec(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -198,7 +192,6 @@ class MediaExtractor:
         
         return None
     
-    # Tested ✅
     def extract_source(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -209,7 +202,6 @@ class MediaExtractor:
         
         return None
     
-    # Tested ✅
     def extract_audio(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
@@ -223,9 +215,9 @@ class MediaExtractor:
     def extract_ext(self, path: Path) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
 
-        for i, part in enumerate(parts):
-            if self._is_ext(i, parts):
-                return part
+        for i, _ in enumerate(parts):
+            if (match := self._is_ext(i, parts)):
+                return match.group(0)
 
         return None
     
@@ -242,7 +234,6 @@ class MediaExtractor:
 
         return False
 
-    # Tested ✅
     def _get_sanitized_file_or_dir(self, path: Path) -> str:
         name = path.name
         name = name.rstrip()
@@ -330,42 +321,38 @@ class MediaExtractor:
                     return audio
         return None
 
-    # tested ✅
-    def _is_ext(self, index: int, parts: list[str]) -> bool:
-        if (
-            self._is_video_ext(index, parts) or
-            self._is_subtitle_ext(index, parts) or
-            self._is_audio_ext(index, parts)
-            ):
-            return True
+    def _is_ext(self, index: int, parts: list[str]) -> Match[str] | None:
 
-        return False
+        if (match := self._is_video_ext(index, parts)):
+            return match
+        if (match := self._is_subtitle_ext(index, parts)):
+            return match
+        if (match := self._is_audio_ext(index, parts)):
+            return match
 
-    # tested ✅
-    def _is_video_ext(self, index: int, parts: list[str]) -> bool:
+        return None
+
+    def _is_video_ext(self, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in VIDEO_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
-                return True
+            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
+                return match
 
-        return False
+        return None
 
-    # tested ✅
-    def _is_subtitle_ext(self, index: int, parts: list[str]) -> bool:
+    def _is_subtitle_ext(self, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in SUBTITLE_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
-                return True
+            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
+                return match
 
-        return False
+        return None
 
-    # tested ✅
-    def _is_audio_ext(self, index: int, parts: list[str]) -> bool:
+    def _is_audio_ext(self, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in AUDIO_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and self._match_regex(pattern, index, parts):
-                return True
+            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
+                return match
 
-        return False
+        return None
 
-    # tested ✅
     def _is_matching_tail_len(self, pattern: str, index: int, parts: list[str]) -> bool:
         """
         Helper function for _is_<type>_ext to ensure ext pattern only matches end of filename parts array.
@@ -379,7 +366,7 @@ class MediaExtractor:
     """
     General helper functions
     """
-    # Tested ✅
+
     def _match_regex(self, pattern: str, index: int, parts: list[str]) -> Match[str] | None:
         """
         Matches pattern on one or more full parts of filename
