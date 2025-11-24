@@ -20,7 +20,7 @@ Series Folder:
 Season Folder:
     Requirements:
         - Folder name matches SEASON_PATTERNS OR metadata.season is not None
-        - All episode files have same season OR all have None
+        - #TODO All episode files have same season OR all have None 
         - Contains multiple episode files
     Optional:
         - Contains subtitle folder OR multiple subtitle files
