@@ -18,14 +18,15 @@ class NodeClassifier:
         pass
 
     def classify(self, node: Node) -> Node:
-        print(f"\n{'='*80}")
-        print(f"[CLASSIFY] Starting classification for: {node.path_metadata.path}")
-        print(f"[CLASSIFY] Is dir: {node.path_metadata.is_dir}, Is file: {node.path_metadata.is_file}")
+
 
         # Throw error if node parsing not completed properly
         if (not node.media_metadata or not node.path_metadata):
             raise ValueError('Media metadata or path metadata not extracted for node')
 
+        print(f"\n{'='*80}")
+        print(f"[CLASSIFY] Starting classification for: {node.original_path}")
+        print(f"[CLASSIFY] Is dir: {node.path_metadata.is_dir}, Is file: {node.path_metadata.is_file}")
 
         if node.path_metadata.is_dir:
             print(f"[CLASSIFY] Routing to _classify_dir()")
@@ -37,7 +38,7 @@ class NodeClassifier:
             raise ValueError('Node must be classified as file or directory')
 
     def _classify_file(self, node: Node) -> Node:
-        print(f"[_classify_file] Classifying file: {node.path_metadata.path}")
+        print(f"[_classify_file] Classifying file: {node.original_path}")
 
         # Throw error if node parsing not completed properly
         if (not node.media_metadata or not node.path_metadata):
@@ -75,7 +76,7 @@ class NodeClassifier:
         """
         Classifies parent and child nodes in order of specificity
         """
-        print(f"\n[_classify_dir] Classifying directory: {node.path_metadata.path}")
+        print(f"\n[_classify_dir] Classifying directory: {node.original_path}")
         print(f"[_classify_dir] Number of children: {len(node.children_nodes)}")
 
         # Throw error if node parsing not completed properly
@@ -121,7 +122,7 @@ class NodeClassifier:
                 raise ValueError('Media metadata or path metadata not extracted for node')
 
             if node.path_metadata.is_dir:
-                print(f"  [_classify_sub_dir] Found subdirectory: {node.path_metadata.name}, recursing...")
+                print(f"  [_classify_sub_dir] Found subdirectory: {node.original_path}, recursing...")
                 self._classify_dir(node)
         
 
@@ -137,7 +138,7 @@ class NodeClassifier:
             # All files in series dir are unknown type
             if node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
-                print(f"    [_classify_series_dir_files] File {node.path_metadata.name} -> UNKNOWN")
+                print(f"    [_classify_series_dir_files] File {node.original_path} -> UNKNOWN")
 
     def _classify_season_dir_files(self, nodes: list[Node]) -> None:
         print(f"  [_classify_season_dir_files] Classifying {len(nodes)} child nodes")
@@ -148,13 +149,13 @@ class NodeClassifier:
             # All video files in season dir are episode files
             if self._is_video_file(node):
                 node.classification = 'EPISODE_FILE'
-                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> EPISODE_FILE")
+                print(f"    [_classify_season_dir_files] File {node.original_path} -> EPISODE_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
-                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
+                print(f"    [_classify_season_dir_files] File {node.original_path} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
-                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> UNKNOWN")
+                print(f"    [_classify_season_dir_files] File {node.original_path} -> UNKNOWN")
 
     def _classify_subtitle_dir_files(self, nodes: list[Node]) -> None:
         print(f"  [_classify_subtitle_dir_files] Classifying {len(nodes)} child nodes")
@@ -164,10 +165,10 @@ class NodeClassifier:
 
             if self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
-                print(f"    [_classify_subtitle_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
+                print(f"    [_classify_subtitle_dir_files] File {node.original_path} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
-                print(f"    [_classify_subtitle_dir_files] File {node.path_metadata.name} -> UNKNOWN")
+                print(f"    [_classify_subtitle_dir_files] File {node.original_path} -> UNKNOWN")
 
     def _classify_extras_dir_files(self, nodes: list[Node]) -> None:
         print(f"  [_classify_extras_dir_files] Classifying {len(nodes)} child nodes")
@@ -177,13 +178,13 @@ class NodeClassifier:
 
             if self._is_video_file(node):
                 node.classification = 'EXTRAS_FILE'
-                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> EXTRAS_FILE")
+                print(f"    [_classify_extras_dir_files] File {node.original_path} -> EXTRAS_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
-                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
+                print(f"    [_classify_extras_dir_files] File {node.original_path} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
-                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> UNKNOWN")
+                print(f"    [_classify_extras_dir_files] File {node.original_path} -> UNKNOWN")
 
     def _classify_movie_dir_files(self, nodes: list[Node]) -> None:
         print(f"  [_classify_movie_dir_files] Classifying {len(nodes)} child nodes")
@@ -193,13 +194,13 @@ class NodeClassifier:
 
             if self._is_video_file(node):
                 node.classification = 'MOVIE_FILE'
-                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> MOVIE_FILE")
+                print(f"    [_classify_movie_dir_files] File {node.original_path} -> MOVIE_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
-                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
+                print(f"    [_classify_movie_dir_files] File {node.original_path} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
-                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> UNKNOWN")
+                print(f"    [_classify_movie_dir_files] File {node.original_path} -> UNKNOWN")
 
     """
     _is_* helper functions
@@ -341,7 +342,7 @@ class NodeClassifier:
         for node in nodes:
             if self._is_video_file(node):
                 total_video_files = total_video_files + 1
-                video_files.append(node.path_metadata.name)
+                video_files.append(node.original_path)
 
         if video_files:
             print(f"    [_get_num_video_files] Found {total_video_files} video files: {video_files}")
@@ -353,7 +354,7 @@ class NodeClassifier:
         for node in nodes:
             if self._is_subtitle_file(node):
                 total_subtitle_files = total_subtitle_files + 1
-                subtitle_files.append(node.path_metadata.name)
+                subtitle_files.append(node.original_path)
 
         if subtitle_files:
             print(f"    [_get_num_subtitle_files] Found {total_subtitle_files} subtitle files: {subtitle_files}")
@@ -367,11 +368,11 @@ class NodeClassifier:
         season_dirs = []
         print(f"    [_get_num_season_dir] Checking {len(nodes)} nodes for season directories")
         for node in nodes:
-            if node.path_metadata.is_dir:
-                print(f"      [_get_num_season_dir] Checking directory: {node.path_metadata.name}")
+            if node.path_metadata and node.path_metadata.is_dir:
+                print(f"      [_get_num_season_dir] Checking directory: {node.original_path}")
             if self._is_season_dir(node):
                 total_season_dir = total_season_dir + 1
-                season_dirs.append(node.path_metadata.name)
+                season_dirs.append(node.original_path)
 
         print(f"    [_get_num_season_dir] Found {total_season_dir} season directories: {season_dirs}")
         return total_season_dir
