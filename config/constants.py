@@ -1,7 +1,6 @@
 """
-Description: Constants for torrent file parsing
+Description: Constants for parsing information about a torrent file's quality and contents
 Attributes:
-
     VIDEO_EXTENSIONS: Set of file extensions for video files
     SUBTITLE_EXTENSIONS: Set of file extensions for subtitle files
     AUDIO_EXTENSIONS: Set of file extensions for audio files
@@ -17,8 +16,7 @@ Attributes:
     EPISODES_PATTERNS: List of patterns to match episode identifiers with capture groups
     SEASONS_PATTERNS: List of patterns to match season identifiers with capture groups
 
-    STATIC_DESCRIPTORS: Set of static descriptors commonly found in torrent filenames
-
+    #STATIC_DESCRIPTORS: Set of static descriptors commonly found in torrent filenames
 """
 
 # File extensions

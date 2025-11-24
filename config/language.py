@@ -1,3 +1,8 @@
+"""
+Description: Constants for parsing languages
+Attributes:
+    LANGUAGE_PATTERNS: Dict of common language patterns found in subtitle and video files 
+"""
 LANGUAGE_PATTERNS = {
     'ENGLISH': [
         'ENGLISH',

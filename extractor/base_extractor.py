@@ -123,8 +123,7 @@ class BaseExtractor:
             return None
 
 
-    def match_pattern_dict(self, path: Path, pattern_dict: Dict[str, str]) -> str | None:
-        parts = self._get_sanitized_stem_parts(path)
+    def _match_pattern_dict(self, parts: list[str], pattern_dict: Dict[str, str]) -> str | None:
 
         for i, _ in enumerate(parts):
             for pattern in pattern_dict:
@@ -133,8 +132,16 @@ class BaseExtractor:
 
         return None
 
-    def match_pattern_dict_list(self, path: Path, pattern_dict_list: Dict[str, list[str]]) -> str | None:
-        parts = self._get_sanitized_stem_parts(path)
+    def _match_pattern_list(self, parts: list[str], pattern_list: list[str]) -> str | None:
+
+        for i, _ in enumerate(parts):
+            for pattern in pattern_list:
+                if self._match_regex(pattern, i, parts):
+                    return pattern
+
+        return None
+
+    def _match_pattern_dict_list(self, parts: list[str], pattern_dict_list: Dict[str, list[str]]) -> str | None:
 
         for i, _ in enumerate(parts):
             for res in pattern_dict_list:

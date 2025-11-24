@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 from config.constants import (
     # Quality descriptor patterns
+    EXTRAS_PATTERNS,
     RESOLUTION_PATTERNS,
     CODEC_PATTERNS,
     SOURCE_PATTERNS,
@@ -42,6 +43,11 @@ class MediaExtractor(BaseExtractor):
         metadata.audio = self._extract_audio(parts)
 
         metadata.language = self._extract_language(parts)
+
+        # Extensible pattern matching variables
+        metadata.season_patterns = bool(self._match_pattern_list(parts, SEASONS_PATTERNS))
+        metadata.episode_patterns = bool(self._match_pattern_list(parts, EPISODES_PATTERNS))
+        metadata.extras_patterns = bool(self._match_pattern_list(parts, EXTRAS_PATTERNS))
 
         return metadata
     

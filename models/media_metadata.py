@@ -17,6 +17,13 @@ class MediaMetadata:
 
     language: str | None = None
 
+    # Booleans to describe if certain patterns have matches, extensible for future use
+    # To add more patterns, add variable, then add pattern to constants.py, then add matching to bottom of MediaExtractor.extract()
+    season_patterns: bool = False
+    episode_patterns: bool = False
+    extras_patterns: bool = False
+
+
     def __str__(self):
         parts = []
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
+from config.media import NodeType
 from models.path_metadata import PathMetadata
 from models.media_metadata import MediaMetadata
 
@@ -10,6 +11,6 @@ class Node:
     path_metadata: PathMetadata | None = None # Metadata regarding file
 
     parent_node: Node | None = None # Parent node
-    children_nodes: list[Node] | list[None] = [] # Children nodes
+    children_nodes: list[Node] = [] # Children nodes
 
-    #classification: MediaType | None = None # Classification of node (file or directory type)
+    classification: NodeType | None = None # Classification of node (file or directory type)

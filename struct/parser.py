@@ -71,6 +71,11 @@ class Parser:
         node_type = "📁" if node.original_path.is_dir() else "📄"
         print(f"{prefix}{node_type} {node.original_path.name}")
 
+        # Print classification if available
+        if node.classification:
+            metadata_indent = " " * (indent + 2)
+            print(f"{metadata_indent}├─ Type: {node.classification}")
+
         # Print media metadata if available
         if node.media_metadata:
             metadata_indent = " " * (indent + 2)
