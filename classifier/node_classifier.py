@@ -18,23 +18,37 @@ class NodeClassifier:
         pass
 
     def classify(self, node: Node) -> Node:
+        print(f"\n{'='*80}")
+        print(f"[CLASSIFY] Starting classification for: {node.path_metadata.path}")
+        print(f"[CLASSIFY] Is dir: {node.path_metadata.is_dir}, Is file: {node.path_metadata.is_file}")
+
         # Throw error if node parsing not completed properly
         if (not node.media_metadata or not node.path_metadata):
             raise ValueError('Media metadata or path metadata not extracted for node')
 
 
         if node.path_metadata.is_dir:
+            print(f"[CLASSIFY] Routing to _classify_dir()")
             return self._classify_dir(node)
         elif node.path_metadata.is_file:
+            print(f"[CLASSIFY] Routing to _classify_file()")
             return self._classify_file(node)
         else:
             raise ValueError('Node must be classified as file or directory')
 
     def _classify_file(self, node: Node) -> Node:
+        print(f"[_classify_file] Classifying file: {node.path_metadata.path}")
+
         # Throw error if node parsing not completed properly
         if (not node.media_metadata or not node.path_metadata):
             raise ValueError('Media metadata or path metadata not extracted for node')
 
+        is_video = self._is_video_file(node)
+        print(f"[_classify_file] Is video file: {is_video}")
+        print(f"[_classify_file] Has title: {bool(node.media_metadata.title)}")
+        print(f"[_classify_file] Title value: {node.media_metadata.title}")
+        print(f"[_classify_file] Season patterns: {node.media_metadata.season_patterns}")
+        print(f"[_classify_file] Episode patterns: {node.media_metadata.episode_patterns}")
 
         if (
             self._is_video_file(node) and
@@ -42,13 +56,18 @@ class NodeClassifier:
             (node.media_metadata.season_patterns or node.media_metadata.episode_patterns)
             ):
             node.classification = 'EPISODE_FILE'
+            print(f"[_classify_file] ✓ Classified as EPISODE_FILE")
         elif (
             self._is_video_file(node) and
             node.media_metadata.title
             ):
             node.classification = 'MOVIE_FILE'
+            print(f"[_classify_file] ✓ Classified as MOVIE_FILE")
         elif self._is_subtitle_file(node):
+            print(f"[_classify_file] ✗ Error: Subtitle file in top level directory")
             raise ValueError('Only episodes or movies are allowed in top level directory')
+        else:
+            print(f"[_classify_file] ✗ No classification matched - remains UNKNOWN")
 
         return node
     
@@ -56,41 +75,53 @@ class NodeClassifier:
         """
         Classifies parent and child nodes in order of specificity
         """
+        print(f"\n[_classify_dir] Classifying directory: {node.path_metadata.path}")
+        print(f"[_classify_dir] Number of children: {len(node.children_nodes)}")
+
         # Throw error if node parsing not completed properly
         if (not node.media_metadata or not node.path_metadata):
             raise ValueError('Media metadata or path metadata not extracted for node')
 
+        print(f"[_classify_dir] Checking if SERIES_DIR...")
         if self._is_series_dir(node):
+            print(f"[_classify_dir] ✓ Classified as SERIES_DIR")
             self._classify_series_dir_files(node.children_nodes)
             self._classify_sub_dir(node.children_nodes)
 
         elif self._is_season_dir(node):
+            print(f"[_classify_dir] ✓ Classified as SEASON_DIR")
             self._classify_season_dir_files(node.children_nodes)
             self._classify_sub_dir(node.children_nodes)
 
         elif self._is_subtitle_dir(node):
+            print(f"[_classify_dir] ✓ Classified as SUBTITLE_DIR")
             self._classify_subtitle_dir_files(node.children_nodes)
             self._classify_sub_dir(node.children_nodes)
 
         elif self._is_extras_dir(node):
+            print(f"[_classify_dir] ✓ Classified as EXTRAS_DIR")
             self._classify_extras_dir_files(node.children_nodes)
             self._classify_sub_dir(node.children_nodes)
 
         elif self._is_movie_dir(node):
+            print(f"[_classify_dir] ✓ Classified as MOVIE_DIR")
             self._classify_movie_dir_files(node.children_nodes)
             self._classify_sub_dir(node.children_nodes)
         else:
             node.classification = 'UNKNOWN'
+            print(f"[_classify_dir] ✗ NO MATCH - Classified as UNKNOWN")
 
 
         return node
 
     def _classify_sub_dir(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_sub_dir] Processing {len(nodes)} nodes for subdirectories")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
 
             if node.path_metadata.is_dir:
+                print(f"  [_classify_sub_dir] Found subdirectory: {node.path_metadata.name}, recursing...")
                 self._classify_dir(node)
         
 
@@ -98,6 +129,7 @@ class NodeClassifier:
     Functions to classify child files of known directory types
     """
     def _classify_series_dir_files(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_series_dir_files] Classifying {len(nodes)} child nodes")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
@@ -105,8 +137,10 @@ class NodeClassifier:
             # All files in series dir are unknown type
             if node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
+                print(f"    [_classify_series_dir_files] File {node.path_metadata.name} -> UNKNOWN")
 
     def _classify_season_dir_files(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_season_dir_files] Classifying {len(nodes)} child nodes")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
@@ -114,44 +148,58 @@ class NodeClassifier:
             # All video files in season dir are episode files
             if self._is_video_file(node):
                 node.classification = 'EPISODE_FILE'
+                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> EPISODE_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
+                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
+                print(f"    [_classify_season_dir_files] File {node.path_metadata.name} -> UNKNOWN")
 
     def _classify_subtitle_dir_files(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_subtitle_dir_files] Classifying {len(nodes)} child nodes")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
-        
+
             if self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
+                print(f"    [_classify_subtitle_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
+                print(f"    [_classify_subtitle_dir_files] File {node.path_metadata.name} -> UNKNOWN")
 
     def _classify_extras_dir_files(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_extras_dir_files] Classifying {len(nodes)} child nodes")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
-        
+
             if self._is_video_file(node):
                 node.classification = 'EXTRAS_FILE'
+                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> EXTRAS_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
+                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
+                print(f"    [_classify_extras_dir_files] File {node.path_metadata.name} -> UNKNOWN")
 
     def _classify_movie_dir_files(self, nodes: list[Node]) -> None:
+        print(f"  [_classify_movie_dir_files] Classifying {len(nodes)} child nodes")
         for node in nodes:
             if not node or not node.media_metadata or not node.path_metadata:
                 raise ValueError('Media metadata or path metadata not extracted for node')
 
             if self._is_video_file(node):
                 node.classification = 'MOVIE_FILE'
+                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> MOVIE_FILE")
             elif self._is_subtitle_file(node):
                 node.classification = 'SUBTITLE_FILE'
+                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> SUBTITLE_FILE")
             elif node.path_metadata.is_file:
                 node.classification = 'UNKNOWN'
+                print(f"    [_classify_movie_dir_files] File {node.path_metadata.name} -> UNKNOWN")
 
     """
     _is_* helper functions
@@ -160,55 +208,109 @@ class NodeClassifier:
         if not node or not node.media_metadata or not node.path_metadata:
             raise ValueError('Media metadata or path metadata not extracted for node')
 
-        return bool(
-                node.path_metadata.is_dir and
-                node.media_metadata.title and # Has title
-                self._get_num_video_files(node.children_nodes) == 0 and # Has no video files
-                self._get_num_subtitle_files(node.children_nodes) == 0 and # Has no subtitle files
-                self._get_num_season_dir(node.children_nodes) >= 1 # Has atleast one season directory
+        is_dir = node.path_metadata.is_dir
+        has_title = bool(node.media_metadata.title)
+        num_video_files = self._get_num_video_files(node.children_nodes)
+        num_subtitle_files = self._get_num_subtitle_files(node.children_nodes)
+        num_season_dirs = self._get_num_season_dir(node.children_nodes)
+
+        print(f"  [_is_series_dir] is_dir={is_dir}, has_title={has_title} ('{node.media_metadata.title}')")
+        print(f"  [_is_series_dir] video_files={num_video_files}, subtitle_files={num_subtitle_files}, season_dirs={num_season_dirs}")
+
+        result = bool(
+                is_dir and
+                has_title and # Has title
+                num_video_files == 0 and # Has no video files
+                num_subtitle_files == 0 and # Has no subtitle files
+                num_season_dirs >= 1 # Has atleast one season directory
                 )
+
+        print(f"  [_is_series_dir] Result: {result}")
+        return result
 
     def _is_season_dir(self, node: Node) -> bool:
         if not node or not node.media_metadata or not node.path_metadata:
             raise ValueError('Media metadata or path metadata not extracted for node')
 
-        return bool(
-                node.path_metadata.is_dir and
-                (node.media_metadata.season_patterns or node.media_metadata.season) and # Has season number or season pattern
-                not node.media_metadata.episode and # Does not have an episode number
-                self._get_num_video_files(node.children_nodes) >= 1 # Has atleast one video file
+        is_dir = node.path_metadata.is_dir
+        has_season = bool(node.media_metadata.season_patterns or node.media_metadata.season)
+        has_episode = bool(node.media_metadata.episode)
+        num_video_files = self._get_num_video_files(node.children_nodes)
+
+        print(f"  [_is_season_dir] is_dir={is_dir}, has_season={has_season}, has_episode={has_episode}")
+        print(f"  [_is_season_dir] season_patterns={node.media_metadata.season_patterns}, season={node.media_metadata.season}")
+        print(f"  [_is_season_dir] episode={node.media_metadata.episode}, video_files={num_video_files}")
+
+        result = bool(
+                is_dir and
+                has_season and # Has season number or season pattern
+                not has_episode and # Does not have an episode number
+                num_video_files >= 1 # Has atleast one video file
                 )
+
+        print(f"  [_is_season_dir] Result: {result}")
+        return result
 
     def _is_subtitle_dir(self, node: Node) -> bool:
         if not node or not node.media_metadata or not node.path_metadata:
             raise ValueError('Media metadata or path metadata not extracted for node')
 
-        return bool(
-                node.path_metadata.is_dir and
-                self._get_num_video_files(node.children_nodes) == 0 and # Has no video files
-                self._get_num_subtitle_files(node.children_nodes) >= 1 # Has atleast one subtitle file
+        is_dir = node.path_metadata.is_dir
+        num_video_files = self._get_num_video_files(node.children_nodes)
+        num_subtitle_files = self._get_num_subtitle_files(node.children_nodes)
+
+        print(f"  [_is_subtitle_dir] is_dir={is_dir}, video_files={num_video_files}, subtitle_files={num_subtitle_files}")
+
+        result = bool(
+                is_dir and
+                num_video_files == 0 and # Has no video files
+                num_subtitle_files >= 1 # Has atleast one subtitle file
                 )
+
+        print(f"  [_is_subtitle_dir] Result: {result}")
+        return result
 
     def _is_extras_dir(self, node: Node) -> bool:
         if not node or not node.media_metadata or not node.path_metadata:
             raise ValueError('Media metadata or path metadata not extracted for node')
 
-        return bool(
-                node.path_metadata.is_dir and
-                node.media_metadata.extras_patterns and # Has extras pattern
-                self._get_num_video_files(node.children_nodes) >= 1 # Has atleast one video file
+        is_dir = node.path_metadata.is_dir
+        has_extras_patterns = bool(node.media_metadata.extras_patterns)
+        num_video_files = self._get_num_video_files(node.children_nodes)
+
+        print(f"  [_is_extras_dir] is_dir={is_dir}, has_extras_patterns={has_extras_patterns}")
+        print(f"  [_is_extras_dir] extras_patterns={node.media_metadata.extras_patterns}, video_files={num_video_files}")
+
+        result = bool(
+                is_dir and
+                has_extras_patterns and # Has extras pattern
+                num_video_files >= 1 # Has atleast one video file
                 )
+
+        print(f"  [_is_extras_dir] Result: {result}")
+        return result
 
     def _is_movie_dir(self, node: Node) -> bool:
         if not node or not node.media_metadata or not node.path_metadata:
             raise ValueError('Media metadata or path metadata not extracted for node')
 
-        return bool(
-                node.path_metadata.is_dir and
-                node.media_metadata.title and # Has title
-                self._get_num_video_files(node.children_nodes) == 1 and # Has one video file
-                self._get_num_season_dir(node.children_nodes) == 0 # Has no season directory
+        is_dir = node.path_metadata.is_dir
+        has_title = bool(node.media_metadata.title)
+        num_video_files = self._get_num_video_files(node.children_nodes)
+        num_season_dirs = self._get_num_season_dir(node.children_nodes)
+
+        print(f"  [_is_movie_dir] is_dir={is_dir}, has_title={has_title} ('{node.media_metadata.title}')")
+        print(f"  [_is_movie_dir] video_files={num_video_files}, season_dirs={num_season_dirs}")
+
+        result = bool(
+                is_dir and
+                has_title and # Has title
+                num_video_files == 1 and # Has one video file
+                num_season_dirs == 0 # Has no season directory
                 )
+
+        print(f"  [_is_movie_dir] Result: {result}")
+        return result
 
     def _is_video_file(self, node) -> bool:
         if not node or not node.media_metadata or not node.path_metadata:
@@ -235,18 +337,26 @@ class NodeClassifier:
     """
     def _get_num_video_files(self, nodes: list[Node]) -> int:
         total_video_files = 0
+        video_files = []
         for node in nodes:
             if self._is_video_file(node):
                 total_video_files = total_video_files + 1
+                video_files.append(node.path_metadata.name)
 
+        if video_files:
+            print(f"    [_get_num_video_files] Found {total_video_files} video files: {video_files}")
         return total_video_files
 
     def _get_num_subtitle_files(self, nodes: list[Node]) -> int:
         total_subtitle_files = 0
+        subtitle_files = []
         for node in nodes:
             if self._is_subtitle_file(node):
                 total_subtitle_files = total_subtitle_files + 1
+                subtitle_files.append(node.path_metadata.name)
 
+        if subtitle_files:
+            print(f"    [_get_num_subtitle_files] Found {total_subtitle_files} subtitle files: {subtitle_files}")
         return total_subtitle_files
 
     def _get_num_season_dir(self, nodes: list[Node]) -> int:
@@ -254,10 +364,16 @@ class NodeClassifier:
         Returns number of directories with season pattern and no episode pattern
         """
         total_season_dir = 0
+        season_dirs = []
+        print(f"    [_get_num_season_dir] Checking {len(nodes)} nodes for season directories")
         for node in nodes:
+            if node.path_metadata.is_dir:
+                print(f"      [_get_num_season_dir] Checking directory: {node.path_metadata.name}")
             if self._is_season_dir(node):
                 total_season_dir = total_season_dir + 1
+                season_dirs.append(node.path_metadata.name)
 
+        print(f"    [_get_num_season_dir] Found {total_season_dir} season directories: {season_dirs}")
         return total_season_dir
 
 
