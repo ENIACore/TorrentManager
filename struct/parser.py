@@ -20,6 +20,9 @@ class Parser:
             node.path_metadata = self.path_extractor.extract_metadata(path)
             node.parent_node = None
 
+        if path.is_file():
+            return node
+
         root, dirnames, filenames = next(walk(path))
     
         # Parse children nodes and add them to parent node 
