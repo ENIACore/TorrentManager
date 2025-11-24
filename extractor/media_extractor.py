@@ -6,7 +6,6 @@ import re
 from datetime import datetime
 from config.constants import (
     # Quality descriptor patterns
-    EXTRAS_PATTERNS,
     RESOLUTION_PATTERNS,
     CODEC_PATTERNS,
     SOURCE_PATTERNS,
@@ -16,38 +15,40 @@ from config.constants import (
     SEASONS_PATTERNS,
     EPISODES_PATTERNS,
 
-    # File extensions
-    VIDEO_EXTENSIONS,
-    SUBTITLE_EXTENSIONS,
-    AUDIO_EXTENSIONS,
-
-    EXTRAS_PATTERNS
     )
 
 
 from config.language import LANGUAGE_PATTERNS
 
 class MediaExtractor(BaseExtractor):
+
     """
-    Extraction functions
+    Main extraction function
     """
     def extract_metadata(self, path: Path) -> MediaMetadata:
+
         metadata = MediaMetadata()
-        metadata.title = self.extract_title(path) 
-        metadata.year = self.extract_year(path)
-        metadata.season = self.extract_season(path)
-        metadata.episode = self.extract_episode(path)
+        # Parts do not include ext, not needed for media identification
+        parts = self._get_sanitized_stem_parts(path)
 
-        metadata.resolution = self.extract_resolution(path)
-        metadata.codec = self.extract_codec(path)
-        metadata.source = self.extract_source(path)
-        metadata.audio = self.extract_audio(path)
+        metadata.title = self._extract_title(parts) 
+        metadata.year = self._extract_year(parts)
+        metadata.season = self._extract_season(parts)
+        metadata.episode = self._extract_episode(parts)
 
-        metadata.language = self.extract_language(path)
+        metadata.resolution = self._extract_resolution(parts)
+        metadata.codec = self._extract_codec(parts)
+        metadata.source = self._extract_source(parts)
+        metadata.audio = self._extract_audio(parts)
+
+        metadata.language = self._extract_language(parts)
 
         return metadata
     
-    def extract_title(self, path: Path) -> str | None:
+    """
+    Extraction functions
+    """
+    def _extract_title(self, parts: list[str]) -> str | None:
         """
         Extracts title of movie or series from filename.
 
@@ -74,7 +75,6 @@ class MediaExtractor(BaseExtractor):
             Title                     → title="Title" (no terminators found)
         """
 
-        parts = self._get_sanitized_file_or_dir_parts(path)
         title = []
 
         for i, part in enumerate(parts):
@@ -92,8 +92,7 @@ class MediaExtractor(BaseExtractor):
                 not part_to_match or
                 self._is_quality_descriptor(index_to_match, parts) or
                 self._extract_season_num(index_to_match, parts) or
-                self._extract_episode_num(index_to_match, parts) or
-                self._is_ext(index_to_match, parts)
+                self._extract_episode_num(index_to_match, parts)
                 ):
                 break
             else:
@@ -104,7 +103,7 @@ class MediaExtractor(BaseExtractor):
 
         return '.'.join(title)
     
-    def extract_year(self, path: Path) -> int | None:
+    def _extract_year(self, parts: list[str]) -> int | None:
         """
         Extracts year of movie or series from filename.
 
@@ -136,7 +135,6 @@ class MediaExtractor(BaseExtractor):
             int if year found
             None if no year found
         """
-        parts = self._get_sanitized_file_or_dir(path).split('.')
 
         for i, part in enumerate(parts):
 
@@ -144,8 +142,7 @@ class MediaExtractor(BaseExtractor):
             if (
                 self._is_quality_descriptor(i, parts) or
                 self._extract_season_num(i, parts) or
-                self._extract_episode_num(i, parts) or
-                self._is_ext(i, parts)
+                self._extract_episode_num(i, parts)
                 ):
                 # If previous part is year, return year
                 if (i > 0 and (year := self._is_valid_year(parts[i - 1]))):
@@ -158,8 +155,7 @@ class MediaExtractor(BaseExtractor):
                 if (year := self._is_valid_year(parts[i])):
                     return year
     
-    def extract_season(self, path: Path) -> int | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_season(self, parts: list[str]) -> int | None:
 
         for i, part in enumerate(parts):
             match = self._extract_season_num(i, parts)
@@ -168,8 +164,7 @@ class MediaExtractor(BaseExtractor):
                 return int(match.group(1)) 
         return None
     
-    def extract_episode(self, path: Path) -> int | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_episode(self, parts: list[str]) -> int | None:
 
         for i, part in enumerate(parts):
             match = self._extract_episode_num(i, parts)
@@ -178,8 +173,7 @@ class MediaExtractor(BaseExtractor):
                 return int(match.group(1))
         return None
     
-    def extract_resolution(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_resolution(self, parts: list[str]) -> str | None:
 
         for i, part in enumerate(parts):
             resolution = self._is_resolution_descriptor(i, parts)
@@ -189,8 +183,7 @@ class MediaExtractor(BaseExtractor):
         return None
             
     
-    def extract_codec(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_codec(self, parts: list[str]) -> str | None:
 
         for i, part in enumerate(parts):
             codec = self._is_codec_descriptor(i, parts)
@@ -199,8 +192,7 @@ class MediaExtractor(BaseExtractor):
         
         return None
     
-    def extract_source(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_source(self, parts: list[str]) -> str | None:
 
         for i, part in enumerate(parts):
             source = self._is_source_descriptor(i, parts)
@@ -209,8 +201,7 @@ class MediaExtractor(BaseExtractor):
         
         return None
     
-    def extract_audio(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_audio(self, parts: list[str]) -> str | None:
 
         for i, part in enumerate(parts):
             audio = self._is_audio_descriptor(i, parts)
@@ -219,8 +210,7 @@ class MediaExtractor(BaseExtractor):
         
         return None
 
-    def extract_language(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+    def _extract_language(self, parts: list[str]) -> str | None:
 
         for i, _ in enumerate(parts):
             for language in LANGUAGE_PATTERNS:
@@ -229,32 +219,10 @@ class MediaExtractor(BaseExtractor):
                         return language
 
         return None
-
-    def match_pattern_dict(self, path: Path, pattern_dict: Dict[str, str]) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
-
-        for i, _ in enumerate(parts):
-            for pattern in pattern_dict:
-                if self._match_regex(pattern, i, parts):
-                    return pattern
-
-        return None
-
-    def match_pattern_dict_list(self, path: Path, pattern_dict_list: Dict[str, list[str]]) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
-
-        for i, _ in enumerate(parts):
-            for res in pattern_dict_list:
-                for pattern in pattern_dict_list[res]:
-                    if self._match_regex(pattern, i, parts):
-                        return res
-
-        return None
     
     """
     Extraction helper functions
     """
-
     def _is_valid_year(self, year: str) -> int | None: 
         if not year.isdigit():
             return False
