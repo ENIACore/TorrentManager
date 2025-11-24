@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-from config.media import NodeType
+from config.node import NodeType
 from models.path_metadata import PathMetadata
 from models.media_metadata import MediaMetadata
 
