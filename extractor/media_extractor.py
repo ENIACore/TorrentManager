@@ -1,5 +1,6 @@
 from typing import Any, Match, Dict
 from pathlib import Path
+from extractor.base_extractor import BaseExtractor
 from models.media_metadata import MediaMetadata
 import re
 from datetime import datetime
@@ -22,10 +23,11 @@ from config.constants import (
 
     EXTRAS_PATTERNS
     )
+
+
 from config.language import LANGUAGE_PATTERNS
 
-class MediaExtractor:
-    
+class MediaExtractor(BaseExtractor):
     """
     Extraction functions
     """
@@ -42,7 +44,6 @@ class MediaExtractor:
         metadata.audio = self.extract_audio(path)
 
         metadata.language = self.extract_language(path)
-        metadata.ext = self.extract_ext(path)
 
         return metadata
     
@@ -73,7 +74,7 @@ class MediaExtractor:
             Title                     → title="Title" (no terminators found)
         """
 
-        parts = self._get_sanitized_file_or_dir(path).split('.')
+        parts = self._get_sanitized_file_or_dir_parts(path)
         title = []
 
         for i, part in enumerate(parts):
@@ -228,16 +229,6 @@ class MediaExtractor:
                         return language
 
         return None
-        
-
-    def extract_ext(self, path: Path) -> str | None:
-        parts = self._get_sanitized_file_or_dir(path).split('.')
-
-        for i, _ in enumerate(parts):
-            if (match := self._is_ext(i, parts)):
-                return match.group(0)
-
-        return None
 
     def match_pattern_dict(self, path: Path, pattern_dict: Dict[str, str]) -> str | None:
         parts = self._get_sanitized_file_or_dir(path).split('.')
@@ -263,20 +254,6 @@ class MediaExtractor:
     """
     Extraction helper functions
     """
-    def _get_sanitized_file_or_dir(self, path: Path) -> str:
-        name = path.name
-        name = name.rstrip()
-        name = name.upper()
-        name = name.replace('\'', '')
-        name = name.replace('\"', '')
-        name = re.sub(r'[^A-Z0-9]+', '.', name)
-        name = name.strip('.')
-
-        # If file name only consists of special characters
-        if name == '':
-            return ''
-
-        return name
 
     def _is_valid_year(self, year: str) -> int | None: 
         if not year.isdigit():
@@ -341,76 +318,3 @@ class MediaExtractor:
                 if self._match_regex(pattern, index, parts):
                     return audio
         return None
-
-    def _is_ext(self, index: int, parts: list[str]) -> Match[str] | None:
-
-        if (match := self._is_video_ext(index, parts)):
-            return match
-        if (match := self._is_subtitle_ext(index, parts)):
-            return match
-        if (match := self._is_audio_ext(index, parts)):
-            return match
-
-        return None
-
-    def _is_video_ext(self, index: int, parts: list[str]) -> Match[str] | None:
-        for pattern in VIDEO_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
-                return match
-
-        return None
-
-    def _is_subtitle_ext(self, index: int, parts: list[str]) -> Match[str] | None:
-        for pattern in SUBTITLE_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
-                return match
-
-        return None
-
-    def _is_audio_ext(self, index: int, parts: list[str]) -> Match[str] | None:
-        for pattern in AUDIO_EXTENSIONS:
-            if self._is_matching_tail_len(pattern, index, parts) and (match := self._match_regex(pattern, index, parts)):
-                return match
-
-        return None
-
-    def _is_matching_tail_len(self, pattern: str, index: int, parts: list[str]) -> int | None:
-        """
-        Helper function for _is_<type>_ext to ensure ext pattern only matches end of filename parts array.
-        Does this by ensuring number of parts in pattern.split('.') is equivalent to remaining parts to match in filename
-        """
-        if (num_pattern_parts := len(pattern.split('.')) == len(parts) - index):
-            return num_pattern_parts
-        
-        return None
-
-    """
-    General helper functions
-    """
-    def _match_regex(self, pattern: str, index: int, parts: list[str]) -> Match[str] | None:
-        """
-        Matches pattern on one or more full parts of filename
-        Parameters:
-            - pattern: Pattern to match
-            - index: index in parts array to start matching
-            - parts: array of filename parts previously separated by '.'
-        """
-
-        # Filename parts are split by '.', in order to match patterns containing '.', filename parts must be recombined
-        parts_to_match = len(pattern.split('.'))
-        combined_parts = ''
-        for i in range(index, min(index + parts_to_match, len(parts))):
-            if not combined_parts:
-                combined_parts = parts[i]
-            else:
-                combined_parts = combined_parts + '.' + parts[i]
-
-        # Match recombined or individual, filename parts with pattern
-        return re.fullmatch(pattern, combined_parts) 
-
-    def _get_next_element(self, index: int, array: list[Any]) -> Any | None:
-        if index < len(array) - 1:
-            return array[index + 1]
-        else:
-            return None
-

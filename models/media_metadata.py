@@ -16,11 +16,7 @@ class MediaMetadata:
     audio: str | None = None
 
     language: str | None = None
-    ext: str | None = None
 
-    """
-        Description: Returns metadata in filename format without file ext
-    """
     def __str__(self):
         parts = []
 
@@ -43,9 +39,6 @@ class MediaMetadata:
 
         return '.'.join(parts)
 
-    """
-        Description: Returns movie title in filename format
-    """
     def _format_title(self, title) -> str | None:
         if title:
             # Make title lowercase and remove quotes
@@ -67,9 +60,6 @@ class MediaMetadata:
         else:
             return None
 
-    """
-        Description: Prints all member variables in a readable format
-    """
     def print(self):
         print("MediaMetadata:")
         print(f"  Title:      {self.title}")
@@ -80,4 +70,3 @@ class MediaMetadata:
         print(f"  Codec:      {self.codec}")
         print(f"  Source:     {self.source}")
         print(f"  Audio:      {self.audio}")
-        print(f"  Extension:  {self.ext}")

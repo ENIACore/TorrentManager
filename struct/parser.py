@@ -48,8 +48,8 @@ class Parser:
             
     def print_tree(self, node: Node | None, indent: int = 0, prefix: str = "") -> None:
         """
-        Recursively print the node tree structure with metadata.
-        
+        Recursively print the node tree structure with metadata and classification.
+
         Args:
             node: The root node to start printing from
             indent: Current indentation level (used internally for recursion)
@@ -57,22 +57,27 @@ class Parser:
         """
         if not node:
             return
-        
+
         # Print current node info
         node_type = "📁" if node.original_path.is_dir() else "📄"
         print(f"{prefix}{node_type} {node.original_path.name}")
-        
+
+        # Print classification if available
+        if hasattr(node, 'classification') and node.classification:
+            classification_indent = " " * (indent + 2)
+            print(f"{classification_indent}├─ Classification: {node.classification}")
+
         # Print metadata if available
         if node.metadata:
             metadata_indent = " " * (indent + 2)
             print(f"{metadata_indent}├─ Metadata: {node.metadata}")
-        
+
         # Print children recursively
         if hasattr(node, 'children_nodes') and node.children_nodes:
             for i, child in enumerate(node.children_nodes):
                 is_last = i == len(node.children_nodes) - 1
                 extension = "└─ " if is_last else "├─ "
                 continuation = "   " if is_last else "│  "
-                
+
                 child_prefix = " " * indent + extension
                 self.print_tree(child, indent + 3, child_prefix)
