@@ -57,7 +57,7 @@ class Parser:
             
     def print_tree(self, node: Node | None, indent: int = 0, prefix: str = "") -> None:
         """
-        Recursively print the node tree structure with metadata and classification.
+        Recursively print the node tree structure with media and path metadata.
 
         Args:
             node: The root node to start printing from
@@ -71,18 +71,18 @@ class Parser:
         node_type = "📁" if node.original_path.is_dir() else "📄"
         print(f"{prefix}{node_type} {node.original_path.name}")
 
-        # Print classification if available
-        if hasattr(node, 'classification') and node.classification:
-            classification_indent = " " * (indent + 2)
-            print(f"{classification_indent}├─ Classification: {node.classification}")
-
-        # Print metadata if available
-        if node.metadata:
+        # Print media metadata if available
+        if node.media_metadata:
             metadata_indent = " " * (indent + 2)
-            print(f"{metadata_indent}├─ Metadata: {node.metadata}")
+            print(f"{metadata_indent}├─ Media: {node.media_metadata}")
+
+        # Print path metadata if available
+        if node.path_metadata:
+            metadata_indent = " " * (indent + 2)
+            print(f"{metadata_indent}├─ Path: {node.path_metadata}")
 
         # Print children recursively
-        if hasattr(node, 'children_nodes') and node.children_nodes:
+        if node.children_nodes:
             for i, child in enumerate(node.children_nodes):
                 is_last = i == len(node.children_nodes) - 1
                 extension = "└─ " if is_last else "├─ "
