@@ -55,6 +55,7 @@ class Parser:
         node.children_nodes = children_nodes
         return node
             
+
     def print_tree(self, node: Node | None, indent: int = 0, prefix: str = "", is_last: bool = True) -> None:
         """
         Recursively print the node tree structure showing:
@@ -91,12 +92,13 @@ class Parser:
         else:
             metadata_prefix = prefix[:-4] + ("    " if is_last else "│   ") + "  "
         
-        # Print new name if different from original
-        if new_name and new_name != original_name:
-            print(f"{metadata_prefix}├─ 📝 New: {new_name}")
+        # Always show classification (even if None/Unknown)
+        has_new_name = new_name and new_name != original_name
         
-        # Print classification
-        if classification:
+        if has_new_name:
+            print(f"{metadata_prefix}├─ 📝 New: {new_name}")
+            print(f"{metadata_prefix}└─ 🏷️  Type: {classification}")
+        else:
             print(f"{metadata_prefix}└─ 🏷️  Type: {classification}")
         
         # Print children recursively
@@ -130,18 +132,19 @@ class Parser:
             # If base_name is empty or just dots, use original name
             if not base_name or base_name.replace('.', '') == '':
                 return node.original_path.name if node.original_path else None
-            return f"{base_name}{node.path_metadata.ext}"
+            return f"{base_name}.{node.path_metadata.ext}"
         
         # For directories, just return the formatted media metadata
         return base_name if base_name and base_name.replace('.', '') != '' else None
 
-    def _format_classification(self, classification: str | None) -> str | None:
+    def _format_classification(self, classification: str | None) -> str:
         """
         Format classification with color coding for better visibility.
         Uses ANSI color codes for terminal output.
         """
-        if not classification:
-            return None
+        # Handle None or missing classification
+        if classification is None:
+            classification = "NOT_CLASSIFIED"
         
         # Color mapping for different classification types
         colors = {
@@ -156,6 +159,7 @@ class Parser:
             'EXTRAS_FILE': '\033[92m',     # Green
             'AUDIO_FILE': '\033[91m',      # Red
             'UNKNOWN': '\033[90m',         # Gray
+            'NOT_CLASSIFIED': '\033[91m',  # Red (to highlight missing classification)
         }
         
         color = colors.get(classification, '\033[0m')
@@ -176,16 +180,15 @@ class Parser:
         original_name = node.original_path.name if node.original_path else "Unknown"
         new_name = self._generate_new_name(node)
         
+        # Get classification (show NOT_CLASSIFIED if None)
+        classification = node.classification if node.classification else "NOT_CLASSIFIED"
+        
         # Print main line with arrow showing transformation
         indent_str = "  " * indent
         if new_name and new_name != original_name:
-            print(f"{indent_str}{node_icon} {original_name} → {new_name}")
+            print(f"{indent_str}{node_icon} {original_name} → {new_name} [{classification}]")
         else:
-            print(f"{indent_str}{node_icon} {original_name}")
-        
-        # Print classification
-        if node.classification:
-            print(f"{indent_str}      Type: {node.classification}")
+            print(f"{indent_str}{node_icon} {original_name} [{classification}]")
         
         # Print children
         for child in node.children_nodes:
