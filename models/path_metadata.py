@@ -11,4 +11,5 @@ class PathMetadata:
     is_dir: bool = False
     is_file: bool = False
     format_type: FormatType | None = None
-    ext: str | None = None
+    ext: str
+

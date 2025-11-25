@@ -1,14 +1,13 @@
 import os
 import shutil
-import logging
 from os import walk
 from os.path import join
 from pathlib import Path
-from typing import Optional
 from struct.node import Node
 from struct.parser import Parser
 from classifier.node_classifier import NodeClassifier
 from logger.logger import Logger
+import re
 
 # Default paths - can be overridden by environment variables
 TORRENT_PATH = os.getenv('TORRENT_DOWNLOAD_PATH', '/mnt/RAID/qbit-data/downloads')
@@ -377,32 +376,10 @@ class TorrentManager:
         if not node.media_metadata:
             raise ValueError('Media metadata not extracted for node')
         
-        parts = []
-        if node.media_metadata.title:
-            parts.append(node.media_metadata.get_formatted_title())
-        
-        if node.media_metadata.year:
-            parts.append(f'({node.media_metadata.year})')
-        
-        # Join with space for cleaner folder names: "Title (Year)"
-        return ' '.join(parts) if parts else 'Unknown'
-
-    def _get_formatted_season_name(self, node: Node) -> str:
-        """
-        Get formatted season folder name.
-        
-        Format: Season XX (e.g., "Season 01")
-        
-        Args:
-            node: Node with media_metadata
-            
-        Returns:
-            Formatted season folder name
-        """
-        if not node.media_metadata:
-            raise ValueError('Media metadata not extracted for node')
-        
-        return node.media_metadata.get_formatted_season_num()
+        if node.media_metadata.title and node.media_metadata.year:
+            return node.media_metadata.get_formatted_title() + '.' + str(node.media_metadata.year)
+        else:
+            return 'UNKNOWN'
 
     def _get_formatted_file_name(self, node: Node) -> str:
         """
@@ -418,12 +395,12 @@ class TorrentManager:
             raise ValueError('Metadata not extracted for node')
         
         base_name = str(node.media_metadata)
-        ext = node.path_metadata.ext or ''
+        ext = node.path_metadata.ext
         
         if ext and not ext.startswith('.'):
             ext = '.' + ext
             
-        return base_name + ext
+        return base_name + ext.lower()
 
     def _process_movie_folder(self, node: Node, parent_path: Path = Path('/')) -> bool:
         """
@@ -491,8 +468,7 @@ class TorrentManager:
         if not node.media_metadata:
             return False
             
-        folder_name = self._get_formatted_season_name(node)
-        node.new_path = parent_path / folder_name
+        node.new_path = parent_path / f'S{node.media_metadata.get_formatted_season_num}'
         
         self.logger.info(f'Processing season folder: {node.original_path} -> {node.new_path}')
         
@@ -597,7 +573,11 @@ class TorrentManager:
         if not node.original_path:
             return False
             
-        node.new_path = parent_path / node.original_path.name
+        file_name = self._sanitize_name(node.original_path.name, node.path_metadata.ext)
+        if node.media_metadata.language:
+            file_name =  Path('subtitle_' + node.media_metadata.language) 
+
+        node.new_path = parent_path / file_name
         
         self.logger.info(f'Processing subtitle file: {node.original_path} -> {node.new_path}')
         return True
@@ -607,7 +587,8 @@ class TorrentManager:
         if not node.original_path:
             return False
             
-        node.new_path = parent_path / node.original_path.name
+        file_name = self._sanitize_name(node.original_path.stem, node.path_metadata.ext)
+        node.new_path = parent_path / file_name
         
         self.logger.info(f'Processing extras file: {node.original_path} -> {node.new_path}')
         return True
@@ -728,3 +709,25 @@ class TorrentManager:
         except Exception as e:
             self.logger.error(f'Failed to remove original {node.original_path}: {e}')
             return False
+
+    def _sanitize_name(self, name: str, ext: str | None) -> str:
+        if name:
+            lowercase_title = name.lower()
+            lowercase_title = lowercase_title.replace('\'', '').replace('\"', '')
+
+            # Remove special characters, and join words with '.'
+            alphanumeric_title = re.sub(r'[^a-z0-9]+', '.', lowercase_title)
+            # Remove '.' from beginning & end of title
+            alphanumeric_title = alphanumeric_title.strip('.')
+
+            # Capitalize each word in title
+            words = alphanumeric_title.split('.')
+            words = [word.capitalize() for word in words if word]
+
+            if ext:
+                words.append(ext.lower())
+
+            return '.'.join(words)
+        else:
+            return ''
+
