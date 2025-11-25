@@ -7,7 +7,6 @@ import os
 
 MANAGER_PATH = os.getenv('TORRENT_MANAGER_PATH', '/mnt/RAID/torrent-manager')
 
-
 class Logger:
     """Thread-safe singleton logger with file and console output."""
     
@@ -23,10 +22,8 @@ class Logger:
         if self._initialized:
             return
         self._initialized = True
-
         # Path that TorrentManager program can use for files/logs/etc
         self.manager_path = manager_path or Path(MANAGER_PATH)
-
         self.log_dir = self.manager_path / "logs"
         self.log_dir.mkdir(parents=True, exist_ok=True)
         
@@ -61,9 +58,17 @@ class Logger:
         error_handler.setFormatter(formatter)
         logger.addHandler(error_handler)
         
-        # Console handler for immediate feedback
+        # Console handler for DEBUG messages only
+        debug_console_handler = logging.StreamHandler(sys.stdout)
+        debug_console_handler.setLevel(logging.DEBUG)
+        debug_console_handler.addFilter(lambda record: record.levelno == logging.DEBUG)
+        debug_console_handler.setFormatter(formatter)
+        logger.addHandler(debug_console_handler)
+        
+        # Console handler for INFO and above (excluding DEBUG)
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setLevel(logging.INFO)
+        console_handler.addFilter(lambda record: record.levelno >= logging.INFO)
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
         
