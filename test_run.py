@@ -18,13 +18,11 @@ for dir in dirnames:
     head = parser.process_nodes(None, Path(join(root, dir)))
     if head:
         head = classifier.classify(head)
-        parser.print_tree(head)
 
 
 for file in filenames:
     head = parser.process_nodes(None, Path(join(root, file)))
     if head:
         head = classifier.classify(head)
-        parser.print_tree(head)
 
 
