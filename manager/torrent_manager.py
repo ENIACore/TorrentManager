@@ -13,7 +13,7 @@ from logger.logger import Logger
 # Default paths - can be overridden by environment variables
 TORRENT_PATH = os.getenv('TORRENT_DOWNLOAD_PATH', '/mnt/RAID/qbit-data/downloads')
 MANAGER_PATH = os.getenv('TORRENT_MANAGER_PATH', '/mnt/RAID/torrent-manager')
-MEDIA_PATH = os.getenv('TORRENT_MEDIA_PATH', '/mnt/RAID/jelly/media')  # Fixed: was using wrong env var
+MEDIA_PATH = os.getenv('MEDIA_SERVER_PATH', '/mnt/RAID/jelly/media')
 
 # Dry run mode - set to 'true' to only log actions without moving files
 DRY_RUN = os.getenv('TORRENT_MANAGER_DRY_RUN', 'true').lower() == 'true'
@@ -21,10 +21,10 @@ DRY_RUN = os.getenv('TORRENT_MANAGER_DRY_RUN', 'true').lower() == 'true'
 class TorrentManager:
 
     def __init__(self, 
-                 torrent_path: Optional[Path] = None,
-                 manager_path: Optional[Path] = None,
-                 media_path: Optional[Path] = None,
-                 dry_run: Optional[bool] = None) -> None:
+                 torrent_path: Path | None = None,
+                 manager_path: Path | None = None,
+                 media_path: Path | None = None,
+                 dry_run: bool | None = None) -> None:
         """
         Initialize TorrentManager with configurable paths.
         
@@ -42,7 +42,7 @@ class TorrentManager:
         self.media_path = media_path or Path(MEDIA_PATH)
         
         self.dry_run = dry_run if dry_run is not None else DRY_RUN
-        self.logger = Logger()
+        self.logger = Logger(manager_path=self.manager_path)
         
         # Validate all critical paths exist
         self._validate_paths()
@@ -323,9 +323,7 @@ class TorrentManager:
         
         parts = []
         if node.media_metadata.title:
-            formatted_title = node.media_metadata.format_title(node.media_metadata.title)
-            if formatted_title:
-                parts.append(formatted_title)
+            parts.append(node.media_metadata.get_formatted_title())
         
         if node.media_metadata.year:
             parts.append(f'({node.media_metadata.year})')
@@ -348,8 +346,7 @@ class TorrentManager:
         if not node.media_metadata:
             raise ValueError('Media metadata not extracted for node')
         
-        season_num = node.media_metadata.season if node.media_metadata.season else 1
-        return f'Season {str(season_num).zfill(2)}'
+        return node.media_metadata.get_formatted_season_num()
 
     def _get_formatted_file_name(self, node: Node) -> str:
         """

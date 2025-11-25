@@ -3,6 +3,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import ClassVar
+import os
+
+MANAGER_PATH = os.getenv('TORRENT_MANAGER_PATH', '/mnt/RAID/torrent-manager')
 
 
 class Logger:
@@ -11,17 +14,20 @@ class Logger:
     _instance: ClassVar['Logger | None'] = None
     _initialized: bool = False
     
-    def __new__(cls, base_path: Path = Path("/mnt/torrent_manager")) -> "Logger":
+    def __new__(cls, manager_path: Path | None = None) -> "Logger":
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
     
-    def __init__(self, base_path: Path = Path("/mnt/torrent_manager")) -> None:
+    def __init__(self, manager_path: Path | None = None) -> None:
         if self._initialized:
             return
         self._initialized = True
-        
-        self.log_dir = base_path / "logs"
+
+        # Path that TorrentManager program can use for files/logs/etc
+        self.manager_path = manager_path or Path(MANAGER_PATH)
+
+        self.log_dir = self.manager_path / "logs"
         self.log_dir.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

@@ -28,13 +28,13 @@ class MediaMetadata:
         parts = []
 
         if self.title:
-            parts.append(self.format_title(self.title))
+            parts.append(self.get_formatted_title())
         if self.year:
             parts.append(str(self.year))
         if self.season:
-            parts.append(str(self.season).zfill(2))
+            parts.append(self.get_formatted_season_num())
         if self.episode:
-            parts.append(str(self.episode).zfill(3))
+            parts.append(self.get_formatted_episode_num())
         if self.resolution:
             parts.append(self.resolution)
         if self.codec:
@@ -46,10 +46,10 @@ class MediaMetadata:
 
         return '.'.join(parts)
 
-    def format_title(self, title) -> str | None:
-        if title:
+    def get_formatted_title(self) -> str:
+        if self.title:
             # Make title lowercase and remove quotes
-            lowercase_title = title.lower()
+            lowercase_title = self.title.lower()
             lowercase_title = lowercase_title.replace('\'', '').replace('\"', '')
 
             # Remove special characters, and join words with '.'
@@ -62,10 +62,17 @@ class MediaMetadata:
             words = [word.capitalize() for word in words if word]
 
             return '.'.join(words)
-        elif title == '':
-            return ''
         else:
-            return None
+            return ''
+
+    def get_formatted_season_num(self) -> str:
+        season_num = self.season if self.season else 1
+        return f'S{str(season_num).zfill(2)}'
+
+    def get_formatted_episode_num(self) -> str:
+        ep_num = self.episode if self.episode else 1
+        return f'S{str(ep_num).zfill(3)}'
+        
 
     def print(self):
         print("MediaMetadata:")
