@@ -7,9 +7,13 @@ FormatType = Literal[
     #'AUDIO' - TODO, Audio files currently disabled
 ]
 
+UnknownType = Literal[
+    'UNKNOWN'
+]
+
 class PathMetadata:
-    is_dir: bool = False
-    is_file: bool = False
-    format_type: FormatType | None = None
+    is_dir: bool
+    is_file: bool
+    format_type: FormatType | UnknownType
     ext: str
 

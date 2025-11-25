@@ -18,4 +18,4 @@ class Node:
     classification: NodeType = 'UNKNOWN' # Classification of node (file or directory type)
 
     def __init__(self, path: Path = Path('/')) -> None:
-        original_path = path
+        self.original_path = path

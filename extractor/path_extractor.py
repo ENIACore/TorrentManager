@@ -1,41 +1,52 @@
 from pathlib import Path
 from extractor.base_extractor import BaseExtractor
-from models.path_metadata import PathMetadata, FormatType
+from models.path_metadata import PathMetadata, FormatType, UnknownType
 
 class PathExtractor(BaseExtractor):
 
-
-    def extract_metadata(self, path: Path) -> PathMetadata:
+    @classmethod
+    def extract_metadata(cls, path: Path) -> PathMetadata:
+        cls._get_logger().debug(f'Extracting path metadata for: {path}')
+        
         metadata = PathMetadata()
         # Parts includes ext to enable file/mime type extraction
-        parts = self._get_sanitized_path_parts(path)
-
+        parts = cls._get_sanitized_path_parts(path)
 
         metadata.is_dir = path.is_dir()
         metadata.is_file = path.is_file()
-        metadata.format_type = self._extract_format_type(parts) 
-        metadata.ext = self._extract_ext(parts)
+        metadata.format_type = cls._extract_format_type(parts) 
+        metadata.ext = cls._extract_ext(parts)
 
+        cls._get_logger().debug(f'Extracted path metadata - is_dir: {metadata.is_dir}, '
+                                f'is_file: {metadata.is_file}, format_type: {metadata.format_type}, '
+                                f'ext: {metadata.ext}')
 
         return metadata
 
-    def _extract_format_type(self, parts: list[str]) -> FormatType | None:
+    @classmethod
+    def _extract_format_type(cls, parts: list[str]) -> FormatType | UnknownType:
 
         for i, _ in enumerate(parts):
-            if self._is_video_ext(i, parts):
+            if cls._is_video_ext(i, parts):
+                cls._get_logger().debug('Detected format type: VIDEO')
                 return 'VIDEO'
-            elif self._is_subtitle_ext(i, parts):
+            elif cls._is_subtitle_ext(i, parts):
+                cls._get_logger().debug('Detected format type: SUBTITLE')
                 return 'SUBTITLE'
             # TODO Audio files currently disabled
-            #elif self._is_audio_ext(i, parts):
+            #elif cls._is_audio_ext(i, parts):
             #    return 'AUDIO'
 
-        return None
+        return 'UNKNOWN'
 
-    def _extract_ext(self, parts: list[str]) -> str | None:
+
+    @classmethod
+    def _extract_ext(cls, parts: list[str]) -> str:
 
         for i, _ in enumerate(parts):
-            if (match := self._is_ext(i, parts)):
-                return match.group(0)
+            if (match := cls._is_ext(i, parts)):
+                ext = match.group(0)
+                cls._get_logger().debug(f'Extracted extension: {ext}')
+                return ext
 
-        return None
+        return ''
