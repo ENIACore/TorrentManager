@@ -44,6 +44,9 @@ class TorrentManager:
         self.dry_run = dry_run if dry_run is not None else DRY_RUN
         self.logger = Logger(manager_path=self.manager_path)
         
+        # Track processing depth for tree separation
+        self._processing_depth = 0
+        
         # Validate all critical paths exist
         self._validate_paths()
 
@@ -209,8 +212,8 @@ class TorrentManager:
         Returns:
             Dictionary with processing statistics
         """
-        parser = Parser()
-        classifier = NodeClassifier()
+        parser = Parser(manager_path=self.manager_path)
+        classifier = NodeClassifier(manager_path=self.manager_path)
         
         stats = {
             'processed': 0,
@@ -256,28 +259,81 @@ class TorrentManager:
         Returns:
             Result status: 'processed', 'failed_validation', 'failed_processing', or 'skipped'
         """
-        self.logger.info(f'Processing: {path}')
+        # Log tree separator for root level torrents
+        if self._processing_depth == 0:
+            self.logger.debug("=" * 80)
+            self.logger.debug(f"STARTING TORRENT PROCESSING: {path.name}")
+            self.logger.debug(f"Full path: {path}")
+            self.logger.debug("=" * 80)
+        
+        self._processing_depth += 1
+        result = 'skipped'
         
         try:
+            self.logger.info(f'Processing: {path}')
+            
+            # Stage 1: Parse
+            self.logger.debug("-" * 40)
+            self.logger.debug("STAGE 1: PARSING NODE TREE")
+            self.logger.debug("-" * 40)
             head = parser.process_nodes(None, path)
+            
+            # Stage 2: Classify
+            self.logger.debug("-" * 40)
+            self.logger.debug("STAGE 2: CLASSIFYING NODE TREE")
+            self.logger.debug("-" * 40)
             head = classifier.classify(head)
             
+            # Stage 3: Validate
+            self.logger.debug("-" * 40)
+            self.logger.debug("STAGE 3: VALIDATING CLASSIFICATIONS")
+            self.logger.debug("-" * 40)
             if not self.validate(head):
                 self.logger.error(f'Validation failed, moving to error dir: {path}')
                 self.move_to_error_dir(head)
-                return 'failed_validation'
-            
-            if self._process_torrent(head):
-                self._move_to_staging(head)
-                return 'processed'
+                result = 'failed_validation'
             else:
-                self.logger.error(f'Processing failed, moving to error dir: {path}')
-                self.move_to_error_dir(head)
-                return 'failed_processing'
-                
+                # Stage 4: Process
+                self.logger.debug("-" * 40)
+                self.logger.debug("STAGE 4: PROCESSING NODE TREE")
+                self.logger.debug("-" * 40)
+                if self._process_torrent(head):
+                    # Stage 5: Move to staging
+                    self.logger.debug("-" * 40)
+                    self.logger.debug("STAGE 5: MOVING TO STAGING")
+                    self.logger.debug("-" * 40)
+                    self._move_to_staging(head)
+                    result = 'processed'
+                else:
+                    self.logger.error(f'Processing failed, moving to error dir: {path}')
+                    self.move_to_error_dir(head)
+                    result = 'failed_processing'
+                    
         except Exception as e:
-            self.logger.error(f'Exception processing {path}: {e}')
-            return 'skipped'
+            self.logger.error(f'Exception processing {path}: {e}', exc_info=True)
+            result = 'skipped'
+        finally:
+            self._processing_depth -= 1
+            
+            # Log completion for root level torrents
+            if self._processing_depth == 0:
+                self.logger.debug("=" * 80)
+                if result == 'processed':
+                    self.logger.debug(f"✓ COMPLETED TORRENT PROCESSING: {path.name}")
+                    self.logger.debug(f"STATUS: SUCCESS")
+                elif result == 'failed_validation':
+                    self.logger.debug(f"✗ COMPLETED TORRENT PROCESSING: {path.name}")
+                    self.logger.debug(f"STATUS: VALIDATION FAILED")
+                elif result == 'failed_processing':
+                    self.logger.debug(f"✗ COMPLETED TORRENT PROCESSING: {path.name}")
+                    self.logger.debug(f"STATUS: PROCESSING FAILED")
+                else:
+                    self.logger.debug(f"✗ COMPLETED TORRENT PROCESSING: {path.name}")
+                    self.logger.debug(f"STATUS: SKIPPED (Exception)")
+                self.logger.debug("=" * 80)
+                self.logger.debug("")  # Empty line for separation
+        
+        return result
 
     def _process_torrent(self, node: Node) -> bool:
         """
