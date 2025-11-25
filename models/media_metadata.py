@@ -28,7 +28,7 @@ class MediaMetadata:
         parts = []
 
         if self.title:
-            parts.append(self._format_title(self.title))
+            parts.append(self.format_title(self.title))
         if self.year:
             parts.append(str(self.year))
         if self.season:
@@ -46,7 +46,7 @@ class MediaMetadata:
 
         return '.'.join(parts)
 
-    def _format_title(self, title) -> str | None:
+    def format_title(self, title) -> str | None:
         if title:
             # Make title lowercase and remove quotes
             lowercase_title = title.lower()

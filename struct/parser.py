@@ -11,7 +11,7 @@ class Parser:
         self.media_extractor = MediaExtractor()
         self.path_extractor = PathExtractor()
 
-    def process_nodes(self, node: Node | None, path: Path) -> Node | None:
+    def process_nodes(self, node: Node | None, path: Path) -> Node:
         # If current node DNE, create head node
         if not node:
             node = Node()

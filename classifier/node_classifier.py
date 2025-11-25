@@ -4,6 +4,7 @@ from config.node import NodeType
 
 
 # TODO: 
+# - Add processing for Episode folders
 # - Validate all video files have same or no epsidoe in _is_season_dir
 # - Enable processing of subtitle direcotries with language directories inside
 # - Enable processing of extras direcotries with season directories inside
