@@ -1,13 +1,12 @@
 import os
-import shutil
 from os import walk
 from os.path import join
 from pathlib import Path
 from struct.node import Node
 from struct.parser import Parser
 from classifier.node_classifier import NodeClassifier
-from logger.logger import Logger
-import re
+from base_manager import BaseManager
+
 
 # Default paths - can be overridden by environment variables
 TORRENT_PATH = os.getenv('TORRENT_DOWNLOAD_PATH', '/mnt/RAID/qbit-data/downloads')
@@ -17,7 +16,8 @@ MEDIA_PATH = os.getenv('MEDIA_SERVER_PATH', '/mnt/RAID/jelly/media')
 # Dry run mode - set to 'true' to only log actions without moving files
 DRY_RUN = os.getenv('TORRENT_MANAGER_DRY_RUN', 'true').lower() == 'true'
 
-class TorrentManager:
+
+class TorrentManager(BaseManager):
 
     def __init__(self, 
                  torrent_path: Path | None = None,
@@ -33,21 +33,23 @@ class TorrentManager:
             media_path: Path for media server (Plex/Jellyfin)
             dry_run: If True, only log actions without moving files
         """
-        # Path raw torrent files are found in
-        self.torrent_path = torrent_path or Path(TORRENT_PATH)
-        # Path that TorrentManager program can use for files/logs/etc
-        self.manager_path = manager_path or Path(MANAGER_PATH)
-        # Path for media server (i.e Plex or Jellyfin)
-        self.media_path = media_path or Path(MEDIA_PATH)
+        resolved_manager_path = manager_path or Path(MANAGER_PATH)
+        resolved_dry_run = dry_run if dry_run is not None else DRY_RUN
         
-        self.dry_run = dry_run if dry_run is not None else DRY_RUN
-        self.logger = Logger(manager_path=self.manager_path)
+        super().__init__(manager_path=resolved_manager_path, dry_run=resolved_dry_run)
+        
+        self.torrent_path = torrent_path or Path(TORRENT_PATH)
+        self.media_path = media_path or Path(MEDIA_PATH)
         
         # Track processing depth for tree separation
         self._processing_depth = 0
         
         # Validate all critical paths exist
-        self._validate_paths()
+        self._validate_paths([
+            (self.torrent_path, "Torrent download path"),
+            (self.manager_path.parent, "Manager path parent"),
+            (self.media_path.parent, "Media path parent"),
+        ])
 
         # Path for files or dirs unable to be parsed automatically
         self.error_path = self.manager_path / 'error'
@@ -58,40 +60,15 @@ class TorrentManager:
         self.staging_path = self.manager_path / 'staging'
 
         # Create required directories
-        self._create_directories()
-        
-        self._log_initialization()
-
-    def _validate_paths(self) -> None:
-        """Validate that all required paths exist."""
-        paths_to_validate = [
-            (self.torrent_path, "Torrent download path"),
-            (self.manager_path.parent, "Manager path parent"),  # Parent should exist
-            (self.media_path.parent, "Media path parent"),  # Parent should exist
-        ]
-        
-        missing_paths = []
-        for path, description in paths_to_validate:
-            if not path.exists():
-                missing_paths.append(f"{description}: {path}")
-        
-        if missing_paths:
-            raise ValueError(
-                f"Required paths do not exist:\n" + "\n".join(f"  - {p}" for p in missing_paths)
-            )
-
-    def _create_directories(self) -> None:
-        """Create all required working directories."""
-        directories = [
+        self._create_directories([
             self.error_path,
             self.series_path,
             self.movies_path,
             self.staging_path,
             self.manager_path / 'logs',
-        ]
+        ])
         
-        for path in directories:
-            path.mkdir(parents=True, exist_ok=True)
+        self._log_initialization()
 
     def _log_initialization(self) -> None:
         """Log initialization details."""
@@ -155,54 +132,7 @@ class TorrentManager:
             self.logger.error('Cannot move node without original path to error directory')
             return False
             
-        source = node.original_path
-        dest = self.error_path / source.name
-        
-        # Handle naming conflicts
-        dest = self._get_unique_path(dest)
-        
-        if self.dry_run:
-            self.logger.info(f'[DRY RUN] Would move {source} to {dest}')
-            return True
-
-        try:
-            if source.is_dir():
-                shutil.copytree(source, dest)
-            else:
-                shutil.copy2(source, dest)
-            self.logger.info(f'Moved to error directory: {source} -> {dest}')
-            return True
-        except Exception as e:
-            self.logger.error(f'Failed to move {source} to error directory: {e}')
-            return False
-
-    def _get_unique_path(self, path: Path) -> Path:
-        """
-        Get a unique path by appending a counter if the path already exists.
-        
-        Args:
-            path: The desired path
-            
-        Returns:
-            A unique path that doesn't conflict with existing files
-        """
-        if not path.exists():
-            return path
-            
-        counter = 1
-        stem = path.stem
-        suffix = path.suffix
-        parent = path.parent
-        
-        while True:
-            new_path = parent / f"{stem}_{counter}{suffix}"
-            if not new_path.exists():
-                return new_path
-            counter += 1
-            
-            # Safety limit
-            if counter > 1000:
-                raise RuntimeError(f"Could not find unique path for {path}")
+        return self._move_to_directory(node.original_path, self.error_path)
 
     def process_torrents(self) -> dict:
         """
@@ -573,9 +503,9 @@ class TorrentManager:
         if not node.original_path:
             return False
             
-        file_name = self._sanitize_name(node.original_path.name, node.path_metadata.ext)
+        file_name = self._sanitize_name(node.original_path.name) + '.' + node.path_metadata.ext
         if node.media_metadata.language:
-            file_name =  Path('subtitle_' + node.media_metadata.language) 
+            file_name = Path('subtitle_' + node.media_metadata.language)
 
         node.new_path = parent_path / file_name
         
@@ -587,7 +517,7 @@ class TorrentManager:
         if not node.original_path:
             return False
             
-        file_name = self._sanitize_name(node.original_path.stem, node.path_metadata.ext)
+        file_name = self._sanitize_name(node.original_path.stem) + '.' + node.path_metadata.ext
         node.new_path = parent_path / file_name
         
         self.logger.info(f'Processing extras file: {node.original_path} -> {node.new_path}')
@@ -630,30 +560,15 @@ class TorrentManager:
 
     def _move_directory_to_staging(self, node: Node, dest_path: Path) -> None:
         """Move a directory node to staging."""
-        if self.dry_run:
-            self.logger.info(f'[DRY RUN] Would create directory: {dest_path}')
-        else:
-            try:
-                dest_path.mkdir(parents=True, exist_ok=True)
-                self.logger.info(f'Created directory: {dest_path}')
-            except Exception as e:
-                self.logger.error(f'Failed to create directory {dest_path}: {e}')
-                return
+        if not self._create_directory(dest_path):
+            return
 
         for child in node.children_nodes:
             self._move_node_to_staging(child)
 
     def _move_file_to_staging(self, node: Node, dest_path: Path) -> None:
         """Move a file node to staging."""
-        if self.dry_run:
-            self.logger.info(f'[DRY RUN] Would copy file: {node.original_path} -> {dest_path}')
-        else:
-            try:
-                dest_path.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(node.original_path, dest_path)
-                self.logger.info(f'Copied file: {node.original_path} -> {dest_path}')
-            except Exception as e:
-                self.logger.error(f'Failed to copy file {node.original_path} to {dest_path}: {e}')
+        self._copy_file(node.original_path, dest_path)
 
     def get_staging_summary(self, node: Node, indent: int = 0) -> str:
         """
@@ -676,7 +591,7 @@ class TorrentManager:
             
             for child in node.children_nodes:
                 child_summary = self.get_staging_summary(child, indent + 1)
-                if child_summary:  # Only append non-empty summaries
+                if child_summary:
                     lines.append(child_summary)
                 
         return '\n'.join(lines)
@@ -692,42 +607,4 @@ class TorrentManager:
         Returns:
             True if cleanup successful
         """
-        if not node.original_path:
-            return False
-            
-        if self.dry_run:
-            self.logger.info(f'[DRY RUN] Would remove original: {node.original_path}')
-            return True
-            
-        try:
-            if node.original_path.is_dir():
-                shutil.rmtree(node.original_path)
-            else:
-                node.original_path.unlink()
-            self.logger.info(f'Removed original: {node.original_path}')
-            return True
-        except Exception as e:
-            self.logger.error(f'Failed to remove original {node.original_path}: {e}')
-            return False
-
-    def _sanitize_name(self, name: str, ext: str | None) -> str:
-        if name:
-            lowercase_title = name.lower()
-            lowercase_title = lowercase_title.replace('\'', '').replace('\"', '')
-
-            # Remove special characters, and join words with '.'
-            alphanumeric_title = re.sub(r'[^a-z0-9]+', '.', lowercase_title)
-            # Remove '.' from beginning & end of title
-            alphanumeric_title = alphanumeric_title.strip('.')
-
-            # Capitalize each word in title
-            words = alphanumeric_title.split('.')
-            words = [word.capitalize() for word in words if word]
-
-            if ext:
-                words.append(ext.lower())
-
-            return '.'.join(words)
-        else:
-            return ''
-
+        return self._remove_path(node.original_path)
