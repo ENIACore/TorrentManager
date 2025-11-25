@@ -212,7 +212,7 @@ class TorrentManager:
         Returns:
             Dictionary with processing statistics
         """
-        parser = Parser(manager_path=self.manager_path)
+        parser = Parser()
         classifier = NodeClassifier(manager_path=self.manager_path)
         
         stats = {
