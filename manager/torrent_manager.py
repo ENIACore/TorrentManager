@@ -170,12 +170,12 @@ class TorrentManager(BaseManager):
             return cls._process_series_folder(node)
         elif node.classification == 'SEASON_FOLDER':
             return cls._process_season_folder(node)
-        elif node.classification == 'MOVIE_FOLDER':
+        elif node.classification == 'MOVIE_FILE':
             return cls._process_movie_file(node)
         elif node.classification == 'EPISODE_FILE':
             return cls._process_episode_file(node)
         else:
-            cls._logger.warning(f'No handler for classification: {node.classification}')
+            cls._logger.warning(f'No root handler for classification: {node.classification}')
             return False
 
     @classmethod
