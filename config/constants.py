@@ -236,7 +236,7 @@ EPISODES_PATTERNS = [
 
 # Pattenrs for
 EXTRAS_PATTERNS = [
-    'EXTRA[s]', 
+    'EXTRA[S]', 
     'FEATURETTE[s]', 
     'BEHIND.THE.SCENE[S]', 
     'BTS',
