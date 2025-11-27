@@ -12,12 +12,12 @@ class Logger:
     _instance: ClassVar[Logger | None] = None
     _initialized: ClassVar[bool] = False
     
-    def __new__(cls, manager_path: Path | None = None) -> Logger:
+    def __new__(cls) -> Logger:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
     
-    def __init__(self, manager_path: Path | None = None) -> None:
+    def __init__(self) -> None:
 
         if Logger._initialized:
             return
@@ -25,7 +25,7 @@ class Logger:
         Logger._initialized = True
 
         # Path that TorrentManager program can use for files/logs/etc
-        self.manager_path = manager_path or Path(MANAGER_PATH)
+        self.manager_path = Path(MANAGER_PATH)
         self.log_dir = self.manager_path / "logs"
         self.log_dir.mkdir(parents=True, exist_ok=True)
         
@@ -92,9 +92,9 @@ class Logger:
         self._logger.critical(message, exc_info=exc_info)
 
     @classmethod
-    def get_logger(cls, manager_path: Path | None = None) -> 'Logger':
+    def get_logger(cls) -> 'Logger':
         """Get the singleton Logger instance."""
-        return cls(manager_path)
+        return cls()
     
     @classmethod
     def reset(cls) -> None:
