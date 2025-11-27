@@ -6,11 +6,6 @@ from struct.node import Node
 from struct.parser import Parser
 from classifier.node_classifier import NodeClassifier
 from manager.base_manager import BaseManager
-from config.settings import (
-        TORRENT_PATH,
-        MANAGER_PATH,
-        MEDIA_PATH,
-        DRY_RUN)
 
 
 class TorrentManager(BaseManager):
@@ -373,6 +368,7 @@ class TorrentManager(BaseManager):
 
     @classmethod
     def _move_file_to_staging(cls, node: Node, dest_path: Path) -> None:
+        # CHANGED: This now moves files instead of copying them
         cls._copy_file(node.original_path, dest_path)
 
 

@@ -110,10 +110,9 @@ class BaseManager(ABC):
             return True
 
         try:
-            if source.is_dir():
-                shutil.copytree(source, dest)
-            else:
-                shutil.copy2(source, dest)
+            # CHANGED: Use shutil.move for both files and directories
+            # This will be fast when source and dest are on the same filesystem
+            shutil.move(source, dest)
             cls._logger.info(f'Moved: {source} -> {dest}')
             return True
         except Exception as e:
@@ -123,26 +122,29 @@ class BaseManager(ABC):
     @classmethod
     def _copy_file(cls, source: Path, dest: Path) -> bool:
         """
-        Copy a file to a destination path.
+        Move a file to a destination path.
+        Note: Despite the name, this now moves files for better performance.
         
         Args:
             source: Source file path
             dest: Destination file path
             
         Returns:
-            True if successfully copied, False otherwise
+            True if successfully moved, False otherwise
         """
         if cls._dry_run:
-            cls._logger.info(f'[DRY RUN] Would copy file: {source} -> {dest}')
+            cls._logger.info(f'[DRY RUN] Would move file: {source} -> {dest}')
             return True
             
         try:
             dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, dest)
-            cls._logger.info(f'Copied file: {source} -> {dest}')
+            # CHANGED: Use shutil.move instead of copy2 for faster operation
+            # On same filesystem, this is instant instead of copying all bytes
+            shutil.move(source, dest)
+            cls._logger.info(f'Moved file: {source} -> {dest}')
             return True
         except Exception as e:
-            cls._logger.error(f'Failed to copy file {source} to {dest}: {e}')
+            cls._logger.error(f'Failed to move file {source} to {dest}: {e}')
             return False
 
     @classmethod
