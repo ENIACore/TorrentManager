@@ -234,6 +234,12 @@ class BaseManager(ABC):
             
         return cls._move_to_directory(node.original_path, cls._error_path)
 
+
+    @classmethod
+    def _move_path_to_error_dir(cls, path: Path) -> bool:
+        return cls._move_to_directory(path, cls._error_path)
+
+
     @classmethod
     def _log_initialization(cls) -> None:
         """Log initialization details."""

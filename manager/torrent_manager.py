@@ -112,6 +112,11 @@ class TorrentManager(BaseManager):
             cls._logger.debug("STAGE 1: PARSING NODE TREE")
             cls._logger.debug("-" * 40)
             head = Parser.process_nodes(None, path)
+
+            if not head:
+                cls._logger.error(f'Unable to process nodes for path {path}, moving to error dir')
+                cls._move_path_to_error_dir(path)
+                return
             
             # Stage 2: Classify
             cls._logger.debug("-" * 40)
