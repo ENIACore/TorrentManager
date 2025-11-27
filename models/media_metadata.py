@@ -71,7 +71,7 @@ class MediaMetadata:
 
     def get_formatted_episode_num(self) -> str:
         ep_num = self.episode if self.episode else 1
-        return f'S{str(ep_num).zfill(3)}'
+        return f'E{str(ep_num).zfill(3)}'
         
 
     def print(self):
