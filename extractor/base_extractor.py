@@ -70,8 +70,8 @@ class BaseExtractor:
             return match
         if (match := cls._is_subtitle_ext(index, parts)):
             return match
-        if (match := cls._is_audio_ext(index, parts)):
-            return match
+        #if (match := cls._is_audio_ext(index, parts)): # TODO add ext
+        #    return match
 
         return None
 

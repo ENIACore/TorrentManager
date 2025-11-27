@@ -11,7 +11,8 @@ class Parser:
         if not node:
             node = Node(path)
 
-        if path.is_file():
+        # only return files if known file ext
+        if path.is_file() and node.path_metadata.format_type != 'UNKNOWN':
             return node
 
         root, dirnames, filenames = next(walk(path))
