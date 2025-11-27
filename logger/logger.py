@@ -9,10 +9,10 @@ from config.settings import MANAGER_PATH
 class Logger:
     """Thread-safe singleton logger with file and console output."""
     
-    _instance: ClassVar[Logger | None] = None
+    _instance: ClassVar['Logger | None'] = None
     _initialized: ClassVar[bool] = False
     
-    def __new__(cls) -> Logger:
+    def __new__(cls) -> 'Logger':
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance

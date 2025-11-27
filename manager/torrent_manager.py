@@ -1,12 +1,11 @@
 from os import walk
-
 from os.path import join
 from pathlib import Path
 from typing import Callable, Dict
 from struct.node import Node
 from struct.parser import Parser
 from classifier.node_classifier import NodeClassifier
-from base_manager import BaseManager
+from manager.base_manager import BaseManager
 from config.settings import (
         TORRENT_PATH,
         MANAGER_PATH,
@@ -92,7 +91,7 @@ class TorrentManager(BaseManager):
         cls._logger.info(f'Successfully processed: {cls.stats['processed']}')
         cls._logger.info(f'Failed validation: {cls.stats['failed_validation']}')
         cls._logger.info(f'Failed Processing: {cls.stats['failed_processing']}')
-        cls._logger.info(f'Skipped: {cls.stats['Skipped']}')
+        cls._logger.info(f'Skipped: {cls.stats['skipped']}')
 
     @classmethod
     def _process_torrent(cls, path: Path):
