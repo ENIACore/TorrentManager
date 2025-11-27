@@ -6,7 +6,7 @@ class PathExtractor(BaseExtractor):
 
     @classmethod
     def extract_metadata(cls, path: Path) -> PathMetadata:
-        cls._get_logger().debug(f'Extracting path metadata for: {path}')
+        cls._logger.debug(f'Extracting path metadata for: {path}')
         
         metadata = PathMetadata()
         # Parts includes ext to enable file/mime type extraction
@@ -17,7 +17,7 @@ class PathExtractor(BaseExtractor):
         metadata.format_type = cls._extract_format_type(parts) 
         metadata.ext = cls._extract_ext(parts)
 
-        cls._get_logger().debug(f'Extracted path metadata - is_dir: {metadata.is_dir}, '
+        cls._logger.debug(f'Extracted path metadata - is_dir: {metadata.is_dir}, '
                                 f'is_file: {metadata.is_file}, format_type: {metadata.format_type}, '
                                 f'ext: {metadata.ext}')
 
@@ -28,10 +28,10 @@ class PathExtractor(BaseExtractor):
 
         for i, _ in enumerate(parts):
             if cls._is_video_ext(i, parts):
-                cls._get_logger().debug('Detected format type: VIDEO')
+                cls._logger.debug('Detected format type: VIDEO')
                 return 'VIDEO'
             elif cls._is_subtitle_ext(i, parts):
-                cls._get_logger().debug('Detected format type: SUBTITLE')
+                cls._logger.debug('Detected format type: SUBTITLE')
                 return 'SUBTITLE'
             # TODO Audio files currently disabled
             #elif cls._is_audio_ext(i, parts):
@@ -46,7 +46,7 @@ class PathExtractor(BaseExtractor):
         for i, _ in enumerate(parts):
             if (match := cls._is_ext(i, parts)):
                 ext = match.group(0)
-                cls._get_logger().debug(f'Extracted extension: {ext}')
+                cls._logger.debug(f'Extracted extension: {ext}')
                 return ext
 
         return ''

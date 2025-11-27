@@ -1,9 +1,10 @@
 from __future__ import annotations
 from pathlib import Path
-from config.node import NodeType
-from models import media_metadata
+from extractor.media_extractor import MediaExtractor
+from extractor.path_extractor import PathExtractor
 from models.path_metadata import PathMetadata
 from models.media_metadata import MediaMetadata
+from config.types import NodeType
 
 class Node:
     original_path: Path = Path('/') # Path to original file
@@ -19,3 +20,6 @@ class Node:
 
     def __init__(self, path: Path = Path('/')) -> None:
         self.original_path = path
+        self.media_metadata = MediaExtractor.extract_metadata(path)
+        self.path_metadata = PathExtractor.extract_metadata(path)
+

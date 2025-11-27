@@ -1,4 +1,3 @@
-import os
 from os import walk
 from os.path import join
 from pathlib import Path
@@ -6,15 +5,11 @@ from struct.node import Node
 from struct.parser import Parser
 from classifier.node_classifier import NodeClassifier
 from base_manager import BaseManager
-
-
-# Default paths - can be overridden by environment variables
-TORRENT_PATH = os.getenv('TORRENT_DOWNLOAD_PATH', '/mnt/RAID/qbit-data/downloads')
-MANAGER_PATH = os.getenv('TORRENT_MANAGER_PATH', '/mnt/RAID/torrent-manager')
-MEDIA_PATH = os.getenv('MEDIA_SERVER_PATH', '/mnt/RAID/jelly/media')
-
-# Dry run mode - set to 'true' to only log actions without moving files
-DRY_RUN = os.getenv('TORRENT_MANAGER_DRY_RUN', 'true').lower() == 'true'
+from config.settings import (
+        TORRENT_PATH,
+        MANAGER_PATH,
+        MEDIA_PATH,
+        DRY_RUN)
 
 
 class TorrentManager(BaseManager):

@@ -3,25 +3,27 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import ClassVar
-import os
+from config.settings import MANAGER_PATH
 
-MANAGER_PATH = os.getenv('TORRENT_MANAGER_PATH', '/mnt/RAID/torrent-manager')
 
 class Logger:
     """Thread-safe singleton logger with file and console output."""
     
-    _instance: ClassVar['Logger | None'] = None
-    _initialized: bool = False
+    _instance: ClassVar[Logger | None] = None
+    _initialized: ClassVar[bool] = False
     
-    def __new__(cls, manager_path: Path | None = None) -> "Logger":
+    def __new__(cls, manager_path: Path | None = None) -> Logger:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
     
     def __init__(self, manager_path: Path | None = None) -> None:
-        if self._initialized:
+
+        if Logger._initialized:
             return
-        self._initialized = True
+        
+        Logger._initialized = True
+
         # Path that TorrentManager program can use for files/logs/etc
         self.manager_path = manager_path or Path(MANAGER_PATH)
         self.log_dir = self.manager_path / "logs"
@@ -29,7 +31,7 @@ class Logger:
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         self._logger = self._create_logger(timestamp)
-    
+
     def _create_logger(self, timestamp: str) -> logging.Logger:
         logger = logging.getLogger(f"torrent_manager_{timestamp}")
         logger.setLevel(logging.DEBUG)
@@ -88,6 +90,11 @@ class Logger:
     
     def critical(self, message: str, exc_info: bool = False) -> None:
         self._logger.critical(message, exc_info=exc_info)
+
+    @classmethod
+    def get_logger(cls, manager_path: Path | None = None) -> 'Logger':
+        """Get the singleton Logger instance."""
+        return cls(manager_path)
     
     @classmethod
     def reset(cls) -> None:

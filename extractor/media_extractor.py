@@ -2,7 +2,6 @@ from typing import Any, Match, Dict
 from pathlib import Path
 from extractor.base_extractor import BaseExtractor
 from models.media_metadata import MediaMetadata
-import re
 from datetime import datetime
 from config.constants import (
     # Quality descriptor patterns
@@ -28,7 +27,7 @@ class MediaExtractor(BaseExtractor):
     """
     @classmethod
     def extract_metadata(cls, path: Path) -> MediaMetadata:
-        cls._get_logger().debug(f'Extracting media metadata for: {path}')
+        cls._logger.debug(f'Extracting media metadata for: {path}')
 
         metadata = MediaMetadata()
         # Parts do not include ext, not needed for media identification
@@ -51,7 +50,7 @@ class MediaExtractor(BaseExtractor):
         metadata.episode_patterns = bool(cls._match_pattern_list(parts, EPISODES_PATTERNS))
         metadata.extras_patterns = bool(cls._match_pattern_list(parts, EXTRAS_PATTERNS))
 
-        cls._get_logger().debug(f'Extracted metadata - title: {metadata.title}, year: {metadata.year}, '
+        cls._logger.debug(f'Extracted metadata - title: {metadata.title}, year: {metadata.year}, '
                                 f'season: {metadata.season}, episode: {metadata.episode}')
 
         return metadata
@@ -111,11 +110,11 @@ class MediaExtractor(BaseExtractor):
                 title.append(part)
 
         if len(title) == 0:
-            cls._get_logger().debug('No title found')
+            cls._logger.debug('No title found')
             return None
 
         title_str = '.'.join(title)
-        cls._get_logger().debug(f'Extracted title: {title_str}')
+        cls._logger.debug(f'Extracted title: {title_str}')
         return title_str
     
     @classmethod
@@ -152,7 +151,7 @@ class MediaExtractor(BaseExtractor):
             None if no year found
         """
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
 
             # If terminator found
             if (
@@ -162,49 +161,47 @@ class MediaExtractor(BaseExtractor):
                 ):
                 # If previous part is year, return year
                 if (i > 0 and (year := cls._is_valid_year(parts[i - 1]))):
-                    cls._get_logger().debug(f'Extracted year: {year}')
+                    cls._logger.debug(f'Extracted year: {year}')
                     return year
                 # If previous part is not year, no year can come after terminator, return None
                 else:
-                    cls._get_logger().debug('No year found')
+                    cls._logger.debug('No year found')
                     return None
             # Returns year if year is last part in filename
             if not cls._get_next_element(i, parts):
                 if (year := cls._is_valid_year(parts[i])):
-                    cls._get_logger().debug(f'Extracted year (end of parts): {year}')
+                    cls._logger.debug(f'Extracted year (end of parts): {year}')
                     return year
     
     @classmethod
     def _extract_season(cls, parts: list[str]) -> int | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             match = cls._extract_season_num(i, parts)
-            #if match and match.groups() and len(match.groups()) >= 1 and match.group(1):
             if match and len(match.groups()) >= 1 and match.group(1):
                 season = int(match.group(1))
-                cls._get_logger().debug(f'Extracted season: {season}')
+                cls._logger.debug(f'Extracted season: {season}')
                 return season
         return None
     
     @classmethod
     def _extract_episode(cls, parts: list[str]) -> int | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             match = cls._extract_episode_num(i, parts)
-            #if match and match.group(1):
             if match and len(match.groups()) >= 1 and match.group(1):
                 episode = int(match.group(1))
-                cls._get_logger().debug(f'Extracted episode: {episode}')
+                cls._logger.debug(f'Extracted episode: {episode}')
                 return episode
         return None
     
     @classmethod
     def _extract_resolution(cls, parts: list[str]) -> str | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             resolution = cls._is_resolution_descriptor(i, parts)
             if resolution:
-                cls._get_logger().debug(f'Extracted resolution: {resolution}')
+                cls._logger.debug(f'Extracted resolution: {resolution}')
                 return resolution
         
         return None
@@ -212,10 +209,10 @@ class MediaExtractor(BaseExtractor):
     @classmethod
     def _extract_codec(cls, parts: list[str]) -> str | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             codec = cls._is_codec_descriptor(i, parts)
             if codec:
-                cls._get_logger().debug(f'Extracted codec: {codec}')
+                cls._logger.debug(f'Extracted codec: {codec}')
                 return codec
         
         return None
@@ -223,10 +220,10 @@ class MediaExtractor(BaseExtractor):
     @classmethod
     def _extract_source(cls, parts: list[str]) -> str | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             source = cls._is_source_descriptor(i, parts)
             if source:
-                cls._get_logger().debug(f'Extracted source: {source}')
+                cls._logger.debug(f'Extracted source: {source}')
                 return source
         
         return None
@@ -234,10 +231,10 @@ class MediaExtractor(BaseExtractor):
     @classmethod
     def _extract_audio(cls, parts: list[str]) -> str | None:
 
-        for i, part in enumerate(parts):
+        for i, _ in enumerate(parts):
             audio = cls._is_audio_descriptor(i, parts)
             if audio:
-                cls._get_logger().debug(f'Extracted audio: {audio}')
+                cls._logger.debug(f'Extracted audio: {audio}')
                 return audio
         
         return None
@@ -249,7 +246,7 @@ class MediaExtractor(BaseExtractor):
             for language in LANGUAGE_PATTERNS:
                 for pattern in LANGUAGE_PATTERNS[language]:
                     if cls._match_regex(pattern, i, parts):
-                        cls._get_logger().debug(f'Extracted language: {language}')
+                        cls._logger.debug(f'Extracted language: {language}')
                         return language
 
         return None

@@ -1,4 +1,4 @@
-from models import media_metadata
+fom models import media_metadata
 from struct.node import Node
 from config.node import NodeType
 from logger.logger import Logger
