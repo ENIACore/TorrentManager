@@ -2,8 +2,10 @@
 1. Fix bug for folder/file removal (top level folders/files are not removed from download folder after processing)
 2. Add seperation of movies and shows in staging folder
 3. Add functionality to directly move movies/shows to jelly
-4. Make tests for all classes to ensure successful file handling
-5. Improve logging file naming conventions and logging readability
+4. Add ability to program differentiate between completed and in progress torrents for processing purposes
+5. Add script for adding program to PATH
+6. Make tests for all classes to ensure successful file handling
+7. Improve logging file naming conventions and logging readability
 
 
 
