@@ -1,4 +1,4 @@
-from typing import Any, Match, Dict
+from typing import Match
 from pathlib import Path
 from extractor.base_extractor import BaseExtractor
 from models.media_metadata import MediaMetadata

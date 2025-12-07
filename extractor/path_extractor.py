@@ -1,6 +1,7 @@
 from pathlib import Path
 from extractor.base_extractor import BaseExtractor
-from models.path_metadata import PathMetadata, FormatType, UnknownType
+from models.path_metadata import PathMetadata, FormatType
+from config.types import UnknownType
 
 class PathExtractor(BaseExtractor):
 

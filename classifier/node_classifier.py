@@ -1,4 +1,4 @@
-from struct.node import Node
+from tree.node import Node
 from logger.logger import Logger
 
 

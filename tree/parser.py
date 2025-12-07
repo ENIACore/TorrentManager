@@ -1,7 +1,7 @@
 from os import walk
 from os.path import join
 from pathlib import Path
-from struct.node import Node
+from tree.node import Node
 
 class Parser:
     @classmethod

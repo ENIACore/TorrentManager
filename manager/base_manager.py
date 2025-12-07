@@ -4,7 +4,7 @@ from pathlib import Path
 from abc import ABC
 from logger.logger import Logger
 from config.settings import (MANAGER_PATH, DRY_RUN, MANAGER_PATH, MEDIA_PATH, TORRENT_PATH)
-from struct.node import Node
+from tree.node import Node
 
 
 class BaseManager(ABC):

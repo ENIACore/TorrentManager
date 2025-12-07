@@ -2,8 +2,8 @@ from os import walk
 from os.path import join
 from pathlib import Path
 from typing import Callable, Dict
-from struct.node import Node
-from struct.parser import Parser
+from tree.node import Node
+from tree.parser import Parser
 from classifier.node_classifier import NodeClassifier
 from manager.base_manager import BaseManager
 
