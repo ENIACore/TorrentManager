@@ -41,39 +41,48 @@ class Logger:
             "%(asctime)s | %(levelname)-8s | %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S"
         )
-        
-        # File handler for all logs (INFO and above)
-        file_handler = logging.FileHandler(
-            self.log_dir / f"{timestamp}.log",
+
+        # Create timestamped directory for this session's logs
+        session_log_dir = self.log_dir / timestamp
+        session_log_dir.mkdir(parents=True, exist_ok=True)
+
+        # Info log file (INFO and WARNING only)
+        info_handler = logging.FileHandler(
+            session_log_dir / "info.log",
             encoding="utf-8"
         )
-        file_handler.setLevel(logging.INFO)
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-        
-        # Separate file handler for errors only
+        info_handler.setLevel(logging.INFO)
+        info_handler.addFilter(lambda record: record.levelno == logging.INFO or record.levelno == logging.WARNING)
+        info_handler.setFormatter(formatter)
+        logger.addHandler(info_handler)
+
+        # Error log file (ERROR and CRITICAL)
         error_handler = logging.FileHandler(
-            self.log_dir / f"{timestamp}.error.log",
+            session_log_dir / "error.log",
             encoding="utf-8"
         )
         error_handler.setLevel(logging.ERROR)
+        error_handler.addFilter(lambda record: record.levelno == logging.ERROR or record.levelno == logging.CRITICAL)
         error_handler.setFormatter(formatter)
         logger.addHandler(error_handler)
+
+        # Debug log file (DEBUG and above)
+        debug_handler = logging.FileHandler(
+            session_log_dir / "debug.log",
+            encoding="utf-8"
+        )
+        debug_handler.setLevel(logging.DEBUG)
+        debug_handler.addFilter(lambda record: record.levelno >= logging.DEBUG)
+        debug_handler.setFormatter(formatter)
+        logger.addHandler(debug_handler)
         
-        # Console handler for DEBUG messages only
-        debug_console_handler = logging.StreamHandler(sys.stdout)
-        debug_console_handler.setLevel(logging.DEBUG)
-        debug_console_handler.addFilter(lambda record: record.levelno == logging.DEBUG)
-        debug_console_handler.setFormatter(formatter)
-        logger.addHandler(debug_console_handler)
-        
-        # Console handler for INFO and above (excluding DEBUG)
+        # Console handler for DEBUG and above
         console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setLevel(logging.INFO)
-        console_handler.addFilter(lambda record: record.levelno >= logging.INFO)
+        console_handler.setLevel(logging.DEBUG)
+        console_handler.addFilter(lambda record: record.levelno >= logging.DEBUG)
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
-        
+
         return logger
     
     def debug(self, message: str) -> None:
@@ -98,7 +107,7 @@ class Logger:
     
     @classmethod
     def reset(cls) -> None:
-        if cls._instance and hasattr(cls._instance, "_logger"):
+        if cls._instance and hasattr(cls._instance, '_logger') and hasattr(cls._instance._logger, 'handlers'):
             for handler in cls._instance._logger.handlers[:]:
                 handler.close()
                 cls._instance._logger.removeHandler(handler)
