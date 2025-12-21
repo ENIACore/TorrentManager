@@ -1,5 +1,4 @@
 from logger.logger import Logger
-from unittest.mock import Mock, MagicMock, call
 from pathlib import Path
 import pytest
 import logging
