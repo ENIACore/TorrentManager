@@ -22,4 +22,3 @@ class Node:
         self.original_path = path
         self.media_metadata = MediaExtractor.extract_metadata(path)
         self.path_metadata = PathExtractor.extract_metadata(path)
-

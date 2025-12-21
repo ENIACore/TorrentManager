@@ -9,7 +9,7 @@ from tree.node import Node
 
 class BaseManager(ABC):
 
-    _logger: Logger = Logger.get_logger()
+    _logger: Logger | None = None
     _dry_run: bool = DRY_RUN
 
     # Main paths
@@ -24,6 +24,12 @@ class BaseManager(ABC):
     # Media Sub paths
     _series_path = Path(MEDIA_PATH) / 'shows'
     _movies_path = Path(MEDIA_PATH) / 'movies'
+
+    @classmethod
+    def _get_logger(cls) -> Logger:
+        if cls._logger is None:
+            cls._logger = Logger.get_logger()
+        return cls._logger
 
     """
     Base class providing common file management utilities.
@@ -106,17 +112,17 @@ class BaseManager(ABC):
         dest = cls._get_unique_path(dest)
         
         if cls._dry_run:
-            cls._logger.info(f'[DRY RUN] Would move {source} to {dest}')
+            cls._get_logger().info(f'[DRY RUN] Would move {source} to {dest}')
             return True
 
         try:
             # CHANGED: Use shutil.move for both files and directories
             # This will be fast when source and dest are on the same filesystem
             shutil.move(source, dest)
-            cls._logger.info(f'Moved: {source} -> {dest}')
+            cls._get_logger().info(f'Moved: {source} -> {dest}')
             return True
         except Exception as e:
-            cls._logger.error(f'Failed to move {source} to {dest}: {e}')
+            cls._get_logger().error(f'Failed to move {source} to {dest}: {e}')
             return False
 
     @classmethod
@@ -133,7 +139,7 @@ class BaseManager(ABC):
             True if successfully moved, False otherwise
         """
         if cls._dry_run:
-            cls._logger.info(f'[DRY RUN] Would move file: {source} -> {dest}')
+            cls._get_logger().info(f'[DRY RUN] Would move file: {source} -> {dest}')
             return True
             
         try:
@@ -141,10 +147,10 @@ class BaseManager(ABC):
             # CHANGED: Use shutil.move instead of copy2 for faster operation
             # On same filesystem, this is instant instead of copying all bytes
             shutil.move(source, dest)
-            cls._logger.info(f'Moved file: {source} -> {dest}')
+            cls._get_logger().info(f'Moved file: {source} -> {dest}')
             return True
         except Exception as e:
-            cls._logger.error(f'Failed to move file {source} to {dest}: {e}')
+            cls._get_logger().error(f'Failed to move file {source} to {dest}: {e}')
             return False
 
     @classmethod
@@ -159,15 +165,15 @@ class BaseManager(ABC):
             True if successfully created, False otherwise
         """
         if cls._dry_run:
-            cls._logger.info(f'[DRY RUN] Would create directory: {path}')
+            cls._get_logger().info(f'[DRY RUN] Would create directory: {path}')
             return True
             
         try:
             path.mkdir(parents=True, exist_ok=True)
-            cls._logger.info(f'Created directory: {path}')
+            cls._get_logger().info(f'Created directory: {path}')
             return True
         except Exception as e:
-            cls._logger.error(f'Failed to create directory {path}: {e}')
+            cls._get_logger().error(f'Failed to create directory {path}: {e}')
             return False
 
     @classmethod
@@ -182,7 +188,7 @@ class BaseManager(ABC):
             True if successfully removed, False otherwise
         """
         if cls._dry_run:
-            cls._logger.info(f'[DRY RUN] Would remove: {path}')
+            cls._get_logger().info(f'[DRY RUN] Would remove: {path}')
             return True
             
         try:
@@ -190,10 +196,10 @@ class BaseManager(ABC):
                 shutil.rmtree(path)
             else:
                 path.unlink()
-            cls._logger.info(f'Removed: {path}')
+            cls._get_logger().info(f'Removed: {path}')
             return True
         except Exception as e:
-            cls._logger.error(f'Failed to remove {path}: {e}')
+            cls._get_logger().error(f'Failed to remove {path}: {e}')
             return False
 
     @classmethod
@@ -231,7 +237,7 @@ class BaseManager(ABC):
         """
 
         if not node.original_path:
-            cls._logger.error('Cannot move node without original path to error directory')
+            cls._get_logger().error('Cannot move node without original path to error directory')
             return False
             
         return cls._move_to_directory(node.original_path, cls._error_path)
@@ -245,10 +251,10 @@ class BaseManager(ABC):
     @classmethod
     def _log_initialization(cls) -> None:
         """Log initialization details."""
-        cls._logger.info(f'TorrentManager initialized')
-        cls._logger.info(f'  Download path: {cls._torrent_path}')
-        cls._logger.info(f'  Manager path: {cls._manager_path}')
-        cls._logger.info(f'  Media path: {cls._media_path}')
-        cls._logger.info(f'  Staging path: {cls._staging_path}')
-        cls._logger.info(f'  Error path: {cls._error_path}')
-        cls._logger.info(f'  Dry run mode: {cls._dry_run}')
+        cls._get_logger().info(f'TorrentManager initialized')
+        cls._get_logger().info(f'  Download path: {cls._torrent_path}')
+        cls._get_logger().info(f'  Manager path: {cls._manager_path}')
+        cls._get_logger().info(f'  Media path: {cls._media_path}')
+        cls._get_logger().info(f'  Staging path: {cls._staging_path}')
+        cls._get_logger().info(f'  Error path: {cls._error_path}')
+        cls._get_logger().info(f'  Dry run mode: {cls._dry_run}')

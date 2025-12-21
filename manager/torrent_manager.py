@@ -17,7 +17,7 @@ class TorrentManager(BaseManager):
         """
 
         if node.classification == 'UNKNOWN':
-            cls._logger.error(f'Node has unknown classification: {node.original_path}')
+            cls._get_logger().error(f'Node has unknown classification: {node.original_path}')
             return False
         
         # These classifications are only valid as children, not at root level
@@ -26,7 +26,7 @@ class TorrentManager(BaseManager):
         }
         
         if not node.parent_node and node.classification in child_only_classifications:
-            cls._logger.error(
+            cls._get_logger().error(
                 f'Invalid root classification {node.classification}: {node.original_path}'
             )
             return False
@@ -66,11 +66,11 @@ class TorrentManager(BaseManager):
         try:
             root, dirs, files = next(walk(cls._torrent_path))
         except StopIteration:
-            cls._logger.warning(f'Torrent directory is empty or inaccessible: {cls._torrent_path}')
+            cls._get_logger().warning(f'Torrent directory is empty or inaccessible: {cls._torrent_path}')
             return
         
         if not dirs and not files:
-            cls._logger.info('No torrents found to process')
+            cls._get_logger().info('No torrents found to process')
     
         # Process directories
         for dir_name in dirs:
@@ -82,11 +82,11 @@ class TorrentManager(BaseManager):
             file_path = Path(join(root, file_name))
             cls._process_torrent(file_path)
         
-        cls._logger.info(f'Processing complete')
-        cls._logger.info(f'Successfully processed: {cls.stats['processed']}')
-        cls._logger.info(f'Failed validation: {cls.stats['failed_validation']}')
-        cls._logger.info(f'Failed Processing: {cls.stats['failed_processing']}')
-        cls._logger.info(f'Skipped: {cls.stats['skipped']}')
+        cls._get_logger().info(f'Processing complete')
+        cls._get_logger().info(f'Successfully processed: {cls.stats['processed']}')
+        cls._get_logger().info(f'Failed validation: {cls.stats['failed_validation']}')
+        cls._get_logger().info(f'Failed Processing: {cls.stats['failed_processing']}')
+        cls._get_logger().info(f'Skipped: {cls.stats['skipped']}')
 
     @classmethod
     def _process_torrent(cls, path: Path):
@@ -94,61 +94,61 @@ class TorrentManager(BaseManager):
         Process torrent file or directory.
         """
 
-        cls._logger.debug("=" * 80)
-        cls._logger.debug(f"STARTING TORRENT PROCESSING: {path.name}")
-        cls._logger.debug(f"Full path: {path}")
-        cls._logger.debug("=" * 80)
+        cls._get_logger().debug("=" * 80)
+        cls._get_logger().debug(f"STARTING TORRENT PROCESSING: {path.name}")
+        cls._get_logger().debug(f"Full path: {path}")
+        cls._get_logger().debug("=" * 80)
         
         try:
-            cls._logger.info(f'Processing: {path}')
+            cls._get_logger().info(f'Processing: {path}')
             
             # Stage 1: Parse
-            cls._logger.debug("-" * 40)
-            cls._logger.debug("STAGE 1: PARSING NODE TREE")
-            cls._logger.debug("-" * 40)
+            cls._get_logger().debug("-" * 40)
+            cls._get_logger().debug("STAGE 1: PARSING NODE TREE")
+            cls._get_logger().debug("-" * 40)
             head = Parser.process_nodes(None, path)
 
             if not head:
-                cls._logger.error(f'Unable to process nodes for path {path}, moving to error dir')
+                cls._get_logger().error(f'Unable to process nodes for path {path}, moving to error dir')
                 cls._move_path_to_error_dir(path)
                 return
             
             # Stage 2: Classify
-            cls._logger.debug("-" * 40)
-            cls._logger.debug("STAGE 2: CLASSIFYING NODE TREE")
-            cls._logger.debug("-" * 40)
+            cls._get_logger().debug("-" * 40)
+            cls._get_logger().debug("STAGE 2: CLASSIFYING NODE TREE")
+            cls._get_logger().debug("-" * 40)
             head = NodeClassifier.classify(head)
             
             # Stage 3: Validate
-            cls._logger.debug("-" * 40)
-            cls._logger.debug("STAGE 3: VALIDATING CLASSIFICATIONS")
-            cls._logger.debug("-" * 40)
+            cls._get_logger().debug("-" * 40)
+            cls._get_logger().debug("STAGE 3: VALIDATING CLASSIFICATIONS")
+            cls._get_logger().debug("-" * 40)
             if not cls.validate(head):
-                cls._logger.error(f'Validation failed, moving to error dir: {path}')
+                cls._get_logger().error(f'Validation failed, moving to error dir: {path}')
                 cls._move_to_error_dir(head)
                 cls.stats['failed_validation'] += 1
                 return
 
             # Stage 4: Process
-            cls._logger.debug("-" * 40)
-            cls._logger.debug("STAGE 4: PROCESSING NODE TREE")
-            cls._logger.debug("-" * 40)
+            cls._get_logger().debug("-" * 40)
+            cls._get_logger().debug("STAGE 4: PROCESSING NODE TREE")
+            cls._get_logger().debug("-" * 40)
             if not cls._assign_paths(head):
-                cls._logger.error(f'Processing failed, moving to error dir: {path}')
+                cls._get_logger().error(f'Processing failed, moving to error dir: {path}')
                 cls._move_to_error_dir(head)
                 cls.stats['failed_processing'] += 1
                 return
 
             # Stage 5: Move to staging
-            cls._logger.debug("-" * 40)
-            cls._logger.debug("STAGE 5: MOVING TO STAGING")
-            cls._logger.debug("-" * 40)
+            cls._get_logger().debug("-" * 40)
+            cls._get_logger().debug("STAGE 5: MOVING TO STAGING")
+            cls._get_logger().debug("-" * 40)
             cls._move_to_staging(head)
             cls.stats['processed'] += 1
 
                     
         except Exception as e:
-            cls._logger.error(f'Exception processing {path}: {e}', exc_info=True)
+            cls._get_logger().error(f'Exception processing {path}: {e}', exc_info=True)
             cls.stats['skipped'] += 1
 
     @classmethod
@@ -156,7 +156,7 @@ class TorrentManager(BaseManager):
         """
         Recursively process a torrent node and assign new_path to all nodes.
         """
-        cls._logger.info(f'Processing node: {node.original_path}')
+        cls._get_logger().info(f'Processing node: {node.original_path}')
         
 
         if node.classification == 'MOVIE_FOLDER':
@@ -170,7 +170,7 @@ class TorrentManager(BaseManager):
         elif node.classification == 'EPISODE_FILE':
             return cls._process_episode_file(node)
         else:
-            cls._logger.warning(f'No root handler for classification: {node.classification}')
+            cls._get_logger().warning(f'No root handler for classification: {node.classification}')
             return False
 
     @classmethod
@@ -179,7 +179,7 @@ class TorrentManager(BaseManager):
         parent_node = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_node / cls._get_formatted_folder_name(node)
 
-        cls._logger.info(f'Processing movie folder: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing movie folder: {node.original_path} -> {node.new_path}')
 
         # Validate all required children exist
         required_classifications = {
@@ -205,7 +205,7 @@ class TorrentManager(BaseManager):
         parent_node = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_node / cls._get_formatted_folder_name(node)
 
-        cls._logger.info(f'Processing series folder: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing series folder: {node.original_path} -> {node.new_path}')
 
         required_classifications = {
             'SEASON_FOLDER'
@@ -227,7 +227,7 @@ class TorrentManager(BaseManager):
         parent_node = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_node / f'S{node.media_metadata.get_formatted_season_num()}'
 
-        cls._logger.info(f'Processing season folder: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing season folder: {node.original_path} -> {node.new_path}')
 
         required_classifications = {
             'EPISODE_FILE'
@@ -251,7 +251,7 @@ class TorrentManager(BaseManager):
         parent_node = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_node / 'Subtitles'
 
-        cls._logger.info(f'Processing subtitle folder: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing subtitle folder: {node.original_path} -> {node.new_path}')
 
         required_classifications = {
             'SUBTITLE_FILE'
@@ -272,7 +272,7 @@ class TorrentManager(BaseManager):
         parent_node = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_node / 'Extras'
 
-        cls._logger.info(f'Processing extras folder: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing extras folder: {node.original_path} -> {node.new_path}')
         
         """
         # TODO - Add check for extras file OR season folder
@@ -298,7 +298,7 @@ class TorrentManager(BaseManager):
         parent_path = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_path / cls._get_formatted_file_name(node) 
             
-        cls._logger.info(f'Processing movie file: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing movie file: {node.original_path} -> {node.new_path}')
 
         return True
 
@@ -307,7 +307,7 @@ class TorrentManager(BaseManager):
         parent_path = node.parent_node.new_path if (node.parent_node and node.parent_node.new_path) else Path('/')
         node.new_path = parent_path / cls._get_formatted_file_name(node) 
         
-        cls._logger.info(f'Processing episode file: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing episode file: {node.original_path} -> {node.new_path}')
 
         return True
 
@@ -319,7 +319,7 @@ class TorrentManager(BaseManager):
             file_name = 'subtitle_' + node.media_metadata.language
         node.new_path = parent_path / file_name
             
-        cls._logger.info(f'Processing subtitle file: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing subtitle file: {node.original_path} -> {node.new_path}')
 
         return True
 
@@ -329,7 +329,7 @@ class TorrentManager(BaseManager):
         file_name = cls._sanitize_name(node.original_path.stem) + '.' + node.path_metadata.ext
         node.new_path = parent_path / file_name
         
-        cls._logger.info(f'Processing extras file: {node.original_path} -> {node.new_path}')
+        cls._get_logger().info(f'Processing extras file: {node.original_path} -> {node.new_path}')
 
         return True
 
@@ -340,7 +340,7 @@ class TorrentManager(BaseManager):
         Creates directories as needed, copies files.
         """
         if not node.original_path or not node.new_path:
-            cls._logger.error(f'Node missing original_path or new_path: {node}')
+            cls._get_logger().error(f'Node missing original_path or new_path: {node}')
             raise ValueError(f'Node missing original_path or new_path: {node}')
 
         # Calculate the full destination path
@@ -388,7 +388,7 @@ class TorrentManager(BaseManager):
                     break
 
             if not res:
-                cls._logger.error(f'Child classification {classification} not found in node {node.classification}')
+                cls._get_logger().error(f'Child classification {classification} not found in node {node.classification}')
                 return False
 
         return True
@@ -400,7 +400,7 @@ class TorrentManager(BaseManager):
             handler = handlers.get(child.classification)
 
             if not handler:
-                cls._logger.error(f' Unexpected node type {child.classification} for {node.classification}')
+                cls._get_logger().error(f' Unexpected node type {child.classification} for {node.classification}')
                 return False
 
             if not handler(child):

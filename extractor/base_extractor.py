@@ -14,7 +14,13 @@ Contains base extractor helper functions to be used by all extractors
 """
 class BaseExtractor:
     
-    _logger: Logger = Logger.get_logger()
+    _logger: Logger | None = None
+
+    @classmethod
+    def _get_logger(cls) -> Logger:
+        if cls._logger is None:
+            cls._logger = Logger.get_logger()
+        return cls._logger
 
     """
     Specific reusable helper functions
@@ -30,10 +36,10 @@ class BaseExtractor:
         name = name.strip('.')
 
         if name:
-            cls._logger.debug(f'Sanitized path: {path.name} -> {name}')
+            cls._get_logger().debug(f'Sanitized path: {path.name} -> {name}')
             return name
 
-        cls._logger.debug(f'Failed to sanitize path: {path.name}')
+        cls._get_logger().debug(f'Failed to sanitize path: {path.name}')
         return None
 
     @classmethod
@@ -41,7 +47,7 @@ class BaseExtractor:
         sanitized_name = cls._get_sanitized_path(path)
         if sanitized_name:
             parts = sanitized_name.split('.')
-            cls._logger.debug(f'Sanitized path parts: {parts}')
+            cls._get_logger().debug(f'Sanitized path parts: {parts}')
             return parts
 
         return []
@@ -60,7 +66,7 @@ class BaseExtractor:
                 parts = parts[:num_ext_parts * -1]
 
         if parts:
-            cls._logger.debug(f'Sanitized stem parts: {parts}')
+            cls._get_logger().debug(f'Sanitized stem parts: {parts}')
         return parts
 
     @classmethod
@@ -79,7 +85,7 @@ class BaseExtractor:
     def _is_video_ext(cls, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in VIDEO_EXTENSIONS:
             if cls._is_matching_tail_len(pattern, index, parts) and (match := cls._match_regex(pattern, index, parts)):
-                cls._logger.debug(f'Matched video extension: {pattern}')
+                cls._get_logger().debug(f'Matched video extension: {pattern}')
                 return match
 
         return None
@@ -88,7 +94,7 @@ class BaseExtractor:
     def _is_subtitle_ext(cls, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in SUBTITLE_EXTENSIONS:
             if cls._is_matching_tail_len(pattern, index, parts) and (match := cls._match_regex(pattern, index, parts)):
-                cls._logger.debug(f'Matched subtitle extension: {pattern}')
+                cls._get_logger().debug(f'Matched subtitle extension: {pattern}')
                 return match
 
         return None
@@ -97,7 +103,7 @@ class BaseExtractor:
     def _is_audio_ext(cls, index: int, parts: list[str]) -> Match[str] | None:
         for pattern in AUDIO_EXTENSIONS:
             if cls._is_matching_tail_len(pattern, index, parts) and (match := cls._match_regex(pattern, index, parts)):
-                cls._logger.debug(f'Matched audio extension: {pattern}')
+                cls._get_logger().debug(f'Matched audio extension: {pattern}')
                 return match
 
         return None
@@ -138,7 +144,7 @@ class BaseExtractor:
         # Match recombined or individual, filename parts with pattern
         match = re.fullmatch(pattern, combined_parts)
         if match:
-            cls._logger.debug(f'Regex match: pattern={pattern}, matched={combined_parts}')
+            cls._get_logger().debug(f'Regex match: pattern={pattern}, matched={combined_parts}')
         return match
 
     @classmethod
@@ -154,7 +160,7 @@ class BaseExtractor:
         for i, _ in enumerate(parts):
             for pattern in pattern_dict:
                 if cls._match_regex(pattern, i, parts):
-                    cls._logger.debug(f'Matched pattern dict: pattern={pattern}')
+                    cls._get_logger().debug(f'Matched pattern dict: pattern={pattern}')
                     return pattern
 
         return None
@@ -165,7 +171,7 @@ class BaseExtractor:
         for i, _ in enumerate(parts):
             for pattern in pattern_list:
                 if cls._match_regex(pattern, i, parts):
-                    cls._logger.debug(f'Matched pattern list: pattern={pattern}')
+                    cls._get_logger().debug(f'Matched pattern list: pattern={pattern}')
                     return pattern
 
         return None
@@ -177,7 +183,7 @@ class BaseExtractor:
             for res in pattern_dict_list:
                 for pattern in pattern_dict_list[res]:
                     if cls._match_regex(pattern, i, parts):
-                        cls._logger.debug(f'Matched pattern dict list: key={res}, pattern={pattern}')
+                        cls._get_logger().debug(f'Matched pattern dict list: key={res}, pattern={pattern}')
                         return res
 
         return None
